@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-Route::get('/', [HomeController::class, 'index'])->name('welcome');
+Route::get('/', [LoginController::class, 'showLoginForm'])->name('welcome');
+// Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/admin/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 Route::get('/admin/dashboardHome', [HomeController::class, 'dashboardHome'])->name('dashboardHome');
 Route::get('/admin/recommendation', [HomeController::class, 'recommendation'])->name('recommendation');

@@ -11,12 +11,13 @@ class LoginController extends Controller
     // Show login form
     public function showLoginForm()
     {
-        return view('auth.login'); // Create this Blade file
+        return view('welcome'); // Create this Blade file
     }
 
     // Handle login request
     public function login(Request $request)
     {
+        //dd('hello6');
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
