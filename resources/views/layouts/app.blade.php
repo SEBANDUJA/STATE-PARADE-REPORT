@@ -1,27 +1,43 @@
-<!-- Preloader -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Laravel Preloader</title>
+    @vite('resources/css/app.css')
 </head>
-<body>
+<body class="relative bg-white">
+
     <!-- Preloader -->
-    <!-- Preloader -->
-    <div id="preloader" class="fixed inset-0 flex items-center justify-center bg-white z-50">
-    <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    <div id="preloader" class="fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-500 bg-white">
+        <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
 
+    <!-- Preloader Script -->
+    <script>
+        let pageLoaded = false;
+        let timerDone = false;
+
+        window.addEventListener('load', () => {
+            pageLoaded = true;
+            hidePreloader();
+        });
+
+        setTimeout(() => {
+            timerDone = true;
+            hidePreloader();
+        }, 1000); // 2 seconds minimum
+
+        function hidePreloader() {
+            if (pageLoaded && timerDone) {
+                const preloader = document.getElementById('preloader');
+                if (preloader) {
+                    preloader.classList.add('opacity-0', 'pointer-events-none');
+                    setTimeout(() => preloader.remove(), 500); // After fade-out transition
+                }
+            }
+        }
+    </script>
+
 </body>
-<script>
-  window.addEventListener('load', function () {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-      preloader.style.display = 'none';
-    }
-  });
-</script>
-
-
 </html>

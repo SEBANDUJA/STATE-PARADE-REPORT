@@ -4,7 +4,7 @@
 @section('title', 'Recommendation')
 
 @section('content')
-   <section class="pt-20">
+   <section class="pt-2">
 
       <!-- cards -->
       <span class="text-md font-semibold text-start mb-12">Select user to recommend</span>
