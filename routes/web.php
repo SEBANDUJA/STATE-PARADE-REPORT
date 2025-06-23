@@ -20,6 +20,10 @@ Route::get('/admin/studentinservice', [HomeController::class, 'studentinservice'
 Route::get('/admin/usermanagement', [HomeController::class, 'usermanagement'])->name('usermanagement');
 Route::get('/admin/modelform', [HomeController::class, 'modelform'])->name('modelform');
 
+Route::get('/profile', [UserController::class, 'show'])->name('profile');
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

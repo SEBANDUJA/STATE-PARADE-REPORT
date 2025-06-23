@@ -81,11 +81,11 @@
 
     <!-- Main Content -->
     <div id="main-content" class="flex-1 ml-72 transition-all duration-500 ease-in-out">
-        <header class="bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 shadow-md p-4 flex items-center justify-between">
+        <header class="bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 shadow-md p-4 flex items-center justify-between relative z-10">
             <div class="flex items-center space-x-4">
                 <!-- Toggle Button for Sidebar -->
                 <button id="toggleSidebar" class="text-2xl text-black">
-                    <i class="fas fa-bars cursor-pointer"></i> <!-- Hamburger Icon -->
+                    <i class="fas fa-bars cursor-pointer"></i>
                 </button>
                 <div class="text-2xl font-semibold text-black uppercase font-thin text-md">Dashboard</div>
             </div>
@@ -93,22 +93,39 @@
             <div class="flex items-center space-x-12">
                 <!-- Notification Icon with Badge -->
                 <div class="relative">
-                    <button class="text-gray-600 relative">
+                    <button class="text-black relative">
                         <i class="fas fa-bell text-4xl"></i>
-                        <!-- Notification Badge -->
                         <span class="absolute top-0 right-0 block w-2.5 h-2.5 bg-red-500 rounded-full"></span>
                     </button>
                 </div>
 
-                <!-- Person Icon with Logout -->
-                <div class="flex items-center space-x-2">
-                    <button class="text-gray-500">
-                        <i class="fas fa-user-circle text-4xl"></i> <!-- Person Icon -->
+                <!-- Person Icon with Dropdown and Name -->
+                <div class="relative">
+                    <button id="userMenuButton" class="text-black flex items-center space-x-2 focus:outline-none">
+                        <!-- Icon with badge -->
+                        <div class="relative">
+                            <i class="fas fa-user-circle text-4xl"></i>
+                            <!-- Green online badge -->
+                            <span class="absolute bottom-0 right-0 block w-3 h-3 rounded-full bg-green-500 border-2 border-white"></span>
+                        </div>
+
+                        <span class="font-semibold text-black text-sm">
+                            {{ Auth::user() ? Auth::user()->name : 'Guest' }}
+                        </span>
                     </button>
-                    
+
+                    <!-- Dropdown positioned below the icon -->
+                    <div id="userDropdown" class="hidden absolute right-0 top-full mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg py-2 z-50">
+                        <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </header>
+
 
         <!-- Dynamic Page Content -->
         <div class="p-6 text-black">
@@ -142,6 +159,18 @@
 
         document.getElementById("accordion1").addEventListener("click", () => toggleAccordion("accordion1-content"));
         document.getElementById("accordion2").addEventListener("click", () => toggleAccordion("accordion2-content"));
+
+        // person icon for profile and logout
+        const userButton = document.getElementById('userMenuButton');
+        const userDropdown = document.getElementById('userDropdown');
+
+        document.addEventListener('click', function (e) {
+            if (userButton.contains(e.target)) {
+                userDropdown.classList.toggle('hidden');
+            } else if (!userDropdown.contains(e.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
     </script>
 
 </body>
