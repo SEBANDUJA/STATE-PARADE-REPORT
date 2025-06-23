@@ -21,9 +21,13 @@
         </div>
         <div class="w-full px-6 py-24">
             <ul class="flex flex-col gap-y-5 w-full uppercase text-xs">
-                <li class="w-72:block w-24:hidden flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl cursor-pointer">
-                    <i class="fas fa-tachometer-alt text-lg"></i> <!-- Dashboard Icon -->
-                    <span class="text">Dashboard</span>
+                
+
+                <li>
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
+                        <i class="fas fa-bell text-lg"></i>
+                        Dashboard
+                    </a>
                 </li>
 
                 <!-- Accordion 1 with Icon -->
@@ -35,8 +39,8 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div id="accordion1-content" class="accordion-content hidden pl-4">
-                            <a href="#" class="block py-3 text-xs text-black"><i class="fas fa-fire-alt text-xs mr-2"></i>Basic FireManShip</a>
-                            <a href="#" class="block py-3 text-xs text-black"><i class="fas fa-cogs text-xs mr-2"></i>In Service</a>
+                            <a href="{{ route('reportbasicfiremanship') }}" class="block py-3 text-xs text-black"><i class="fas fa-fire-alt text-xs mr-2"></i>Basic FireManShip</a>
+                            <a href="{{ route('reportinservice') }}" class="block py-3 text-xs text-black"><i class="fas fa-cogs text-xs mr-2"></i>In Service</a>
                         </div>
                     </div>
                 </li>
@@ -50,15 +54,15 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div id="accordion2-content" class="accordion-content hidden pl-4">
-                            <a href="#" class="block py-3 text-xs text-black"><i class="fas fa-user-graduate text-xs mr-2"></i>Basic FireManShip</a>
-                            <a href="#" class="block py-3 text-xs text-black"><i class="fas fa-chalkboard-teacher text-xs mr-2"></i>In Service</a>
+                            <a href="{{ route('studentbasicfiremanship') }}" class="block py-3 text-xs text-black"><i class="fas fa-user-graduate text-xs mr-2"></i>Basic FireManShip</a>
+                            <a href="{{ route('studentinservice') }}" class="block py-3 text-xs text-black"><i class="fas fa-chalkboard-teacher text-xs mr-2"></i>In Service</a>
                         </div>
                     </div>
                 </li>
 
                 <!-- User management -->
                 <li>
-                    <a href="#" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
+                    <a href="{{ route('usermanagement') }}" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
                         <i class="fas fa-user text-lg"></i> <!-- Icon for User management -->
                         User management
                     </a>
@@ -66,8 +70,8 @@
 
                 <!-- Recommendation Area with Icon -->
                 <li>
-                    <a href="#" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
-                        <i class="fas fa-bell text-lg"></i> <!-- Icon for Recommendation Area -->
+                    <a href="{{ route('recommendation') }}" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
+                        <i class="fas fa-bell text-lg"></i>
                         Recommendation Area
                     </a>
                 </li>
@@ -86,7 +90,7 @@
                 <div class="text-2xl font-semibold text-black uppercase font-thin text-md">Dashboard</div>
             </div>
 
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-12">
                 <!-- Notification Icon with Badge -->
                 <div class="relative">
                     <button class="text-gray-600 relative">

@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
 @extends('layouts.admin')
+@extends('layouts.app')
 
 @section('title', 'Dashboard')
 
@@ -34,7 +35,7 @@
             </div>
             <div class="flex flex-col gap-y-2 font-semibold">
                 <span class="text-md uppercase font-thin">Total users</span>
-                <span class="text-xl">6</span>
+                <span class="text-xl">{{ $users_count }}</span>
             </div>
         </div>
 
@@ -44,7 +45,7 @@
             </div>
             <div class="flex flex-col gap-y-2 font-semibold">
                 <span class="text-md uppercase font-thin">Total Course</span>
-                <span class="text-xl">2</span>
+                <span class="text-xl">{{ $users_count }}</span>
             </div>
         </div>
 
@@ -161,4 +162,5 @@
 
 
     </section>
+
 @endsection

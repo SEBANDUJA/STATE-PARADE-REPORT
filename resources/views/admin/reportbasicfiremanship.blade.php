@@ -4,5 +4,5 @@
 @section('title', 'Firemanship Report')
 
 @section('content')
-    <div>ReportFireManShip</div>
+    <div>ReportbasicfireManShip</div>
 @endsection

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -11,7 +13,9 @@ class HomeController extends Controller
     }
 
     public function dashboard() {
-        return view('admin.dashboard');
+        $users_count = User::count();
+        //dd($users_count);
+        return view('admin.dashboard', compact('users_count'));
     }
 
     public function dashboardHome() {
@@ -22,7 +26,27 @@ class HomeController extends Controller
         return view('admin.recommendation');
     }
 
-    public function reportFiremanship() {
-        return view('admin.reportFiremanship');
+    public function reportbasicfiremanship() {
+        return view('admin.reportbasicfiremanship');
+    }
+
+    public function reportinservice() {
+        return view('admin.reportinservice');
+    }
+
+    public function studentbasicfiremanship() {
+        return view('admin.studentbasicfiremanship');
+    }
+
+    public function studentinservice() {
+        return view('admin.studentinservice');
+    }
+
+    public function usermanagement() {
+        return view('admin.usermanagement');
+    }
+
+    public function modelform() {
+        return view('admin.modelform');
     }
 }
