@@ -80,8 +80,8 @@
     </div>
 
     <!-- Main Content -->
-    <div id="main-content" class="flex-1 ml-72 transition-all duration-300 ease-in-out">
-         <header class="bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 shadow-md p-4 flex items-center justify-between">
+    <div id="main-content" class="flex-1 ml-72 transition-all duration-500 ease-in-out">
+        <header class="bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 shadow-md p-4 flex items-center justify-between">
             <div class="flex items-center space-x-4">
                 <!-- Toggle Button for Sidebar -->
                 <button id="toggleSidebar" class="text-2xl text-black">
@@ -105,6 +105,7 @@
                     <button class="text-gray-500">
                         <i class="fas fa-user-circle text-4xl"></i> <!-- Person Icon -->
                     </button>
+                    
                 </div>
             </div>
         </header>
