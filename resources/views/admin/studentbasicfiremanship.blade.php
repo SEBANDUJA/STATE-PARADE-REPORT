@@ -11,11 +11,13 @@
     <div class="flex justify-end items-center mb-4">
         <button
             @click="openAddForm()"
-            class="h-10 px-4 bg-blue-500 rounded-md text-white hover:bg-blue-500 transition uppercase text-xs"
+            class="h-10 px-4 bg-gray-500 rounded-md text-white hover:bg-blue-600 transition uppercase text-xs flex items-center gap-2 hover:border-2 hover:border-orange-600 hover:bg-white hover:text-black transition-all duration-500 ease-in cursor-pointer"
         >
+            <i class="fas fa-user-plus text-sm"></i>
             Add Student
         </button>
     </div>
+
 
     <!-- Add / Edit Form Modal -->
     <div
@@ -102,13 +104,21 @@
                     <td class="px-4 py-2 flex gap-2">
                         <button
                             @click="openEditForm(stud)"
-                            class="w-fit px-3 h-8 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 uppercase"
-                        >Edit</button>
+                            class="w-fit px-3 h-8 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 uppercase flex items-center gap-2.5 cursor-pointer"
+                        >
+                            <i class="fas fa-edit text-white text-sm"></i>
+                            Edit
+                        </button>
+
                         <button
                             @click="deleteStudent(stud.id)"
-                            class="w-fit px-3 h-8 bg-red-500 text-white text-xs rounded hover:bg-red-600 uppercase"
-                        >Delete</button>
+                            class="w-fit px-3 h-8 bg-red-500 text-white text-xs rounded hover:bg-red-600 uppercase flex items-center gap-2.5 cursor-pointer"
+                        >
+                            <i class="fas fa-trash text-white text-sm"></i>
+                            Delete
+                        </button>
                     </td>
+
                 </tr>
             </template>
         </tbody>
