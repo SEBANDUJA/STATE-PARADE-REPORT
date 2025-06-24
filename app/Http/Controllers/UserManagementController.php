@@ -26,6 +26,12 @@ class UserManagementController extends Controller
         return view ('admin.usermanagement', compact('user_in'));
     }
 
+    public function profile()
+    {
+        
+        return view ('admin.profile');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
