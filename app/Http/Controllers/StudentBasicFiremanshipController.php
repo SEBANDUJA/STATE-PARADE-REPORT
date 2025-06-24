@@ -3,30 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Student;
-use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class StudentBasicFiremanshipController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $students_count = Student::count();
-        $users_count = User::count();
-        return view('admin.dashboard', compact('users_count', 'students_count'));
+        $students = Student::paginate(10);
+        return view ('admin.studentbasicfiremanship',compact('students'));
     }
 
     /**

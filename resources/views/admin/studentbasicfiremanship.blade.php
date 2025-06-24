@@ -84,23 +84,26 @@
         <thead class="bg-gray-100">
             <tr>
                 <th class="px-4 py-2 text-left">SN</th>
+                <th class="px-4 py-2 text-left">ID</th>
                 <th class="px-4 py-2 text-left">Name</th>
                 <th class="px-4 py-2 text-left">Gender</th>
-                <th class="px-4 py-2 text-left">NIDA No</th>
                 <th class="px-4 py-2 text-left">Company</th>
-                <th class="px-4 py-2 text-left">Company No</th>
+                <th class="px-4 py-2 text-left">ED</th>
+                <th class="px-4 py-2 text-left">LD</th>
                 <th class="px-4 py-2 text-left">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <template x-for="(stud, index) in students" :key="stud.id">
+            <!--<template x-for="(stud, index) in students" :key="stud.id">-->
+                @foreach($students as $student)
                 <tr class="border-b hover:bg-gray-50">
-                    <td class="px-4 py-2" x-text="index + 1"></td>
-                    <td class="px-4 py-2" x-text="stud.name"></td>
-                    <td class="px-4 py-2" x-text="stud.gender"></td>
-                    <td class="px-4 py-2" x-text="stud.nida_no"></td>
-                    <td class="px-4 py-2" x-text="stud.company"></td>
-                    <td class="px-4 py-2" x-text="stud.company_no"></td>
+                    <td class="px-4 py-2">{{ $loop->iteration }}</td>
+                    <td class="px-4 py-2">{{ $student->s_id }}</td>
+                    <td class="px-4 py-2">{{ $student->name }}</td>
+                    <td class="px-4 py-2">{{ $student->gender }}</td>
+                    <td class="px-4 py-2">{{ $student->company }}</td>
+                    <td class="px-4 py-2">{{ $student->ed }}</td>
+                    <td class="px-4 py-2">{{ $student->ld }}</td>
                     <td class="px-4 py-2 flex gap-2">
                         <button
                             @click="openEditForm(stud)"
@@ -120,9 +123,15 @@
                     </td>
 
                 </tr>
-            </template>
+                @endforeach
+           <!-- </template> -->
         </tbody>
     </table>
+</div>
+
+{{-- Pagination Links --}}
+<div class="mt-4">
+    {{ $students->links() }}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>

@@ -1,46 +1,50 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    // Show login form
     public function showLoginForm()
     {
-        return view('welcome'); // Create this Blade file
+        return view('welcome');
     }
 
-    // Handle login request
-    public function login(Request $request)
+    public function loginto(Request $request)
     {
-        //dd('hello6');
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate(); // Prevent session fixation
-            //dd($request);
-            // return redirect()->intended('/admin/dashboard');
-            return redirect()->intended(route('dashboard'));
+        $user = DB::table('users')->where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return back()->with('error', 'Invalid email or password');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->withInput();
+        // Store user ID in session
+        session(['user_id' => $user->id]);
+
+        return redirect('/admin/dashboard');
     }
 
-    // Handle logout
-    public function logout(Request $request)
+    public function dashboard()
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        if (!session('user_id')) {
+            return redirect('/login');
+        }
+
+        return view('dashboard'); // Create a blade view or return text
+    }
+
+    public function logout()
+    {
+        session()->forget('user_id');
         return redirect('/login');
     }
 }
+
