@@ -15,7 +15,7 @@
             </div>
             <div class="flex flex-col gap-y-2 font-semibold">
                 <span class="text-md uppercase font-thin">Total students</span>
-                <span class="text-xl">432</span>
+                <span class="text-xl">{{ $students_count }}</span>
             </div>
         </div>
 

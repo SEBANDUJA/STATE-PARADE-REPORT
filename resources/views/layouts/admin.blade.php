@@ -62,7 +62,7 @@
 
                 <!-- User management -->
                 <li>
-                    <a href="{{ route('usermanagement') }}" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
+                    <a href="{{ route('usermanager') }}" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
                         <i class="fas fa-user text-lg"></i> <!-- Icon for User management -->
                         User management
                     </a>

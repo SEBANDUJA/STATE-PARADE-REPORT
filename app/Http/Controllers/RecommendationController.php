@@ -3,30 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Student;
-use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class RecommendationController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $students_count = Student::count();
-        $users_count = User::count();
-        return view('admin.dashboard', compact('users_count', 'students_count'));
+        return view ('admin.recommendation');
     }
 
     /**
