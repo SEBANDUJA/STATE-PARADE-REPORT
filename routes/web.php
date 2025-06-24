@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\RecommendationController;
+use App\Http\Controllers\StudentBasicFiremanshipController;
+use App\Http\Controllers\ReportBasicFiremanship;
+use App\Http\Controllers\ReportinServiceController;
+use App\Http\Controllers\StudentinServiceController;
 
 
 Route::post('/login', [LoginController::class, 'login']);
@@ -11,18 +17,15 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // Route::get('/', [LoginController::class, 'showLoginForm'])->name('welcome');
  Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/admin/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-Route::get('/admin/recommendation', [HomeController::class, 'recommendation'])->name('recommendation');
-Route::get('/admin/reportbasicfiremanship', [HomeController::class, 'reportbasicfiremanship'])->name('reportbasicfiremanship');
-Route::get('/admin/reportinservice', [HomeController::class, 'reportinservice'])->name('reportinservice');
-Route::get('/admin/studentbasicfiremanship', [HomeController::class, 'studentbasicfiremanship'])->name('studentbasicfiremanship');
-Route::get('/admin/studentinservice', [HomeController::class, 'studentinservice'])->name('studentinservice');
-Route::get('/admin/usermanagement', [HomeController::class, 'usermanagement'])->name('usermanagement');
-Route::get('/admin/paradereportbasicfiremanship', [HomeController::class, 'paradereportbasicfiremanship'])->name('paradereportbasicfiremanship');
-Route::get('/admin/paradereportinservice', [HomeController::class, 'paradereportinservice'])->name('paradereportinservice');
-
-Route::get('/profile', [UserController::class, 'show'])->name('profile');
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
+// Route::get('/admin/dashboardHome', [HomeController::class, 'dashboardHome'])->name('dashboardHome');
+Route::get('/admin/recommendation', [RecommendationController::class, 'index'])->name('recommendation');
+Route::get('/admin/reportbasicfiremanship', [ReportBasicFiremanship::class, 'index'])->name('reportbasicfiremanship');
+Route::get('/admin/reportinservice', [ReportinServiceController::class, 'index'])->name('reportinservice');
+Route::get('/admin/studentbasicfiremanship', [StudentBasicFiremanshipController::class, 'index'])->name('studentbasicfiremanship');
+Route::get('/admin/studentinservice', [StudentinServiceController::class, 'index'])->name('studentinservice');
+Route::get('/admin/usermanagement', [UserManagementController::class, 'index'])->name('usermanager');
+Route::get('admin/profile', [UserManagementController::class, 'profile'])->name('profile');
+// Route::get('/admin/modelform', [HomeController::class, 'modelform'])->name('modelform');
 
 
 require __DIR__.'/settings.php';

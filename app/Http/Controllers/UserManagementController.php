@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class UserManagementController extends Controller
 {
-    /**
+        /**
      * Create a new controller instance.
      *
      * @return void
@@ -18,15 +17,19 @@ class HomeController extends Controller
     // {
     //     $this->middleware('auth');
     // }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $students_count = Student::count();
-        $users_count = User::count();
-        return view('admin.dashboard', compact('users_count', 'students_count'));
+        $user_in = User::paginate(10);
+        return view ('admin.usermanagement', compact('user_in'));
+    }
+
+    public function profile()
+    {
+        
+        return view ('admin.profile');
     }
 
     /**

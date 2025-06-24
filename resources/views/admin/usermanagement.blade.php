@@ -84,22 +84,24 @@
             <tr>
                 <th class="px-4 py-2 text-left">SN</th>
                 <th class="px-4 py-2 text-left">Name</th>
+                <th class="px-4 py-2 text-left">username</th>
+                <th class="px-4 py-2 text-left">Job Title</th>
+                <th class="px-4 py-2 text-left">Email</th>
                 <th class="px-4 py-2 text-left">Gender</th>
-                <th class="px-4 py-2 text-left">NIDA No</th>
-                <th class="px-4 py-2 text-left">Company</th>
-                <th class="px-4 py-2 text-left">Company No</th>
                 <th class="px-4 py-2 text-left">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <template x-for="(stud, index) in students" :key="stud.id">
+            <!-- <template x-for="(stud, index) in students" :key="stud.id"> -->
+                @foreach($user_in as $user)
                 <tr class="border-b hover:bg-gray-50">
-                    <td class="px-4 py-2" x-text="index + 1"></td>
-                    <td class="px-4 py-2" x-text="stud.name"></td>
-                    <td class="px-4 py-2" x-text="stud.gender"></td>
-                    <td class="px-4 py-2" x-text="stud.nida_no"></td>
-                    <td class="px-4 py-2" x-text="stud.company"></td>
-                    <td class="px-4 py-2" x-text="stud.company_no"></td>
+                    <td class="px-4 py-2" >{{ $loop->iteration }}</td>
+                    <td class="px-4 py-2" >{{ $user->name }}</td>
+                    <td class="px-4 py-2" >{{ $user->username }}</td>
+                    <td class="px-4 py-2" >{{ $user->job_title }}</td>
+                    <td class="px-4 py-2" >{{ $user->email }}</td>
+                    <td class="px-4 py-2" >{{ $user->gender }}</td>
+                    <!-- <td class="px-4 py-2" ></td> -->
                     <td class="px-4 py-2 flex gap-2">
                         <button
                             @click="openEditForm(stud)"
@@ -118,9 +120,15 @@
                         </button>
                     </td>
                 </tr>
-            </template>
+                @endforeach
+            <!-- </template> -->
         </tbody>
     </table>
+</div>
+
+{{-- Pagination Links --}}
+<div class="mt-4">
+    {{ $user_in->links() }}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
