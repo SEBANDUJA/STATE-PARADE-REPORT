@@ -17,6 +17,8 @@ Route::get('/admin/reportinservice', [HomeController::class, 'reportinservice'])
 Route::get('/admin/studentbasicfiremanship', [HomeController::class, 'studentbasicfiremanship'])->name('studentbasicfiremanship');
 Route::get('/admin/studentinservice', [HomeController::class, 'studentinservice'])->name('studentinservice');
 Route::get('/admin/usermanagement', [HomeController::class, 'usermanagement'])->name('usermanagement');
+Route::get('/admin/paradereportbasicfiremanship', [HomeController::class, 'paradereportbasicfiremanship'])->name('paradereportbasicfiremanship');
+Route::get('/admin/paradereportinservice', [HomeController::class, 'paradereportinservice'])->name('paradereportinservice');
 
 Route::get('/profile', [UserController::class, 'show'])->name('profile');
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

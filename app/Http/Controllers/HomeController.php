@@ -46,7 +46,10 @@ class HomeController extends Controller
         return view('admin.usermanagement');
     }
 
-    public function modelform() {
-        return view('admin.modelform');
+    public function paradereportbasicfiremanship() {
+        return view('admin.paradereportbasicfiremanship');
+    }
+    public function paradereportinservice() {
+        return view('admin.paradereportinservice');
     }
 }

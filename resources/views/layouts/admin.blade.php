@@ -81,12 +81,12 @@
                     <div class="relative">
                         <button id="accordion3" class="flex flex-row justify-between gap-x-1 block w-full py-3 px-4 text-xs uppercase text-black bg-white border rounded-4xl focus:outline-none">
                             <i class="fas fa-users text-lg"></i> <!-- Icon for List of Students -->
-                            Upload student data
+                            Upload parade report
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div id="accordion3-content" class="accordion-content hidden pl-4">
-                            <a href="{{ route('studentbasicfiremanship') }}" class="block py-3 text-xs text-black"><i class="fas fa-user-graduate text-xs mr-2"></i>Basic FireManShip</a>
-                            <a href="{{ route('studentinservice') }}" class="block py-3 text-xs text-black"><i class="fas fa-chalkboard-teacher text-xs mr-2"></i>In Service</a>
+                            <a href="{{ route('paradereportbasicfiremanship') }}" class="block py-3 text-xs text-black"><i class="fas fa-user-graduate text-xs mr-2"></i>Basic FireManShip</a>
+                            <a href="{{ route('paradereportinservice') }}" class="block py-3 text-xs text-black"><i class="fas fa-chalkboard-teacher text-xs mr-2"></i>In Service</a>
                         </div>
                     </div>
                 </li>
