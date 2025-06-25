@@ -13,8 +13,8 @@
         </div>
 
         <!-- heading -->
-        <h1 class="text-5xl text-white font-semibold">SPRS MANAGEMENT SYSTEM</h1>
-        <h3 class="text-3xl mt-1 font-semibold">STATE PARADE REPORT</h3>
+        <h1 class="text-5xl text-white font-semibold uppercase">sprs management system</h1>
+        <h3 class="text-3xl mt-1 font-semibold uppercase">state parade report</h3>
 
         <!-- form -->
         <form class="mt-2 flex flex-col justify-start items-center w-full gap-y-2" action="{{ route('login') }}" method="POST">
