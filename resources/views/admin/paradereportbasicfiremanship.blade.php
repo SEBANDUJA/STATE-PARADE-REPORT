@@ -3,78 +3,6 @@
 @section('title', 'Parade Report Basicfiremanship')
 
 @section('content')
-    <!-- <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Company Step Forms</title>
-        @vite('resources/css/app.css') {{-- Laravel Vite --}}
-        <script src="//unpkg.com/alpinejs" defer></script>
-    </head>
-    <body class="bg-gray-100 p-10">
-
-        <div x-data="{ step: 1 }" class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow">
-
-            
-            <div class="flex justify-between mb-6">
-                <template x-for="s in 4" :key="s">
-                    <button @click="step = s" 
-                            class="px-4 py-2 rounded font-semibold"
-                            :class="step === s ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'">
-                        <span x-text="'Step ' + s"></span>
-                    </button>
-                </template>
-            </div>
-
-            
-            <div x-show="step === 1">
-                <h2 class="text-xl font-bold mb-4">A Coy Form</h2>
-                <form action="" method="POST">
-                    @csrf
-                    <input type="hidden" name="company" value="A Coy">
-                    <input type="text" name="name" placeholder="Name" class="input" required>
-                    <input type="number" name="staff" placeholder="Number of Staff" class="input mt-2" required>
-                    <button class="btn-primary mt-4">Submit A Coy</button>
-                </form>
-            </div>
-
-            <div x-show="step === 2">
-                <h2 class="text-xl font-bold mb-4">B Coy Form</h2>
-                <form action="" method="POST">
-                    @csrf
-                    <input type="hidden" name="company" value="B Coy">
-                    <input type="text" name="name" placeholder="Name" class="input" required>
-                    <input type="number" name="staff" placeholder="Number of Staff" class="input mt-2" required>
-                    <button class="btn-primary mt-4">Submit B Coy</button>
-                </form>
-            </div>
-
-            <div x-show="step === 3">
-                <h2 class="text-xl font-bold mb-4">C Coy Form</h2>
-                <form action="" method="POST">
-                    @csrf
-                    <input type="hidden" name="company" value="C Coy">
-                    <input type="text" name="name" placeholder="Name" class="input" required>
-                    <input type="number" name="staff" placeholder="Number of Staff" class="input mt-2" required>
-                    <button class="btn-primary mt-4">Submit C Coy</button>
-                </form>
-            </div>
-
-            <div x-show="step === 4">
-                <h2 class="text-xl font-bold mb-4">D Coy Form</h2>
-                <form action="" method="POST">
-                    @csrf
-                    <input type="hidden" name="company" value="D Coy">
-                    <input type="text" name="name" placeholder="Name" class="input" required>
-                    <input type="number" name="staff" placeholder="Number of Staff" class="input mt-2" required>
-                    <button class="btn-primary mt-4">Submit D Coy</button>
-                </form>
-            </div>
-
-        </div>
-
-    </body>
-</html> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +12,7 @@
     @vite('resources/css/app.css') {{-- Vite for Tailwind --}}
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
-<body class="bg-gray-100 p-10">
+<body class="p-10">
 
 <div x-data="paradeApp()" class="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow flex gap-6">
 
@@ -93,11 +21,11 @@
         <template x-for="company in companies" :key="company.name">
             <button
                 @click="selectCompany(company.name)"
-                class="w-full px-4 py-2 flex justify-between items-center border rounded-lg font-semibold"
+                class="w-full px-4 py-2 flex justify-between items-center border rounded-lg font-semibold cursor-pointer"
                 :class="{
-                    'bg-blue-600 text-white': selected === company.name,
-                    'bg-green-100 border-green-500 text-green-700': company.submitted,
-                    'bg-white text-gray-800': !selected === company.name && !company.submitted
+                    'bg-orange-500 text-white cursor-pointer': selected === company.name,
+                    'bg-green-100 cursor-pointer border-green-500 text-green-700': company.submitted,
+                    'bg-white  cursor-pointertext-gray-800': !selected === company.name && !company.submitted
                 }"
             >
                 <span x-text="company.name"></span>
@@ -125,7 +53,7 @@
 
                     <!-- Step 1 -->
                     <div x-show="step === 1" class="space-y-4"
-                       x-data="{
+                        x-data="{
                             form: {
                                 present: '',
                                 absent: 0,
@@ -284,37 +212,276 @@
 
                     </div>
 
-                    <!-- Step 2 -->
-                    <div x-show="step === 2" class="space-y-4">
+                    <!-- step 2                     -->
+                    <div x-show="step === 2" class="space-y-4"
+                        x-data="{
+                            form: {
+                                sick_out: 0,
+                                ed: 0,
+                                ld: 0,
+                                selectedSickOutNames: [],
+                                selectedEdNames: [],
+                                selectedLdNames: []
+                            },
+                            allNames: ['John Doe', 'Jane Smith', 'Alice Brown', 'Bob Johnson', 'Michael Lee'],
+
+                            sickOutQuery: '', sickOutResults: [],
+                            edQuery: '', edResults: [],
+                            ldQuery: '', ldResults: [],
+
+                            updateSearch(field) {
+                                let query = this[field + 'Query'].toLowerCase().trim();
+                                if (!query) {
+                                    this[field + 'Results'] = [];
+                                    return;
+                                }
+                                const selectedList = this.form['selected' + field.charAt(0).toUpperCase() + field.slice(1) + 'Names'];
+                                this[field + 'Results'] = this.allNames.filter(name =>
+                                    name.toLowerCase().includes(query) && !selectedList.includes(name)
+                                );
+                            },
+
+                            selectName(field, name) {
+                                const key = 'selected' + field.charAt(0).toUpperCase() + field.slice(1) + 'Names';
+                                const limit = this.form[field];
+                                if (this.form[key].length < limit) {
+                                    this.form[key].push(name);
+                                    this[field + 'Query'] = '';
+                                    this[field + 'Results'] = [];
+                                }
+                            },
+
+                            removeName(field, index) {
+                                const key = 'selected' + field.charAt(0).toUpperCase() + field.slice(1) + 'Names';
+                                this.form[key].splice(index, 1);
+                            }
+                        }">
+                        
+                        <!-- SICK OUT -->
                         <div>
-                            <label class="block font-semibold">Sick Out</label>
-                            <input type="text" name="sick_out" x-model="form.sick_out"
-                                class="w-full border rounded p-2 focus:outline-none focus:ring" />
+                            <label class="block font-semibold">Sick Out (number)</label>
+                            <input type="number" x-model.number="form.sick_out"
+                                @input="form.selectedSickOutNames = []"
+                                class="w-full border rounded p-2 focus:outline-none focus:ring"/>
                         </div>
-                        <div>
-                            <label class="block font-semibold">ED</label>
-                            <input type="text" name="ed" x-model="form.ed"
-                                class="w-full border rounded p-2 focus:outline-none focus:ring" />
+                        <div x-show="form.sick_out > 0">
+                            <label class="block font-semibold">Search Sick Out Name</label>
+                            <input type="text" x-model="sickOutQuery"
+                                @input="updateSearch('sickOut')"
+                                placeholder="Search name..."
+                                class="w-full border rounded p-2"/>
+
+                            <ul class="border rounded p-2 mt-2 max-h-40 overflow-y-auto">
+                                <template x-for="name in sickOutResults" :key="name">
+                                    <li @click="selectName('sickOut', name)" x-text="name"
+                                        class="cursor-pointer hover:bg-blue-100 p-1"></li>
+                                </template>
+                                <li x-show="sickOutResults.length === 0" class="text-gray-400">No matches</li>
+                            </ul>
+
+                            <template x-for="(name, index) in form.selectedSickOutNames" :key="index">
+                                <div class="flex justify-between items-center bg-red-50 border p-2 mt-2 rounded">
+                                    <span x-text="name"></span>
+                                    <button @click="removeName('sickOut', index)" type="button"
+                                            class="text-red-600 text-sm hover:underline">Remove</button>
+                                </div>
+                            </template>
+
+                            <!-- Hidden inputs -->
+                            <template x-for="name in form.selectedSickOutNames">
+                                <input type="hidden" name="sick_out_names[]" :value="name">
+                            </template>
                         </div>
+
+                        <!-- ED -->
                         <div>
-                            <label class="block font-semibold">LD</label>
-                            <input type="text" name="ld" x-model="form.ld"
-                                class="w-full border rounded p-2 focus:outline-none focus:ring" />
+                            <label class="block font-semibold">ED (number)</label>
+                            <input type="number" x-model.number="form.ed"
+                                @input="form.selectedEdNames = []"
+                                class="w-full border rounded p-2 focus:outline-none focus:ring"/>
+                        </div>
+                        <div x-show="form.ed > 0">
+                            <label class="block font-semibold">Search ED Name</label>
+                            <input type="text" x-model="edQuery"
+                                @input="updateSearch('ed')"
+                                placeholder="Search name..."
+                                class="w-full border rounded p-2"/>
+
+                            <ul class="border rounded p-2 mt-2 max-h-40 overflow-y-auto">
+                                <template x-for="name in edResults" :key="name">
+                                    <li @click="selectName('ed', name)" x-text="name"
+                                        class="cursor-pointer hover:bg-blue-100 p-1"></li>
+                                </template>
+                                <li x-show="edResults.length === 0" class="text-gray-400">No matches</li>
+                            </ul>
+
+                            <template x-for="(name, index) in form.selectedEdNames" :key="index">
+                                <div class="flex justify-between items-center bg-blue-50 border p-2 mt-2 rounded">
+                                    <span x-text="name"></span>
+                                    <button @click="removeName('ed', index)" type="button"
+                                            class="text-red-600 text-sm hover:underline">Remove</button>
+                                </div>
+                            </template>
+
+                            <!-- Hidden inputs -->
+                            <template x-for="name in form.selectedEdNames">
+                                <input type="hidden" name="ed_names[]" :value="name">
+                            </template>
+                        </div>
+
+                        <!-- LD -->
+                        <div>
+                            <label class="block font-semibold">LD (number)</label>
+                            <input type="number" x-model.number="form.ld"
+                                @input="form.selectedLdNames = []"
+                                class="w-full border rounded p-2 focus:outline-none focus:ring"/>
+                        </div>
+                        <div x-show="form.ld > 0">
+                            <label class="block font-semibold">Search LD Name</label>
+                            <input type="text" x-model="ldQuery"
+                                @input="updateSearch('ld')"
+                                placeholder="Search name..."
+                                class="w-full border rounded p-2"/>
+
+                            <ul class="border rounded p-2 mt-2 max-h-40 overflow-y-auto">
+                                <template x-for="name in ldResults" :key="name">
+                                    <li @click="selectName('ld', name)" x-text="name"
+                                        class="cursor-pointer hover:bg-blue-100 p-1"></li>
+                                </template>
+                                <li x-show="ldResults.length === 0" class="text-gray-400">No matches</li>
+                            </ul>
+
+                            <template x-for="(name, index) in form.selectedLdNames" :key="index">
+                                <div class="flex justify-between items-center bg-yellow-50 border p-2 mt-2 rounded">
+                                    <span x-text="name"></span>
+                                    <button @click="removeName('ld', index)" type="button"
+                                            class="text-red-600 text-sm hover:underline">Remove</button>
+                                </div>
+                            </template>
+
+                            <!-- Hidden inputs -->
+                            <template x-for="name in form.selectedLdNames">
+                                <input type="hidden" name="ld_names[]" :value="name">
+                            </template>
                         </div>
                     </div>
 
+
                     <!-- Step 3 -->
-                    <div x-show="step === 3" class="space-y-4">
+                    <div x-show="step === 3" class="space-y-4"
+                        x-data="{
+                            form: {
+                                permission: 0,
+                                pass: 0,
+                                selectedPermissionNames: [],
+                                selectedPassNames: []
+                            },
+                            allNames: ['John Doe', 'Jane Smith', 'Alice Brown', 'Bob Johnson', 'Michael Lee'],
+
+                            permissionQuery: '', permissionResults: [],
+                            passQuery: '', passResults: [],
+
+                            updateSearch(field) {
+                                let query = this[field + 'Query'].toLowerCase().trim();
+                                if (!query) {
+                                    this[field + 'Results'] = [];
+                                    return;
+                                }
+                                const selectedList = this.form['selected' + field.charAt(0).toUpperCase() + field.slice(1) + 'Names'];
+                                this[field + 'Results'] = this.allNames.filter(name =>
+                                    name.toLowerCase().includes(query) && !selectedList.includes(name)
+                                );
+                            },
+
+                            selectName(field, name) {
+                                const key = 'selected' + field.charAt(0).toUpperCase() + field.slice(1) + 'Names';
+                                const limit = this.form[field];
+                                if (this.form[key].length < limit) {
+                                    this.form[key].push(name);
+                                    this[field + 'Query'] = '';
+                                    this[field + 'Results'] = [];
+                                }
+                            },
+
+                            removeName(field, index) {
+                                const key = 'selected' + field.charAt(0).toUpperCase() + field.slice(1) + 'Names';
+                                this.form[key].splice(index, 1);
+                            }
+                        }">
+
+                        <!-- Permission -->
                         <div>
-                            <label class="block font-semibold">Permission</label>
-                            <input type="text" name="permission" x-model="form.permission"
-                                class="w-full border rounded p-2 focus:outline-none focus:ring" />
+                            <label class="block font-semibold">Permission (number)</label>
+                            <input type="number" x-model.number="form.permission"
+                                @input="form.selectedPermissionNames = []"
+                                class="w-full border rounded p-2 focus:outline-none focus:ring"/>
                         </div>
+                        <div x-show="form.permission > 0">
+                            <label class="block font-semibold">Search Permission Name</label>
+                            <input type="text" x-model="permissionQuery"
+                                @input="updateSearch('permission')"
+                                class="w-full border rounded p-2 focus:outline-none focus:ring"
+                                placeholder="Search a name..."/>
+
+                            <ul class="border rounded p-2 mt-2 max-h-40 overflow-y-auto">
+                                <template x-for="name in permissionResults" :key="name">
+                                    <li @click="selectName('permission', name)" x-text="name"
+                                        class="cursor-pointer hover:bg-blue-100 p-1"></li>
+                                </template>
+                                <li x-show="permissionResults.length === 0" class="text-gray-400">No matches</li>
+                            </ul>
+
+                            <template x-for="(name, index) in form.selectedPermissionNames" :key="index">
+                                <div class="flex justify-between items-center bg-purple-50 border p-2 mt-2 rounded">
+                                    <span x-text="name"></span>
+                                    <button @click="removeName('permission', index)" type="button"
+                                            class="text-red-600 text-sm hover:underline">Remove</button>
+                                </div>
+                            </template>
+
+                            <!-- Hidden Inputs -->
+                            <template x-for="name in form.selectedPermissionNames">
+                                <input type="hidden" name="permission_names[]" :value="name">
+                            </template>
+                        </div>
+
+                        <!-- Pass -->
                         <div>
-                            <label class="block font-semibold">Pass</label>
-                            <input type="text" name="pass" x-model="form.pass"
-                                class="w-full border rounded p-2 focus:outline-none focus:ring" />
+                            <label class="block font-semibold">Pass (number)</label>
+                            <input type="number" x-model.number="form.pass"
+                                @input="form.selectedPassNames = []"
+                                class="w-full border rounded p-2 focus:outline-none focus:ring"/>
                         </div>
+                        <div x-show="form.pass > 0">
+                            <label class="block font-semibold">Search Pass Name</label>
+                            <input type="text" x-model="passQuery"
+                                @input="updateSearch('pass')"
+                                class="w-full border rounded p-2 focus:outline-none focus:ring"
+                                placeholder="Search a name..."/>
+
+                            <ul class="border rounded p-2 mt-2 max-h-40 overflow-y-auto">
+                                <template x-for="name in passResults" :key="name">
+                                    <li @click="selectName('pass', name)" x-text="name"
+                                        class="cursor-pointer hover:bg-blue-100 p-1"></li>
+                                </template>
+                                <li x-show="passResults.length === 0" class="text-gray-400">No matches</li>
+                            </ul>
+
+                            <template x-for="(name, index) in form.selectedPassNames" :key="index">
+                                <div class="flex justify-between items-center bg-indigo-50 border p-2 mt-2 rounded">
+                                    <span x-text="name"></span>
+                                    <button @click="removeName('pass', index)" type="button"
+                                            class="text-red-600 text-sm hover:underline">Remove</button>
+                                </div>
+                            </template>
+
+                            <!-- Hidden Inputs -->
+                            <template x-for="name in form.selectedPassNames">
+                                <input type="hidden" name="pass_names[]" :value="name">
+                            </template>
+                        </div>
+
+                        <!-- Total (manual input, not by name) -->
                         <div>
                             <label class="block font-semibold">Total</label>
                             <input type="text" name="total" x-model="form.total"
@@ -324,29 +491,39 @@
 
                     <!-- Navigation Buttons -->
                     <div class="mt-6 flex justify-between">
-                        <button type="button" @click="step = step > 1 ? step - 1 : 1"
-                            class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
+
+                        <!-- Previous Button: Shown only in Step 2 and Step 3 -->
+                        <button
+                            x-show="step > 1"
+                            @click="step--"
+                            type="button"
+                            class="bg-orange-600 text-white px-4 w-fit h-10 cursor-pointer rounded hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black transition">
+                            <i class="fas fa-chevron-left px-2"></i>
                             Previous
                         </button>
 
-                        <template x-if="step < 3">
-                            <button type="button" @click="step++"
-                                class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                        <div class="flex gap-4 ml-auto">
+                            <!-- Next Button: Show on Step 1 and 2 -->
+                            <button
+                                x-show="step < 3"
+                                @click="step++"
+                                type="button"
+                                class="bg-orange-600 text-white px-4 w-fit h-10 cursor-pointer rounded hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black transition">
                                 Next
+                                <i class="fas fa-chevron-right px-2"></i>
                             </button>
-                        </template>
 
-                        <template x-if="step === 3">
-                            <button type="submit"
-                                class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-                                Submit
+                            <!-- Save Statement: Only visible on Step 3 -->
+                            <button
+                                x-show="step === 3"
+                                type="submit"
+                                class="bg-white text-black px-4 py-2 rounded border-2 border-orange-500 hover:bg-orange-500 transition-all ease-out duration-500 hover:text-white cursor-pointer">
+                                <i class="fas fa-save"></i>
+                                Save Statement
                             </button>
-                        </template>
+                        </div>
                     </div>
 
-                    <button type="submit" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                        Save Statement
-                    </button>
                 </form>
             </div>
         </template>
@@ -363,10 +540,10 @@ function paradeApp() {
         selected: null,
         statement: '',
         companies: [
-            { name: 'A Coy', submitted: false },
-            { name: 'B Coy', submitted: false },
-            { name: 'C Coy', submitted: false },
-            { name: 'D Coy', submitted: false },
+            { name: 'A - COY', submitted: false },
+            { name: 'B - COY', submitted: false },
+            { name: 'C - COY', submitted: false },
+            { name: 'D - COY', submitted: false },
         ],
         selectCompany(name) {
             this.selected = name;
