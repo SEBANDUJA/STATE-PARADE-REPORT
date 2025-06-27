@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -15,21 +16,36 @@ class LoginController extends Controller
 
     public function loginto(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+        //  $request->validate([
+        //      'email' => 'required|email',
+        //      'password' => 'required'
+        //  ]);
+
+        //  $user = DB::table('users')->where('email', $request->email)->first();
+
+        //  if (!$user || !Hash::check($request->password, $user->password)) {
+        //      return back()->with('error', 'Invalid email or password');
+        //  }
+
+        // // // Store user ID in session
+        // session(['user_id' => $user->id]);
+        //  //dd($user->id);
+        //  return redirect('/admin/dashboard',compact('user'));
+
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
-        $user = DB::table('users')->where('email', $request->email)->first();
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return back()->with('error', 'Invalid email or password');
+            return redirect()->intended('/admin/dashboard');
         }
 
-        // Store user ID in session
-        session(['user_id' => $user->id]);
-
-        return redirect('/admin/dashboard');
+        return back()->withErrors([
+            'email' => 'Invalid credentials.',
+        ]);
     }
 
     public function dashboard()

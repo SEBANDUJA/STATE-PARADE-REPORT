@@ -125,7 +125,7 @@
                         </div>
 
                         <span class="font-semibold text-black text-sm">
-                            {{ Auth::user() ? Auth::user()->name : 'Guest' }}
+                            {{ Auth::user() ? Auth::user()->username : 'Guest' }}
                         </span>
                     </button>
 

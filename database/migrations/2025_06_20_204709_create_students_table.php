@@ -17,15 +17,19 @@ return new class extends Migration
             $table->string('name');
             $table->string('gender');
             $table->string('company');
-            $table->float('ed');
-            $table->float('ld');
-            $table->boolean('sick_in');
-            $table->boolean('sick_out');
-            $table->float('permission');
-            $table->boolean('centry');
-            $table->boolean('special_duty');
-            $table->float('pass');
-            $table->char('guard');
+
+            // Fields that should only be 0 or 1 with default 0
+            $table->boolean('absent')->default(0);
+            $table->boolean('ed')->default(0);
+            $table->boolean('ld')->default(0);
+            $table->boolean('sick_in')->default(0);
+            $table->boolean('sick_out')->default(0);
+            $table->boolean('permission')->default(0);
+            $table->boolean('centry')->default(0);
+            $table->boolean('special_duty')->default(0);
+            $table->boolean('pass')->default(0);
+            $table->boolean('guard')->default(0);
+            //
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
