@@ -68,7 +68,7 @@
 
 
                <div>
-                  <button class="h-10 w-fit px-8 rounded-md uppercase text-xs bg-blue-500 text-white flex items-center gap-2 cursor-pointer">
+                  <button class="h-10 w-fit px-8 rounded-md uppercase text-xs bg-orange-500 text-white flex items-center gap-2 cursor-pointer hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black transition-all duration-500 ease-out">
                      <i class="fas fa-paper-plane"></i>
                      Send
                   </button>
@@ -99,7 +99,7 @@
                      </div>
                   </div>
                   <div>
-                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer">
+                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer hover:border-2 hover:border-red-500 hover:bg-white hover:text-black transition-all ease-out duration-500">
                         <i class="fas fa-trash-alt"></i>
                         Delete
                      </button>
@@ -124,7 +124,7 @@
                      </div>
                   </div>
                   <div>
-                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer">
+                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer hover:border-2 hover:border-red-500 hover:bg-white hover:text-black transition-all ease-out duration-500">
                         <i class="fas fa-trash-alt"></i>
                         Delete
                      </button>
@@ -150,7 +150,7 @@
                      </div>
                   </div>
                   <div>
-                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer">
+                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer hover:border-2 hover:border-red-500 hover:bg-white hover:text-black transition-all ease-out duration-500">
                         <i class="fas fa-trash-alt"></i>
                         Delete
                      </button>
@@ -175,7 +175,7 @@
                      </div>
                   </div>
                   <div>
-                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer">
+                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer hover:border-2 hover:border-red-500 hover:bg-white hover:text-black transition-all ease-out duration-500">
                         <i class="fas fa-trash-alt"></i>
                         Delete
                      </button>

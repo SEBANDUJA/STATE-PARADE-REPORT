@@ -11,7 +11,7 @@
     <section class="grid grid-cols-4 justify-center place-items-center w-full">
         <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10">
             <div>
-                <i class="bi bi-people-fill text-blue-400 text-6xl"></i>
+                <i class="bi bi-people-fill text-orange-500 text-6xl"></i>
             </div>
             <div class="flex flex-col gap-y-2 font-semibold">
                 <span class="text-md uppercase font-thin">Total students</span>
@@ -21,7 +21,7 @@
 
         <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10">
             <div>
-                <i class="bi bi-journal-bookmark-fill text-blue-400 text-6xl"></i>
+                <i class="bi bi-journal-bookmark-fill text-orange-500 text-6xl"></i>
             </div>
             <div class="flex flex-col gap-y-2 font-semibold">
                 <span class="text-md uppercase font-thin">Permission</span>
@@ -31,7 +31,7 @@
 
         <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10">
             <div>
-                <i class="bi bi-person-fill text-blue-400 text-6xl"></i>
+                <i class="bi bi-person-fill text-orange-500 text-6xl"></i>
             </div>
             <div class="flex flex-col gap-y-2 font-semibold">
                 <span class="text-md uppercase font-thin">Total users</span>
@@ -41,7 +41,7 @@
 
         <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10">
             <div>
-                <i class="bi bi-book-fill text-blue-400 text-6xl"></i>
+                <i class="bi bi-book text-orange-500 text-6xl"></i>
             </div>
             <div class="flex flex-col gap-y-2 font-semibold">
                 <span class="text-md uppercase font-thin">Total Course</span>
@@ -55,29 +55,29 @@
     <section class="grid grid-cols-2 justify-center place-items-center gap-x-1">
 
         <!-- bar graph -->
-        <div class="max-w-xl mx-auto p-6 bg-white shadow rounded ">
+        <div class=" p-6 bg-gray-50 shadow rounded mt-16">
             <h2 class="text-lg font-bold mb-6 text-center">Monthly status</h2>
 
             <div class="flex justify-around items-end space-x-6 h-48 border-b border-gray-300 px-4">
 
-                <!-- Group 1: Students -->
+                <!-- Group 1: Instructors -->
                 <div class="flex flex-col items-center space-x-1 space-y-1">
                     <div class="flex space-x-1 items-end h-40">
-                        <div class="w-6 bg-blue-500 rounded-t" style="height: 70%;"></div>
-                        <div class="w-6 bg-blue-300 rounded-t" style="height: 50%;"></div>
-                        <div class="w-6 bg-blue-100 rounded-t" style="height: 30%;"></div>
-                        <div class="w-6 bg-blue-200 rounded-t" style="height: 40%;"></div>
+                        <div class="w-6 bg-orange-400 rounded-t" style="height: 70%;"></div>
+                        <div class="w-6 bg-orange-300 rounded-t" style="height: 50%;"></div>
+                        <div class="w-6 bg-orange-100 rounded-t" style="height: 30%;"></div>
+                        <div class="w-6 bg-orange-200 rounded-t" style="height: 40%;"></div>
                     </div>
-                    <span class="mt-2 text-sm font-medium">First Week</span>
+                    <span class="mt-2 text-sm font-medium">Second Week</span>
                 </div>
 
                 <!-- Group 2: Instructors -->
                 <div class="flex flex-col items-center space-x-1 space-y-1">
                     <div class="flex space-x-1 items-end h-40">
-                        <div class="w-6 bg-blue-400 rounded-t" style="height: 60%;"></div>
-                        <div class="w-6 bg-blue-100 rounded-t" style="height: 40%;"></div>
-                        <div class="w-6 bg-blue-300 rounded-t" style="height: 10%;"></div>
-                        <div class="w-6 bg-blue-500 rounded-t" style="height: 20%;"></div>
+                        <div class="w-6 bg-orange-400 rounded-t" style="height: 60%;"></div>
+                        <div class="w-6 bg-orange-300 rounded-t" style="height: 40%;"></div>
+                        <div class="w-6 bg-orange-100 rounded-t" style="height: 10%;"></div>
+                        <div class="w-6 bg-orange-200 rounded-t" style="height: 20%;"></div>
                     </div>
                     <span class="mt-2 text-sm font-medium">Second Week</span>
                 </div>
@@ -85,10 +85,10 @@
                 <!-- Group 3: Courses -->
                 <div class="flex flex-col items-center space-x-1 space-y-1">
                     <div class="flex space-x-1 items-end h-40">
-                        <div class="w-6 bg-blue-400 rounded-t" style="height: 80%;"></div>
-                        <div class="w-6 bg-blue-300 rounded-t" style="height: 70%;"></div>
-                        <div class="w-6 bg-blue-100 rounded-t" style="height: 50%;"></div>
-                        <div class="w-6 bg-blue-500 rounded-t" style="height: 30%;"></div>
+                        <div class="w-6 bg-orange-400 rounded-t" style="height: 80%;"></div>
+                        <div class="w-6 bg-orange-300 rounded-t" style="height: 70%;"></div>
+                        <div class="w-6 bg-orange-200 rounded-t" style="height: 50%;"></div>
+                        <div class="w-6 bg-orange-100 rounded-t" style="height: 30%;"></div>
                     </div>
                     <span class="mt-2 text-sm font-medium">Third Week</span>
                 </div>
@@ -96,17 +96,45 @@
                 <!-- Group 4: Graduates -->
                 <div class="flex flex-col items-center space-x-1 space-y-1">
                     <div class="flex space-x-1 items-end h-40">
-                        <div class="w-6 bg-blue-500 rounded-t" style="height: 50%;"></div>
-                        <div class="w-6 bg-blue-100 rounded-t" style="height: 30%;"></div>
-                        <div class="w-6 bg-blue-400 rounded-t" style="height: 20%;"></div>
-                        <div class="w-6 bg-blue-200 rounded-t" style="height: 70%;"></div>
+                        <div class="w-6 bg-orange-300 rounded-t" style="height: 50%;"></div>
+                        <div class="w-6 bg-orange-200 rounded-t" style="height: 30%;"></div>
+                        <div class="w-6 bg-orange-100 rounded-t" style="height: 20%;"></div>
+                        <div class="w-6 bg-orange-400 rounded-t" style="height: 70%;"></div>
                     </div>
                     <span class="mt-2 text-sm font-medium">Fourth Week</span>
                 </div>
 
             </div>
+
+            <!-- key -->
+            <div class="mt-12">
+                <h2 class="font-bold">Key</h2>
+                <div class="flex flex-col gap-y-1">
+                    <div class="flex flex-row gap-x-4 justify-start items-center mt-2">
+                        <span class="inline-block bg-orange-100 rounded-full h-5 w-5"></span>
+                        <span>Very Low (0% - 20%) </span>
+                    </div>
+                    <div class="flex flex-row gap-x-4 justify-start items-center">
+                        <span class="inline-block bg-orange-200 rounded-full h-5 w-5"></span>
+                        <span>Low (21% - 40%) </span>
+                    </div>
+                    <div class="flex flex-row gap-x-4 justify-start items-center">
+                        <span class="inline-block bg-orange-300 rounded-full h-5 w-5"></span>
+                        <span>Moderate (41% - 60%) </span>
+                    </div>
+                    <div class="flex flex-row gap-x-4 justify-start items-center">
+                        <span class="inline-block bg-orange-400 rounded-full h-5 w-5"></span>
+                        <span>High (61% - 80%) </span>
+                    </div>
+                    <div class="flex flex-row gap-x-4 justify-start items-center">
+                        <span class="inline-block bg-orange-500 rounded-full h-5 w-5"></span>
+                        <span>Very High / Exellent (81% - 100%) </span>
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <!-- Trending line graph -->
         <div class="max-w-4xl mx-auto p-12 bg-white shadow rounded mt-10">
             <h2 class="text-lg font-bold mb-6 text-center">Trending Line Graph</h2>
 
@@ -142,21 +170,15 @@
                         stroke-width="2"
                         points="0,75 100,65 200,50" />
                 </svg>
-
-                <!-- X-Axis Labels -->
-                <div class="absolute bottom-0 left-0 w-full flex justify-between px-8 text-xs text-gray-500">
-                    <span>A</span>
-                    <span>B</span>
-                    <span>C</span>
-                </div>
             </div>
 
             <!-- Legend -->
             <div class="mt-4 flex justify-center space-x-6 text-sm text-gray-700">
-                <div class="flex items-center space-x-2"><span class="w-4 h-2 bg-blue-500 block"></span>Students</div>
-                <div class="flex items-center space-x-2"><span class="w-4 h-2 bg-green-500 block"></span>Instructors</div>
-                <div class="flex items-center space-x-2"><span class="w-4 h-2 bg-yellow-400 block"></span>Courses</div>
-                <div class="flex items-center space-x-2"><span class="w-4 h-2 bg-red-500 block"></span>Graduates</div>
+                <div class="flex items-center space-x-2"><span class="w-4 h-2 bg-orange-100 block"></span>Sick in</div>
+                <div class="flex items-center space-x-2"><span class="w-4 h-2 bg-orange-200 block"></span>Sick Out</div>
+                <div class="flex items-center space-x-2"><span class="w-4 h-2 bg-orange-300 block"></span>Ed</div>
+                <div class="flex items-center space-x-2"><span class="w-4 h-2 bg-orange-400 block"></span>Ld</div>
+                <div class="flex items-center space-x-2"><span class="w-4 h-2 bg-orange-400 block"></span>Permission</div>
             </div>
         </div>
 

@@ -41,10 +41,17 @@ class LoginController extends Controller
         return view('dashboard'); // Create a blade view or return text
     }
 
+    // public function logout()
+    // {
+    //     session()->forget('user_id');
+    //     return redirect('/login');
+    // }
+
     public function logout()
-    {
-        session()->forget('user_id');
-        return redirect('/login');
-    }
+{
+    session()->flush(); // Clears entire session
+    return redirect('/login');
+}
+
 }
 
