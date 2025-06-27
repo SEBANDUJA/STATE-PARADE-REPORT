@@ -14,10 +14,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
 
     /**
      * Display a listing of the resource.
@@ -27,6 +23,14 @@ class HomeController extends Controller
         $students_count = Student::count();
         $users_count = User::count();
         return view('admin.dashboard', compact('users_count', 'students_count'));
+    }
+    /**
+     * Show the form for creating a new resource.
+     */
+
+    public function showWelcomePage()
+    {
+        return view('welcome');
     }
 
     /**
