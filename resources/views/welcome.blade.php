@@ -13,22 +13,22 @@
         </div>
 
         <!-- heading -->
-        <h1 class="text-lg md:text-5xl text-white font-semibold uppercase">sprs management system</h1>
+        <h1 class="text-xl md:text-5xl text-white font-semibold uppercase">sprs management system</h1>
         <h3 class="text-md md:text-3xl mt-1 font-semibold uppercase">state parade report</h3>
 
         <!-- form -->
         <form class="mt-2 flex flex-col justify-start items-center w-full gap-y-2 px-4 md:px-0" action="{{ route('login') }}" method="POST">
               @csrf
             <div class="flex flex-col justify-center items-start w-full md:w-1/3">
-                <span class="font-normal md:font-semibold">Email</span>
+                <span class="text-sm md:text-md font-normal md:font-semibold">Email</span>
                 <input type="email" name="email" placeholder="Enter Email" class="h-10 px-3 w-full outline-none bg-white rounded-lg" />
             </div>
             <div class="flex flex-col justify-center items-start w-full md:w-1/3 relative">
-                <label for="password" class="font-normal md:font-semibold mb-1">Password</label>
+                <label for="password" class="text-sm md:text-md font-normal md:font-semibold mb-1">Password</label>
 
                 <input
                     id="password"
-                    type="password"
+                    type="password" 
                     name="password"
                     placeholder="Enter Password"
                     class="h-10 px-3 pr-10 w-full outline-none bg-white rounded-lg border border-gray-300"
