@@ -83,6 +83,7 @@
         <thead class="bg-gray-100">
             <tr>
                 <th class="px-4 py-2 text-left">SN</th>
+                <th class="px-4 py-2 text-left">Photo</th>
                 <th class="px-4 py-2 text-left">Name</th>
                 <th class="px-4 py-2 text-left">username</th>
                 <th class="px-4 py-2 text-left">Job Title</th>
@@ -96,6 +97,7 @@
                 @foreach($user_in as $user)
                 <tr class="border-b hover:bg-gray-50">
                     <td class="px-4 py-2" >{{ $loop->iteration }}</td>
+                    <td class="px-4 py-2" ></td>
                     <td class="px-4 py-2" >{{ $user->name }}</td>
                     <td class="px-4 py-2" >{{ $user->username }}</td>
                     <td class="px-4 py-2" >{{ $user->job_title }}</td>

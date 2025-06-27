@@ -39,43 +39,98 @@
                     <input type="hidden" name="id" :value="student.id">
                 </template>
 
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" id="name" name="name" x-model="student.name"
-                        class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        required>
+                <!-- Accordion Section for Student Name -->
+                <div x-data="{ open: true }" class="border rounded">
+                    <button type="button" @click="open = !open" class="w-full text-left px-4 py-2 bg-gray-100 font-semibold">
+                        Student Name
+                    </button>
+                    <div x-show="open" class="p-4">
+                        <input type="text" name="name" x-model="student.name"
+                            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    </div>
                 </div>
 
-                <div>
-                    <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
-                    <select id="gender" name="gender" x-model="student.gender"
-                        class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        required>
-                        <option value="">Select</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
-                    </select>
+                <!-- Accordion Section for Student Photo -->
+                <div x-data="{ open: true }" class="border rounded">
+                    <!-- Accordion Header -->
+                    <button type="button" @click="open = !open" class="w-full text-left px-4 py-2 bg-gray-100 font-semibold">
+                        Upload Student Photo
+                    </button>
+
+                    <!-- Accordion Content -->
+                    <div x-show="open" x-transition class="p-4">
+                        <input type="file" name="photo"
+                            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    </div>
                 </div>
 
-                <div>
-                    <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
-                    <input type="number" id="age" name="age" x-model="student.age"
-                        class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        required>
+
+                <!-- Accordion Section for Student Company -->
+                <div x-data="{ open: false }" class="border rounded">
+                    <button type="button" @click="open = !open" class="w-full text-left px-4 py-2 bg-gray-100 font-semibold">
+                        Company Name
+                    </button>
+                    <div x-show="open" class="p-4">
+                        <select name="gender" x-model="student.gender"
+                            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                            <option value="">Select</option>
+                            <option>A - COY</option>
+                            <option>B - COY</option>
+                            <option>C - COY</option>
+                            <option>D - COY</option>
+                        </select>
+                    </div>
                 </div>
 
+                <!-- Accordion Section for Company Number -->
+                <div x-data="{ open: false }" class="border rounded">
+                    <button type="button" @click="open = !open" class="w-full text-left px-4 py-2 bg-gray-100 font-semibold">
+                        Company Number
+                    </button>
+                    <div x-show="open" class="p-4">
+                        <input type="text" name="company_number" x-model="student.company_number"
+                            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    </div>
+                </div>
+
+                <!-- Accordion Section for Gender -->
+                <div x-data="{ open: false }" class="border rounded">
+                    <button type="button" @click="open = !open" class="w-full text-left px-4 py-2 bg-gray-100 font-semibold">
+                        Gender
+                    </button>
+                    <div x-show="open" class="p-4">
+                        <select name="gender" x-model="student.gender"
+                            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                            <option value="">Select</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Accordion Section for Age -->
+                <div x-data="{ open: false }" class="border rounded">
+                    <button type="button" @click="open = !open" class="w-full text-left px-4 py-2 bg-gray-100 font-semibold">
+                        Age
+                    </button>
+                    <div x-show="open" class="p-4">
+                        <input type="number" name="age" x-model="student.age"
+                            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    </div>
+                </div>
+
+                <!-- Form Buttons -->
                 <div class="flex justify-end gap-2 pt-4">
-                    <button type="button" @click="closeForm()"
-                        class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition">
+                    <button type="button" @click="closeForm()" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition">
                         Cancel
                     </button>
-                    <button type="submit"
-                        class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition">
+                    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition">
                         Save
                     </button>
                 </div>
             </form>
+
         </div>
     </div>
 
@@ -84,12 +139,13 @@
         <thead class="bg-gray-100">
             <tr>
                 <th class="px-4 py-2 text-left">SN</th>
-                <th class="px-4 py-2 text-left">ID</th>
+                <th class="px-4 py-2 text-left">Photo</th>
+                <th class="px-4 py-2 text-left">Company</th>
+                <th class="px-4 py-2 text-start">Company number</th>
                 <th class="px-4 py-2 text-left">Name</th>
                 <th class="px-4 py-2 text-left">Gender</th>
-                <th class="px-4 py-2 text-left">Company</th>
-                <th class="px-4 py-2 text-left">ED</th>
-                <th class="px-4 py-2 text-left">LD</th>
+                <!-- <th class="px-4 py-2 text-left">ED</th>
+                <th class="px-4 py-2 text-left">LD</th> -->
                 <th class="px-4 py-2 text-left">Actions</th>
             </tr>
         </thead>
@@ -99,11 +155,12 @@
                 <tr class="border-b hover:bg-gray-50">
                     <td class="px-4 py-2">{{ $loop->iteration }}</td>
                     <td class="px-4 py-2">{{ $student->s_id }}</td>
+                    <td class="px-4 py-2">{{ $student->company }}</td>
+                    <td class="px-4 py-2">{{ $student->s_id }}</td>
                     <td class="px-4 py-2">{{ $student->name }}</td>
                     <td class="px-4 py-2">{{ $student->gender }}</td>
-                    <td class="px-4 py-2">{{ $student->company }}</td>
-                    <td class="px-4 py-2">{{ $student->ed }}</td>
-                    <td class="px-4 py-2">{{ $student->ld }}</td>
+                    <!-- <td class="px-4 py-2">{{ $student->ed }}</td>
+                    <td class="px-4 py-2">{{ $student->ld }}</td> -->
                     <td class="px-4 py-2 flex gap-2">
                         <button
                             @click="openEditForm(stud)"
