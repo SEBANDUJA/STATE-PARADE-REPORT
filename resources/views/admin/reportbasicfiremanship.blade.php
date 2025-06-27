@@ -4,15 +4,6 @@
 @section('title', 'Firemanship Report')
 
 @section('content')
-    @php
-    // Sample data structure
-    $data = [
-        ['coy' => 'A-COY', 'present' => 30, 'absent' => 2, 'sick_in' => 1, 'sick_out' => 0, 'ed' => 1, 'ld' => 0, 'pass' => 2, 'permission' => 1],
-        ['coy' => 'B-COY', 'present' => 28, 'absent' => 4, 'sick_in' => 1, 'sick_out' => 1, 'ed' => 0, 'ld' => 1, 'pass' => 1, 'permission' => 2],
-        ['coy' => 'C-COY', 'present' => 32, 'absent' => 1, 'sick_in' => 0, 'sick_out' => 1, 'ed' => 2, 'ld' => 1, 'pass' => 0, 'permission' => 0],
-        ['coy' => 'D-COY', 'present' => 29, 'absent' => 3, 'sick_in' => 1, 'sick_out' => 0, 'ed' => 1, 'ld' => 0, 'pass' => 1, 'permission' => 1],
-    ];
-    @endphp
 
     <div class="flex flex-col justify-center items-center w-full">
         <div class="flex flex-col uppercase justify-center items-center text-lg font-semibold">
@@ -22,13 +13,13 @@
         <div class="flex flex-row uppercase justify-between items-center w-full mt-5 font-semibold">
             <h1>session<span> ______</span></h1>
             <h1>state parade</h1>
-            <h1>date: ______</h1>
+            <h1>date: {{ $currentDate }}</h1>
         </div>
 
         <hr class="my-4 border-t-2 border-gray-400 w-full" />
 
         <div class="flex flex-row uppercase justify-between items-center w-full font-semibold">
-            <span>Number<span>_______</span></span>
+            <span>Number<span>:05</span></span>
             <span>course report (basic firemanship No. 05: 2025)</span>
             <span></span>
         </div>
@@ -50,45 +41,33 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $row)
+            @foreach ($reportData as $row)
                 <tr class="bg-white border">
-                    <td class="border px-2 py-4 font-semibold">{{ $row['coy'] }}</td>
-                    <td class="border px-2 py-4">{{ $row['present'] }}</td>
-                    <td class="border px-2 py-4">{{ $row['absent'] }}</td>
-                    <td class="border px-2 py-4">{{ $row['sick_in'] }}</td>
-                    <td class="border px-2 py-4">{{ $row['sick_out'] }}</td>
-                    <td class="border px-2 py-4">{{ $row['ed'] }}</td>
-                    <td class="border px-2 py-4">{{ $row['ld'] }}</td>
-                    <td class="border px-2 py-4">{{ $row['pass'] }}</td>
-                    <td class="border px-2 py-4">{{ $row['permission'] }}</td>
-                    <td class="border px-2 py-4 font-bold">
-                        {{
-                            $row['present'] + $row['absent'] + $row['sick_in'] + $row['sick_out'] +
-                            $row['ed'] + $row['ld'] + $row['pass'] + $row['permission']
-                        }}
-                    </td>
+                    <td class="border px-2 py-4 font-semibold">{{ $row->company }}-COY</td>
+                    <td class="border px-2 py-4">{{ $row->present }}</td>
+                    <td class="border px-2 py-4">{{ $row->absent }}</td>
+                    <td class="border px-2 py-4">{{ $row->sick_in }}</td>
+                    <td class="border px-2 py-4">{{ $row->sick_out }}</td>
+                    <td class="border px-2 py-4">{{ $row->ed }}</td>
+                    <td class="border px-2 py-4">{{ $row->ld }}</td>
+                    <td class="border px-2 py-4">{{ $row->pass }}</td>
+                    <td class="border px-2 py-4">{{ $row->permission }}</td>
+                    <td class="border px-2 py-4 font-bold">{{ $row->total }}</td>
                 </tr>
             @endforeach
 
             {{-- Totals --}}
             <tr class="bg-gray-200 font-bold">
                 <td class="border px-2 py-4">Total</td>
-                <td class="border px-2 py-4">{{ collect($data)->sum('present') }}</td>
-                <td class="border px-2 py-4">{{ collect($data)->sum('absent') }}</td>
-                <td class="border px-2 py-4">{{ collect($data)->sum('sick_in') }}</td>
-                <td class="border px-2 py-4">{{ collect($data)->sum('sick_out') }}</td>
-                <td class="border px-2 py-4">{{ collect($data)->sum('ed') }}</td>
-                <td class="border px-2 py-4">{{ collect($data)->sum('ld') }}</td>
-                <td class="border px-2 py-4">{{ collect($data)->sum('pass') }}</td>
-                <td class="border px-2 py-4">{{ collect($data)->sum('permission') }}</td>
-                <td class="border px-2 py-4">
-                    {{
-                        collect($data)->sum(fn ($row) =>
-                            $row['present'] + $row['absent'] + $row['sick_in'] + $row['sick_out'] +
-                            $row['ed'] + $row['ld'] + $row['pass'] + $row['permission']
-                        )
-                    }}
-                </td>
+                <td class="border px-2 py-4">{{collect($reportData)->sum('present')}}</td>
+                <td class="border px-2 py-4">{{collect($reportData)->sum('absent')}}</td>
+                <td class="border px-2 py-4">{{collect($reportData)->sum('sick_in')}}</td>
+                <td class="border px-2 py-4">{{collect($reportData)->sum('sick_out')}}</td>
+                <td class="border px-2 py-4">{{collect($reportData)->sum('ed')}}</td>
+                <td class="border px-2 py-4">{{collect($reportData)->sum('ld')}}</td>
+                <td class="border px-2 py-4">{{collect($reportData)->sum('pass')}}</td>
+                <td class="border px-2 py-4">{{collect($reportData)->sum('permission')}}</td>
+                <td class="border px-2 py-4">{{ collect($reportData)->sum('total') }}</td>
             </tr>
         </tbody>
     </table>
@@ -97,8 +76,8 @@
     <div class="mt-8">
         <div class="flex flex-col justify-start items-start font-semibold">
             <span>Summary</span>
-            <span>Male:____</span>
-            <span>Female: ____</span>
+            <span>Male:  {{$maleCount}}</span>
+            <span>Female:  {{$femaleCount}}</span>
         </div>
         
         <div class="mt-5">
@@ -107,33 +86,33 @@
                 <div>
                     <span class="uppercase">A: Absent</span>
                     <ol>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
+                        @foreach ($absentList as $student)
+                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
+                        @endforeach
                     </ol>
                 </div>
                 <div>
                     <span class="uppercase">B: sick in</span>
                     <ol>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
+                        @foreach ($sickInList as $student)
+                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
+                        @endforeach
                     </ol>
                 </div>
                 <div>
                     <span class="uppercase">C: sick out</span>
                     <ol>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
+                        @foreach ($sickOutList as $student)
+                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
+                        @endforeach
                     </ol>
                 </div>
                 <div>
-                    <span class="uppercase">d: ed</span>
+                    <span class="uppercase">D: ed</span>
                     <ol>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
+                        @foreach ($edList as $student)
+                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
+                        @endforeach
                     </ol>
                 </div>
             </div>
@@ -143,33 +122,33 @@
                 <div>
                     <span class="uppercase">e: ld</span>
                     <ol>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
+                        @foreach ($ldList as $student)
+                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
+                        @endforeach
                     </ol>
                 </div>
                 <div>
                     <span class="uppercase">f: permission</span>
                     <ol>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
+                        @foreach ($permissionList as $student)
+                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
+                        @endforeach
                     </ol>
                 </div>
                 <div>
                     <span class="uppercase">g: special duty</span>
                     <ol>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
+                        @foreach ($specialDutyList as $student)
+                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
+                        @endforeach
                     </ol>
                 </div>
                 <div>
                     <span class="uppercase">h: pass</span>
                     <ol>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
+                        @foreach ($passList as $student)
+                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
+                        @endforeach
                     </ol>
                 </div>
             </div>

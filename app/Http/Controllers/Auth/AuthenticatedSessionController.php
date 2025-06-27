@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard'); // or route('dashboard')
+            return redirect()->intended('/admin/dashboard'); // or route('dashboard')
         }
 
         return back()->withErrors([
