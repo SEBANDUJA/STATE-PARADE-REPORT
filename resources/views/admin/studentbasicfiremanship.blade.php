@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Firemanship Report')
+@section('title', 'Basic Firemanship Report')
 
 @section('content')
 <div x-data="studentForm()" class="container mx-auto px-4 py-8 relative min-h-screen">
@@ -28,7 +28,7 @@
         style="background: transparent;"
     >
         <div
-            class="bg-white border border-gray-300 shadow-lg p-6 rounded-md w-full max-w-md"
+            class="bg-white border border-gray-300 shadow-lg p-6 rounded-md w-full max-w-2xl"
             @click.stop
         >
             <h2 class="text-lg font-semibold mb-4" x-text="formMode === 'add' ? 'Add Student' : 'Edit Student'"></h2>
@@ -113,6 +113,17 @@
                 <div x-data="{ open: false }" class="border rounded">
                     <button type="button" @click="open = !open" class="w-full text-left px-4 py-2 bg-gray-100 font-semibold">
                         Age
+                    </button>
+                    <div x-show="open" class="p-4">
+                        <input type="number" name="age" x-model="student.age"
+                            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    </div>
+                </div>
+
+                <!-- Accordion Section for Nida -->
+                <div x-data="{ open: false }" class="border rounded">
+                    <button type="button" @click="open = !open" class="w-full text-left px-4 py-2 bg-gray-100 font-semibold">
+                        Nida number
                     </button>
                     <div x-show="open" class="p-4">
                         <input type="number" name="age" x-model="student.age"
