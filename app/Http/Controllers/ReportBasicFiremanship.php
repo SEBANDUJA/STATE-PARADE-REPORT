@@ -88,7 +88,7 @@ class ReportBasicFiremanship extends Controller
      */
     public function create()
     {
-        //
+        return view ('admin.paradereportbasicfiremanship');
     }
 
     /**

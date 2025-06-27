@@ -68,7 +68,7 @@
 
 
                <div>
-                  <button class="h-10 w-fit px-8 rounded-md uppercase text-xs bg-blue-500 text-white flex items-center gap-2 cursor-pointer">
+                  <button class="h-10 w-fit px-8 rounded-md uppercase text-xs bg-orange-500 text-white flex items-center gap-2 cursor-pointer hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black transition-all duration-500 ease-out">
                      <i class="fas fa-paper-plane"></i>
                      Send
                   </button>
@@ -80,6 +80,32 @@
          <div class="w-full shadow-md py-8 px-4">
             <h2 class="font-semibold">Recent Messages</h2>
             <div class="flex flex-col gap-y-6 mt-5">
+
+               <div class="flex flex-row justify-start items-center gap-x-4 bg-gray-100">
+                  <div class="w-10">
+                     <img src="../images/nutcracker.png" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
+                  </div>
+                  <div class="flex flex-col justify-start items-start">
+                     <span class="font-semibold text-sm">Hlestacov Coder</span>
+                     <span class="text-gray-500">Lorem Ipsum is simply dummy text of .....</span>
+                  </div>
+
+                  <div>
+                     <div>
+
+                     </div>
+                     <div>
+                        <span class="text-xs">10 JUNE 11:45</span>
+                     </div>
+                  </div>
+                  <div>
+                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer hover:border-2 hover:border-red-500 hover:bg-white hover:text-black transition-all ease-out duration-500">
+                        <i class="fas fa-trash-alt"></i>
+                        Delete
+                     </button>
+                  </div>
+               </div>
+               
                <div class="flex flex-row justify-start items-center gap-x-4 bg-gray-100">
                   <div class="w-10">
                      <img src="../images/soldier.png" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
@@ -98,7 +124,7 @@
                      </div>
                   </div>
                   <div>
-                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer">
+                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer hover:border-2 hover:border-red-500 hover:bg-white hover:text-black transition-all ease-out duration-500">
                         <i class="fas fa-trash-alt"></i>
                         Delete
                      </button>
@@ -108,7 +134,7 @@
 
                <div class="flex flex-row justify-start items-center gap-x-4 bg-gray-100">
                   <div class="w-10">
-                     <img src="../images/soldier.png" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
+                     <img src="../images/wildfire.jpg" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
                   </div>
                   <div class="flex flex-col justify-start items-start">
                      <span class="font-semibold text-sm">Mathilde Andersen</span>
@@ -124,7 +150,7 @@
                      </div>
                   </div>
                   <div>
-                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer">
+                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer hover:border-2 hover:border-red-500 hover:bg-white hover:text-black transition-all ease-out duration-500">
                         <i class="fas fa-trash-alt"></i>
                         Delete
                      </button>
@@ -133,10 +159,10 @@
 
                <div class="flex flex-row justify-start items-center gap-x-4 bg-gray-100">
                   <div class="w-10">
-                     <img src="../images/soldier.png" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
+                     <img src="../images/soldier1.png" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
                   </div>
                   <div class="flex flex-col justify-start items-start">
-                     <span class="font-semibold text-sm">Mathilde Andersen</span>
+                     <span class="font-semibold text-sm">Nathanael Johnson</span>
                      <span class="text-gray-500">Lorem Ipsum is simply dummy text of .....</span>
                   </div>
 
@@ -149,32 +175,7 @@
                      </div>
                   </div>
                   <div>
-                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer">
-                        <i class="fas fa-trash-alt"></i>
-                        Delete
-                     </button>
-                  </div>
-               </div>
-
-               <div class="flex flex-row justify-start items-center gap-x-4 bg-gray-100">
-                  <div class="w-10">
-                     <img src="../images/soldier.png" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
-                  </div>
-                  <div class="flex flex-col justify-start items-start">
-                     <span class="font-semibold text-sm">Mathilde Andersen</span>
-                     <span class="text-gray-500">Lorem Ipsum is simply dummy text of .....</span>
-                  </div>
-
-                  <div>
-                     <div>
-
-                     </div>
-                     <div>
-                        <span class="text-xs">10 JUNE 11:45</span>
-                     </div>
-                  </div>
-                  <div>
-                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer">
+                     <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer hover:border-2 hover:border-red-500 hover:bg-white hover:text-black transition-all ease-out duration-500">
                         <i class="fas fa-trash-alt"></i>
                         Delete
                      </button>
