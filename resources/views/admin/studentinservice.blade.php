@@ -1,11 +1,37 @@
 @extends('layouts.admin')
+@extends('layouts.app')
 
 @section('title', 'Firemanship Report')
 
 @section('content')
 <div x-data="studentForm()" class="container mx-auto px-4 py-8 relative min-h-screen">
 
-    <h1 class="text-2xl font-bold mb-6">In Service Student List</h1>
+    <!-- filter -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+        <!-- First Span -->
+        <div>
+            <span class="text-xl font-semibold uppercase">In Service student list</span>
+        </div>
+
+        <!-- Search Filters -->
+        <div class="flex flex-wrap gap-4 items-center">
+            <!-- Filter by Name -->
+            <input
+                type="text"
+                placeholder="Search by name"
+                class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                x-model="searchName"
+            >
+
+            <!-- Filter by Company Number -->
+            <input
+                type="text"
+                placeholder="Search by Company Number"
+                class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                x-model="searchCompany"
+            >
+        </div>
+    </div>
 
     <!-- Add Student Button -->
     <div class="flex justify-end items-center mb-4">
@@ -79,30 +105,53 @@
     </div>
 
     <!-- Student Table -->
-    <table class="min-w-full bg-white rounded shadow overflow-hidden mt-6">
-        <thead class="bg-gray-100">
-            <tr>
-                <th class="px-4 py-2 text-left">SN</th>
-                <th class="px-4 py-2 text-left">Name</th>
-                <th class="px-4 py-2 text-left">Gender</th>
-                <th class="px-4 py-2 text-left">NIDA No</th>
-                <th class="px-4 py-2 text-left">Company</th>
-                <th class="px-4 py-2 text-left">Company No</th>
-                <th class="px-4 py-2 text-left">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <template x-for="(stud, index) in students" :key="stud.id">
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white rounded shadow overflow-hidden mt-6">
+            <thead class="bg-gray-100">
+                <tr class="uppercase text-xs">
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">SN</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Company Number</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Sudent Name</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Gender</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Company</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Absent</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Ed</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Ld</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Sick in</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Sick out</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Permission</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Centry</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Special Duty</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Pass</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Guard</th>
+                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Actions</th>
+                    </tr>
+
+            </thead>
+            
+            <tbody>
+                <!--<template x-for="(stud, index) in students" :key="stud.id">-->
+                @foreach($students as $student)
                 <tr class="border-b hover:bg-gray-50">
-                    <td class="px-4 py-2" x-text="index + 1"></td>
-                    <td class="px-4 py-2" x-text="stud.name"></td>
-                    <td class="px-4 py-2" x-text="stud.gender"></td>
-                    <td class="px-4 py-2" x-text="stud.nida_no"></td>
-                    <td class="px-4 py-2" x-text="stud.company"></td>
-                    <td class="px-4 py-2" x-text="stud.company_no"></td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $loop->iteration }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->s_id }}</td>
+                    <td class="px-4 py-2 whitespace-nowrap">{{ $student->name }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->gender }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->company }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->absent }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->ed }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->ld }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->sick_in }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->sick_out }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->permission }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->centry }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->special_duty }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->pass }}</td>
+                    <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->guard }}</td>
+                    <!-- <td class="px-4 py-2">{{ $student->photo }}</td> -->
                     <td class="px-4 py-2 flex gap-2">
                         <button
-                            @click="openEditForm(stud)"
+                            @click="openEditForm({{ json_encode($student) }})"
                             class="w-fit px-3 h-8 bg-gray-500 text-white text-xs rounded hover:bg-blue-600 uppercase flex items-center gap-2.5 cursor-pointer"
                         >
                             <i class="fas fa-edit text-white text-sm"></i>
@@ -110,17 +159,20 @@
                         </button>
 
                         <button
-                            @click="deleteStudent(stud.id)"
+                            @click="deleteStudent({{ $student->id }})"
                             class="w-fit px-3 h-8 bg-red-500 text-white text-xs rounded hover:bg-red-600 uppercase flex items-center gap-2.5 cursor-pointer"
                         >
                             <i class="fas fa-trash text-white text-sm"></i>
                             Delete
                         </button>
                     </td>
+
                 </tr>
-            </template>
-        </tbody>
-    </table>
+                @endforeach
+                <!-- </template> -->
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>

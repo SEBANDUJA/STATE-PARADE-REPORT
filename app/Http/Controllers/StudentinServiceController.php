@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class StudentinServiceController extends Controller
 {
@@ -11,7 +12,8 @@ class StudentinServiceController extends Controller
      */
     public function index()
     {
-        return view ('admin.studentinservice');
+        $students = Student::paginate(10);
+        return view ('admin.studentinservice',compact('students'));
     }
 
     /**

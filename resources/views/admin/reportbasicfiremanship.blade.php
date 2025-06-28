@@ -1,5 +1,6 @@
 
 @extends('layouts.admin')
+@extends('layouts.app')
 
 @section('title', 'Firemanship Report')
 
@@ -82,75 +83,47 @@
         
         <div class="mt-5">
             <h2 class="uppercase font-semibold">other particulars by identity</h2>
-            <div class="grid grid-cols-4 justify-items-between items-center mt-2 gap-x-32">
-                <div>
-                    <span class="uppercase">A: Absent</span>
-                    <ol>
-                        @foreach ($absentList as $student)
-                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
-                        @endforeach
-                    </ol>
-                </div>
-                <div>
-                    <span class="uppercase">B: sick in</span>
-                    <ol>
-                        @foreach ($sickInList as $student)
-                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
-                        @endforeach
-                    </ol>
-                </div>
-                <div>
-                    <span class="uppercase">C: sick out</span>
-                    <ol>
-                        @foreach ($sickOutList as $student)
-                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
-                        @endforeach
-                    </ol>
-                </div>
-                <div>
-                    <span class="uppercase">D: ed</span>
-                    <ol>
-                        @foreach ($edList as $student)
-                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
-                        @endforeach
-                    </ol>
-                </div>
+
+            {{-- First Row --}}
+            <div class="grid grid-cols-4 items-stretch mt-2 gap-x-8">
+                @foreach ([
+                    'A: Absent' => $absentList,
+                    'B: Sick In' => $sickInList,
+                    'C: Sick Out' => $sickOutList,
+                    'D: ED' => $edList,
+                ] as $label => $list)
+                    <div class="rounded p-2 h-full flex flex-col">
+                        <span class="uppercase font-semibold">{{ $label }}</span>
+                        <ol class="mt-2">
+                            @forelse ($list as $student)
+                                <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
+                            @empty
+                                <li class="text-gray-500">None</li>
+                            @endforelse
+                        </ol>
+                    </div>
+                @endforeach
             </div>
 
-            <div class="grid grid-cols-4 justify-items-between items-center mt-3 gap-x-32">
-                
-                <div>
-                    <span class="uppercase">e: ld</span>
-                    <ol>
-                        @foreach ($ldList as $student)
-                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
-                        @endforeach
-                    </ol>
-                </div>
-                <div>
-                    <span class="uppercase">f: permission</span>
-                    <ol>
-                        @foreach ($permissionList as $student)
-                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
-                        @endforeach
-                    </ol>
-                </div>
-                <div>
-                    <span class="uppercase">g: special duty</span>
-                    <ol>
-                        @foreach ($specialDutyList as $student)
-                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
-                        @endforeach
-                    </ol>
-                </div>
-                <div>
-                    <span class="uppercase">h: pass</span>
-                    <ol>
-                        @foreach ($passList as $student)
-                        <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
-                        @endforeach
-                    </ol>
-                </div>
+            {{-- Second Row --}}
+            <div class="grid grid-cols-4 items-stretch mt-3 gap-x-8">
+                @foreach ([
+                    'E: LD' => $ldList,
+                    'F: Permission' => $permissionList,
+                    'G: Special Duty' => $specialDutyList,
+                    'H: Pass' => $passList,
+                ] as $label => $list)
+                    <div class="rounded p-2 h-full flex flex-col">
+                        <span class="uppercase font-semibold">{{ $label }}</span>
+                        <ol class="mt-2">
+                            @forelse ($list as $student)
+                                <li>{{ $loop->iteration }}. {{ $student->s_id }} - {{ $student->name }}</li>
+                            @empty
+                                <li class="text-gray-500">None</li>
+                            @endforelse
+                        </ol>
+                    </div>
+                @endforeach
             </div>
         </div>
 
