@@ -96,6 +96,7 @@
                         <div class="w-6 bg-orange-200 rounded-t" style="height: 40%;"></div>
                     </div>
                     <span class="mt-2 text-sm font-medium">First Week</span>
+                    <span class="mt-2 text-sm font-medium">First Week</span>
                 </div>
 
                 <!-- Group 2: Instructors -->

@@ -1,4 +1,3 @@
-<!-- resources/views/layouts/admin.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Dashboard')</title>
 
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
@@ -197,7 +196,7 @@
         </div>
     </div>
 
-    <!-- Sidebar Toggle and Accordion Scripts -->
+    <!-- Sidebar & Dropdown Scripts -->
     <script>
         const toggleButton = document.getElementById('toggleSidebar');
         const sidebar = document.getElementById('sidebar');
@@ -234,7 +233,9 @@
                     content.classList.add('hidden');
                 }
             });
-            targetContent.classList.toggle('hidden');
+            if (targetContent) {
+                targetContent.classList.toggle('hidden');
+            }
         }
 
         document.getElementById("accordion1").addEventListener("click", () => toggleAccordion("accordion1-content"));
@@ -242,14 +243,13 @@
         document.getElementById("accordion3").addEventListener("click", () => toggleAccordion("accordion3-content"));
         document.getElementById("accordion4").addEventListener("click", () => toggleAccordion("accordion4-content"));
 
-        // person icon for profile and logout
         const userButton = document.getElementById('userMenuButton');
         const userDropdown = document.getElementById('userDropdown');
 
         document.addEventListener('click', function (e) {
-            if (userButton.contains(e.target)) {
+            if (userButton && userButton.contains(e.target)) {
                 userDropdown.classList.toggle('hidden');
-            } else if (!userDropdown.contains(e.target)) {
+            } else if (userDropdown && !userDropdown.contains(e.target)) {
                 userDropdown.classList.add('hidden');
             }
         });
