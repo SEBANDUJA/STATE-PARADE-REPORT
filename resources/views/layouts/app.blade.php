@@ -26,7 +26,7 @@
         setTimeout(() => {
             timerDone = true;
             hidePreloader();
-        }, 1000); // 2 seconds minimum
+        }, 1000); // 1 seconds minimum
 
         function hidePreloader() {
             if (pageLoaded && timerDone) {

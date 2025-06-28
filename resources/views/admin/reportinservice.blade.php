@@ -1,5 +1,6 @@
 
 @extends('layouts.admin')
+@extends('layouts.app')
 
 @section('title', 'Firemanship Report')
 

@@ -9,43 +9,70 @@
 
     <!-- overview cards -->
     <section class="grid grid-cols-4 justify-center place-items-center w-full">
-        <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10">
+        <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-8 aspect-video">
             <div>
-                <i class="bi bi-people-fill text-orange-500 text-6xl"></i>
+                <i class="bi bi-people-fill text-orange-500 text-5xl"></i>
             </div>
-            <div class="flex flex-col gap-y-2 font-semibold">
-                <span class="text-md uppercase font-thin">Total students</span>
-                <span class="text-xl">{{ $students_count }}</span>
+            <div class="flex flex-col gap-y-2">
+                <span class="text-md uppercase font-semibold">Total students</span>
+
+                <div class="flex justify-center items-center space-x-4">
+                    <div>
+                        <span class="text-xs">Basic</span>
+                        <span class="text-xl font-semibold flex justify-center">{{ $students_count }}</span>
+                    </div>
+
+                    <!-- Vertical divider -->
+                    <div class="h-8 border-l-2 border-gray-400"></div>
+
+                    <div>
+                        <span class="text-xs">In Service</span>
+                        <span class="text-xl font-semibold text-center flex justify-center">{{ $students_count }}</span>
+                    </div>
+                </div>                
             </div>
         </div>
 
-        <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10">
+        <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10 aspect-video">
             <div>
-                <i class="bi bi-journal-bookmark-fill text-orange-500 text-6xl"></i>
+                <i class="bi bi-journal-bookmark-fill text-orange-500 text-5xl"></i>
             </div>
-            <div class="flex flex-col gap-y-2 font-semibold">
-                <span class="text-md uppercase font-thin">Permission</span>
-                <span class="text-xl">32</span>
+            <div class="flex flex-col gap-y-2">
+                <span class="text-md uppercase font-semibold font-semibold">Permission</span>
+                <div class="flex justify-center items-center space-x-4">
+                    <div>
+                        <span class="text-xs">Basic</span>
+                        <span class="text-xl font-semibold flex justify-center">13</span>
+                    </div>
+
+                    <!-- Vertical divider -->
+                    <div class="h-8 border-l-2 border-gray-400"></div>
+
+                    <div>
+                        <span class="text-xs">In Service</span>
+                        <span class="text-xl font-semibold text-center flex justify-center">03</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10">
+        <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10 aspect-video">
             <div>
-                <i class="bi bi-person-fill text-orange-500 text-6xl"></i>
+                <i class="bi bi-person-fill text-orange-500 text-5xl"></i>
             </div>
             <div class="flex flex-col gap-y-2 font-semibold">
-                <span class="text-md uppercase font-thin">Total users</span>
-                <span class="text-xl">{{ $users_count }}</span>
+                <span class="text-md uppercase font-semibold">Total users</span>
+                <span class="text-xl flex justify-center">{{ $users_count }}</span>
             </div>
         </div>
 
-        <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10">
+        <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10 aspect-video">
             <div>
-                <i class="bi bi-book text-orange-500 text-6xl"></i>
+                <i class="bi bi-book text-orange-500 text-5xl"></i>
             </div>
             <div class="flex flex-col gap-y-2 font-semibold">
-                <span class="text-md uppercase font-thin">Total Course</span>
-                <span class="text-xl">2</span>
+                <span class="text-md uppercase font-semibold">Total Course</span>
+                <span class="text-xl flex justify-center">2</span>
             </div>
         </div>
 
@@ -55,7 +82,7 @@
     <section class="grid grid-cols-2 justify-center place-items-center gap-x-1">
 
         <!-- bar graph -->
-        <div class=" p-6 bg-gray-50 shadow rounded mt-16">
+        <div class=" p-6 rounded mt-16">
             <h2 class="text-lg font-bold mb-6 text-center">Monthly status</h2>
 
             <div class="flex justify-around items-end space-x-6 h-48 border-b border-gray-300 px-4">
@@ -68,6 +95,7 @@
                         <div class="w-6 bg-orange-100 rounded-t" style="height: 30%;"></div>
                         <div class="w-6 bg-orange-200 rounded-t" style="height: 40%;"></div>
                     </div>
+                    <span class="mt-2 text-sm font-medium">First Week</span>
                     <span class="mt-2 text-sm font-medium">First Week</span>
                 </div>
 
@@ -135,7 +163,7 @@
         </div>
 
         <!-- Trending line graph -->
-        <div class="max-w-4xl mx-auto p-12 bg-white shadow rounded mt-10">
+        <div class="max-w-4xl mx-auto p-12 bg-white rounded mt-">
             <h2 class="text-lg font-bold mb-6 text-center">Trending Line Graph</h2>
 
             <!-- X & Y Axis -->

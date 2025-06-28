@@ -1,5 +1,6 @@
 
 @extends('layouts.admin')
+@extends('layouts.app')
 
 @section('title', 'Recommendation')
 
@@ -34,7 +35,7 @@
 
       <!-- messages section -->
       <div class="grid grid-cols-2 justify-items-between items-center gap-x-8 py-10 w-full">
-         <form class="w-full">
+         <form class="w-full shadow-md p-4">
             <div class="w-full">
                <label for="message" class="text-sm font-semibold">Your Message:</label><br>
                <textarea id="message" name="message" placeholder="Type your message here..." class="border-2 border-gray-300 w-full h-32 mt-4 px-3 rounded-md"></textarea>
