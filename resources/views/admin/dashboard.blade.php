@@ -45,7 +45,7 @@
             </div>
             <div class="flex flex-col gap-y-2 font-semibold">
                 <span class="text-md uppercase font-thin">Total Course</span>
-                <span class="text-xl">{{ $users_count }}</span>
+                <span class="text-xl">2</span>
             </div>
         </div>
 
@@ -68,7 +68,7 @@
                         <div class="w-6 bg-orange-100 rounded-t" style="height: 30%;"></div>
                         <div class="w-6 bg-orange-200 rounded-t" style="height: 40%;"></div>
                     </div>
-                    <span class="mt-2 text-sm font-medium">Second Week</span>
+                    <span class="mt-2 text-sm font-medium">First Week</span>
                 </div>
 
                 <!-- Group 2: Instructors -->

@@ -28,4 +28,5 @@ class Kernel extends ConsoleKernel
         // Run the reset command every 12 hours
         $schedule->command('students:reset-flags')->everyMinute();
     }
+    
 }
