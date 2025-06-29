@@ -9,75 +9,40 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
         $students_count = Student::count();
         $users_count = User::count();
-        return view('admin.dashboard', compact('users_count', 'students_count'));
+
+        // Get selected month from query, default to current
+        $month = $request->get('month', now()->format('Y-m'));
+        [$year, $monthNum] = explode('-', $month);
+
+        // Get trend data grouped by date for the selected month
+        $trendData = Student::selectRaw('DATE(created_at) as date,
+                SUM(ed) as ed_count,
+                SUM(absent) as absent_count,
+                SUM(sick_out) as sick_out_count')
+            ->whereYear('created_at', $year)
+            ->whereMonth('created_at', $monthNum)
+            ->groupByRaw('DATE(created_at)')
+            ->orderBy('date', 'asc')
+            ->get();
+
+        return view('admin.dashboard', [
+            'students_count' => $students_count,
+            'users_count' => $users_count,
+            'dates' => $trendData->pluck('date'),
+            'edCounts' => $trendData->pluck('ed_count'),
+            'absentCounts' => $trendData->pluck('absent_count'),
+            'sickOutCounts' => $trendData->pluck('sick_out_count'),
+            'selectedMonth' => $month,
+        ]);
     }
-    /**
-     * Show the form for creating a new resource.
-     */
 
     public function showWelcomePage()
     {
         return view('welcome');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
+
