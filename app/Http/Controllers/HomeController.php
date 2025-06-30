@@ -18,12 +18,35 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students_count = Student::count();
-        $users_count = User::count();
-        return view('admin.dashboard', compact('users_count', 'students_count'));
+    $students_count = Student::count();
+    $users_count = User::count();
+
+    $month = $request->get('month', now()->format('Y-m'));
+    [$year, $monthNum] = explode('-', $month);
+
+    $trendData = Student::selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d') as date,
+            SUM(ed) as ed_count,
+            SUM(absent) as absent_count,
+            SUM(sick_out) as sick_out_count")
+        ->whereYear('created_at', $year)
+        ->whereMonth('created_at', $monthNum)
+        ->groupBy('date')
+        ->orderBy('date', 'asc')
+        ->get();
+
+    return view('admin.dashboard', [
+        'students_count' => $students_count,
+        'users_count' => $users_count,
+        'dates' => $trendData->pluck('date'),
+        'edCounts' => $trendData->pluck('ed_count'),
+        'absentCounts' => $trendData->pluck('absent_count'),
+        'sickOutCounts' => $trendData->pluck('sick_out_count'),
+        'selectedMonth' => $month,
+    ]);
     }
+
     /**
      * Show the form for creating a new resource.
      */

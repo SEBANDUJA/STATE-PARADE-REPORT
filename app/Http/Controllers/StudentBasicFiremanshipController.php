@@ -53,7 +53,10 @@ class StudentBasicFiremanshipController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+            $student = Student::findOrFail($id);
+            $student->update($request->all());
+
+            return redirect()->back()->with('success', 'Student updated successfully');
     }
 
     /**
@@ -61,6 +64,9 @@ class StudentBasicFiremanshipController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+            $student = Student::findOrFail($id);
+            $student->delete();
+
+            return response()->json(['message' => 'Student deleted successfully']);
     }
 }

@@ -9,6 +9,8 @@
     @vite('resources/js/app.js')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
 </head>
 <body class="bg-gray-100 overflow-x-hidden">
 
@@ -60,6 +62,20 @@
                             </div>
                         </div>
                     </li>
+                <!-- Accordion 2 -->
+                <li>
+                    <div class="relative">
+                        <button id="accordion2" class="flex justify-between w-full py-3 px-4 text-xs uppercase text-black bg-white border rounded-4xl focus:outline-none">
+                            <i class="fas fa-users text-lg"></i>
+                            List of Students
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="accordion2-content" class="accordion-content hidden pl-4">
+                            <a href="{{ route('studentbasicfiremanship') }}" class="block py-3 text-xs text-black"><i class="fas fa-user-graduate text-xs mr-2"></i>Basic FireManShip</a>
+                            <a href="{{ route('studentinservice') }}" class="block py-3 text-xs text-black"><i class="fas fa-chalkboard-teacher text-xs mr-2"></i>In Service</a>
+                        </div>
+                    </div>
+                </li>
 
                     @if(Auth::user() && in_array(Auth::user()->role, ['admin', 'co', 'ci']))
                         <li>
