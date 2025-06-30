@@ -38,7 +38,7 @@
                 <i class="bi bi-journal-bookmark-fill text-orange-500 text-5xl"></i>
             </div>
             <div class="flex flex-col gap-y-2">
-                <span class="text-md uppercase font-semibold font-semibold">Permission</span>
+                <span class="text-md uppercase font-semibold">Permission</span>
                 <div class="flex justify-center items-center space-x-4">
                     <div>
                         <span class="text-xs">Basic</span>
