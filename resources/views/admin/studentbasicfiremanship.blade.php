@@ -83,8 +83,8 @@
 
                     <!-- Student Gender -->
                     <div>
-                        <label for="company" class="block text-sm font-medium text-gray-700">Gender</label>
-                        <select id="company" name="company" x-model="student.company"
+                        <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                        <select id="gender" name="gender" x-model="student.gender"
                             class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                             <option value="">Select Gender</option>
                             <option>Male</option>
@@ -117,7 +117,7 @@
                     <div class="mt-4">
                         <label for="photo" class="block text-sm font-medium text-gray-700">Upload Student Photo</label>
                         <input type="file" id="photo" name="photo"
-                            class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                            class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" >
                     </div>
 
                     <!-- Form Buttons -->
@@ -136,71 +136,73 @@
 
         <!-- Student Table -->
         <div class="overflow-x-auto">
-            <table class="min-w-full bg-white rounded shadow overflow-hidden mt-6">
-                <thead class="bg-gray-100">
-                    <tr class="uppercase text-xs">
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">SN</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Company Number</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Sudent Name</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Gender</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Company</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Absent</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Ed</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Ld</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Sick in</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Sick out</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Permission</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Centry</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Special Duty</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Pass</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Guard</th>
-                        <th class="px-4 py-5 text-left whitespace-nowrap w-max">Actions</th>
-                    </tr>
+            <div x-data="studentActions()">
+                <table class="min-w-full bg-white rounded shadow overflow-hidden mt-6">
+                    <thead class="bg-gray-100">
+                        <tr class="uppercase text-xs">
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">SN</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Company Number</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Sudent Name</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Gender</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Company</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Absent</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Ed</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Ld</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Sick in</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Sick out</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Permission</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Centry</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Special Duty</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Pass</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Guard</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Actions</th>
+                        </tr>
 
-                </thead>
-                <tbody>
-                    <!--<template x-for="(stud, index) in students" :key="stud.id">-->
-                    @foreach($students as $student)
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $loop->iteration }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->s_id }}</td>
-                        <td class="px-4 py-2 whitespace-nowrap">{{ $student->name }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->gender }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->company }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->absent }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->ed }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->ld }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->sick_in }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->sick_out }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->permission }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->centry }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->special_duty }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->pass }}</td>
-                        <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->guard }}</td>
-                        <!-- <td class="px-4 py-2">{{ $student->photo }}</td> -->
-                        <td class="px-4 py-2 flex gap-2">
-                            <button
-                                @click="openEditForm({{ json_encode($student) }})"
-                                class="w-fit px-3 h-8 bg-gray-500 text-white text-xs rounded hover:bg-blue-600 uppercase flex items-center gap-2.5 cursor-pointer"
-                            >
-                                <i class="fas fa-edit text-white text-sm"></i>
-                                Edit
-                            </button>
+                    </thead>
+                    <tbody>
+                        <!--<template x-for="(stud, index) in students" :key="stud.id">-->
+                        @foreach($students as $student)
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $loop->iteration }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->s_id }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ $student->name }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap uppercase">{{ $student->gender }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->company }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->absent }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->ed }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->ld }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->sick_in }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->sick_out }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->permission }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->centry }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->special_duty }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->pass }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->guard }}</td>
+                            <!-- <td class="px-4 py-2">{{ $student->photo }}</td> -->
+                            <td class="px-4 py-2 flex gap-2">
+                                <button
+                                    @click="openEditForm({{ json_encode($student) }})"
+                                    class="w-fit px-3 h-8 bg-gray-500 text-white text-xs rounded hover:bg-blue-600 uppercase flex items-center gap-2.5 cursor-pointer"
+                                >
+                                    <i class="fas fa-edit text-white text-sm"></i>
+                                    Edit
+                                </button>
 
-                            <button
-                                @click="deleteStudent({{ $student->id }})"
-                                class="w-fit px-3 h-8 bg-red-500 text-white text-xs rounded hover:bg-red-600 uppercase flex items-center gap-2.5 cursor-pointer"
-                            >
-                                <i class="fas fa-trash text-white text-sm"></i>
-                                Delete
-                            </button>
-                        </td>
+                                <button
+                                    @click="deleteStudent({{ $student->id }})"
+                                    class="w-fit px-3 h-8 bg-red-500 text-white text-xs rounded hover:bg-red-600 uppercase flex items-center gap-2.5 cursor-pointer"
+                                >
+                                    <i class="fas fa-trash text-white text-sm"></i>
+                                    Delete
+                                </button>
+                            </td>
 
-                    </tr>
-                    @endforeach
-                    <!-- </template> -->
-                </tbody>
-            </table>
+                        </tr>
+                        @endforeach
+                        <!-- </template> -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -212,47 +214,79 @@
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
 <script>
-function studentForm() {
+// function studentForm() {
+//     return {
+//         showForm: false,
+//         formMode: 'add', // 'add' or 'edit'
+//         student: {
+//             id: null,
+//             name: '',
+//             gender: '',
+//             age: '',
+//         },
+//         // Mocked students data (replace with actual server data or load via AJAX)
+//         students: [
+//             {id: 1, name: 'Alice John', gender: 'Female', age: 25, nida_no: '1234567890', company: 'TechCorp', company_no: '567890'},
+//             {id: 2, name: 'John Doe', gender: 'Male', age: 30, nida_no: '9876543210', company: 'Innovate Ltd', company_no: '234567'},
+//         ],
+
+//         openAddForm() {
+//             this.formMode = 'add';
+//             this.student = {id: null, name: '', gender: '', age: ''};
+//             this.showForm = true;
+//         },
+
+//         openEditForm(stud) {
+//             this.formMode = 'edit';
+//             // Copy selected student data into form model
+//             this.student = {...stud};
+//             this.showForm = true;
+//         },
+
+//         closeForm() {
+//             this.showForm = false;
+//         },
+
+//         deleteStudent(id) {
+//             if(confirm('Are you sure you want to delete this student?')) {
+//                 this.students = this.students.filter(s => s.id !== id);
+//             }
+//         }
+//     }
+// }
+</script>
+<script>
+function studentActions() {
     return {
-        showForm: false,
-        formMode: 'add', // 'add' or 'edit'
-        student: {
-            id: null,
-            name: '',
-            gender: '',
-            age: '',
+        studentForm: {},
+        openEditForm(student) {
+            this.studentForm = { ...student };
+            // Show modal or set form inputs manually
+            console.log("Edit student:", this.studentForm);
+            // You can toggle a modal here if using one
         },
-        // Mocked students data (replace with actual server data or load via AJAX)
-        students: [
-            {id: 1, name: 'Alice John', gender: 'Female', age: 25, nida_no: '1234567890', company: 'TechCorp', company_no: '567890'},
-            {id: 2, name: 'John Doe', gender: 'Male', age: 30, nida_no: '9876543210', company: 'Innovate Ltd', company_no: '234567'},
-        ],
-
-        openAddForm() {
-            this.formMode = 'add';
-            this.student = {id: null, name: '', gender: '', age: ''};
-            this.showForm = true;
-        },
-
-        openEditForm(stud) {
-            this.formMode = 'edit';
-            // Copy selected student data into form model
-            this.student = {...stud};
-            this.showForm = true;
-        },
-
-        closeForm() {
-            this.showForm = false;
-        },
-
         deleteStudent(id) {
-            if(confirm('Are you sure you want to delete this student?')) {
-                this.students = this.students.filter(s => s.id !== id);
+            if (confirm('Are you sure you want to delete this student?')) {
+                fetch(`/admin/studentbasicfiremanship/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Accept': 'application/json',
+                    }
+                })
+                .then(res => {
+                    if (res.ok) {
+                        location.reload(); // Refresh page after delete
+                    } else {
+                        alert("Failed to delete student.");
+                    }
+                });
             }
         }
     }
 }
 </script>
+
 </html>
 
 

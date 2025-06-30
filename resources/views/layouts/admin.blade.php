@@ -8,6 +8,8 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
 </head>
 <body class="bg-gray-100">
 
@@ -42,7 +44,7 @@
                 <!-- Accordion 2 -->
                 <li>
                     <div class="relative">
-                        <button id="accordion2" class="flex justify-between gap-x-1 w-full py-3 px-4 text-xs uppercase text-black bg-white border rounded-4xl focus:outline-none">
+                        <button id="accordion2" class="flex justify-between w-full py-3 px-4 text-xs uppercase text-black bg-white border rounded-4xl focus:outline-none">
                             <i class="fas fa-users text-lg"></i>
                             List of Students
                             <i class="fas fa-chevron-down"></i>
