@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/reportbasicfiremanship', [ReportBasicFiremanship::class, 'index'])->name('reportbasicfiremanship');
     Route::get('/admin/reportinservice', [ReportinServiceController::class, 'index'])->name('reportinservice');
     Route::get('/admin/studentbasicfiremanship', [StudentBasicFiremanshipController::class, 'index'])->name('studentbasicfiremanship');
+    Route::put('/admin/studentbasicfiremanship/{id}', [StudentBasicFiremanshipController::class, 'update'])->name('students.update');
     Route::get('/admin/studentinservice', [StudentinServiceController::class, 'index'])->name('studentinservice');
     Route::get('admin/profile', [UserManagementController::class, 'profile'])->name('profile');
 });
@@ -31,6 +32,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Only admin can access these
     Route::middleware([RoleMiddleware::class . ':admin,co,ci'])->group(function () {
+        Route::delete('/admin/studentbasicfiremanship/{id}', [StudentBasicFiremanshipController::class, 'destroy'])->name('students.destroy');
+        Route::post('/admin/recommendation', [RecommendationController::class, 'store'])->name('recommendation.store');
         Route::get('/admin/recommendation', [RecommendationController::class, 'index'])->name('recommendation');
         Route::get('/admin/usermanagement', [UserManagementController::class, 'index'])->name('usermanager');
     });
