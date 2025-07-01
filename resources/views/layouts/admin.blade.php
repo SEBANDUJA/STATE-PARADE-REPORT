@@ -14,7 +14,7 @@
 <body class="bg-gray-100">
 
     <!-- Sidebar -->
-    <div id="sidebar" class="fixed left-0 top-0 h-full bg-orange-500 text-white py-7 px-2 w-72 transform transition-transform duration-300 ease-in-out">
+    <div id="sidebar" class="no-print fixed left-0 top-0 h-full bg-orange-500 text-white py-7 px-2 w-72 transform transition-transform duration-300 ease-in-out">
         <div class="w-20 h-20 mx-24">
             <img src="{{ asset('images/Fire logo.png') }}" alt="Zimamoto Logo" class="w-full" />
         </div>
@@ -92,7 +92,7 @@
 
     <!-- Main Content -->
     <div id="main-content" class="flex-1 ml-72 transition-all duration-500 ease-in-out">
-        <header class="bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 shadow-md p-4 flex items-center justify-between relative z-10">
+        <header class="no-print bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 shadow-md p-4 flex items-center justify-between relative z-10">
             <div class="flex items-center space-x-4">
                 <button id="toggleSidebar" class="text-2xl text-black">
                     <i class="fas fa-bars cursor-pointer"></i>
