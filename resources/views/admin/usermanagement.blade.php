@@ -20,13 +20,14 @@
     <!-- Add Student Button -->
     <div class="flex justify-end items-center mb-4">
         <button
-            
+            @click="openAddForm()"
             class="h-10 px-4 bg-orange-500 rounded-md text-white uppercase text-xs flex items-center gap-2 hover:border-2 hover:border-orange-600 hover:bg-white hover:text-black transition-all duration-500 ease-in cursor-pointer"
         >
             <i class="fas fa-user-plus text-sm"></i>
             Add user
         </button>
     </div>
+
 
     <!-- Add / Edit Form Modal -->
     <div
@@ -49,8 +50,22 @@
                 </template>
 
                 <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Photo</label>
+                    <input type="file" id="Photo" name="photo" x-model="student.photo"
+                        class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        required>
+                </div>
+
+                <div>
                     <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                     <input type="text" id="name" name="name" x-model="student.name"
+                        class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        required>
+                </div>
+
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">User Name</label>
+                    <input type="text" id="username" name="username" x-model="student.username"
                         class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                         required>
                 </div>
@@ -60,16 +75,35 @@
                     <select id="gender" name="gender" x-model="student.gender"
                         class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                         required>
-                        <option value="">Select</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
+                        <option value="" selected  disabled>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
                     </select>
                 </div>
 
                 <div>
-                    <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
-                    <input type="number" id="age" name="age" x-model="student.age"
+                    <label for="name" class="block text-sm font-medium text-gray-700">Job Title</label>
+                    <input type="text" id="job_title" name="job_title" x-model="student.job_title"
+                        class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        required>
+                </div>
+
+                <div>
+                    <label for="gender" class="block text-sm font-medium text-gray-700">Role</label>
+                    <select id="gender" name="role" x-model="student.role"
+                        class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        required>
+                        <option value="" selected disabled>Select Role</option>
+                        <option value="Admin">Afande C.O | CI</option>
+                        <option value="mto_cc">Afande MTO | CC</option>
+                        <option value="hc">Orderly Corporal | Sir Major</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="age" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="text" id="email" name="email" x-model="student.email"
                         class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                         required>
                 </div>
@@ -116,12 +150,13 @@
                     <td class="px-4 py-4">{{ $user->email }}</td>
                     <td class="px-4 py-4">{{ $user->gender }}</td>
                     <td class="px-4 py-4 flex gap-2">
-                        <button @click="openEditForm(stud)"
+                        
+                        <button @click='openEditForm(@json($user))'
                             class="w-fit px-3 h-8 bg-gray-500 text-white text-xs rounded hover:bg-blue-600 uppercase flex items-center gap-2.5 cursor-pointer">
                             <i class="fas fa-edit text-white text-sm"></i>
                             Edit
                         </button>
-                        <button @click="deleteStudent(stud.id)"
+                        <button @click="deleteStudent({{ $user->id }})"
                             class="w-fit px-3 h-8 bg-red-500 text-white text-xs rounded hover:bg-red-600 uppercase flex items-center gap-2.5 cursor-pointer">
                             <i class="fas fa-trash text-white text-sm"></i>
                             Delete

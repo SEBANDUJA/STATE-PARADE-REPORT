@@ -4,15 +4,7 @@
 @section('title', 'Basic Firemanship Report')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body class="overflow-x-hidden">
-    <div x-data="studentForm()" class="container mx-auto px-4 py-8 relative min-h-screen">
+    <div x-data="studentForm()" class="container mx-auto px-4 py-8 relative min-h-screen z-20">
 
         <!-- filter -->
         <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
@@ -210,9 +202,8 @@
     <div class="mt-4">
         {{ $students->links() }}
     </div>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 <script>
  function studentForm() {
      return {
@@ -286,9 +277,5 @@ function studentActions() {
     }
 }
 </script>
-
-</html>
-
-
 
 @endsection
