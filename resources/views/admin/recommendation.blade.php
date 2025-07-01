@@ -257,11 +257,13 @@
                   </div>
                </div>
             </form>
+
+            <!-- Recent Messages -->
             <div class="w-full shadow-md py-8 px-4">
             <h2 class="font-semibold">Recent Messages</h2>
             <div class="flex flex-col gap-y-6 mt-5">
             @foreach($recom as $recommendation)
-               <div class="flex flex-row justify-start items-center gap-x-4 bg-gray-100">
+               <div class="grid grid-cols-4 justify-items-start items-center gap-x-4 bg-gray-100">
                   <div class="w-10">
                      <img src="../images/nutcracker.png" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
                   </div>
