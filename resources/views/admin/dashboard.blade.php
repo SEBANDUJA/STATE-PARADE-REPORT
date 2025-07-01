@@ -66,7 +66,7 @@
 <!-- Filter section -->
 <section class="max-w-6xl mx-auto mb-8 p-6 bg-white shadow rounded">
     <div class="flex justify-between items-center">
-        <h2 class="text-lg font-bold">Trending Graphs</h2>
+        <h2 class="text-lg font-bold">Visualization</h2>
         <form method="GET" action="{{ route('dashboard') }}" class="flex items-center gap-x-4">
             <label for="month" class="text-sm font-medium">Filter by Month:</label>
             <input type="month" id="month" name="month" value="{{ $selectedMonth }}" class="border px-3 py-2 rounded">
