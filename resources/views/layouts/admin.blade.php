@@ -99,7 +99,7 @@
                 <button id="toggleSidebar" class="text-2xl text-black">
                     <i class="fas fa-bars cursor-pointer"></i>
                 </button>
-                <div class="text-2xl font-semibold text-black uppercase font-thin text-md">Dashboard</div>
+                <div class="text-2xl font-semibold text-black uppercase text-md">Dashboard</div>
             </div>
 
                 <div class="flex items-center space-x-12">
