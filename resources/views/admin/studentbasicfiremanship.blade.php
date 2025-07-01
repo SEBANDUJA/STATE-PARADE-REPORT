@@ -16,6 +16,7 @@
 
         <!-- filter -->
         <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+ 
             <!-- First Span -->
             <div>
                 <span class="text-xl font-semibold uppercase">Basic firemanship student list</span>
@@ -61,18 +62,19 @@
             @click.away="closeForm()"
             class="fixed inset-0 flex items-center justify-center z-50 pointer-events-auto"
             style="background: transparent;"
-        >
+          >
             <div
                 class="bg-white border border-gray-300 shadow-lg p-6 rounded-md w-full max-w-2xl"
                 @click.stop
             >
                 <h2 class="text-lg font-semibold mb-4" x-text="formMode === 'add' ? 'Add Student' : 'Edit Student'"></h2>
 
-                <form :action="formMode === 'add' ? '{{ url('/students/store') }}' : `{{ url('/students/update') }}/${student.id}`" method="POST" class="space-y-4">
+                <form
+                    :action="formMode === 'add' ? '{{ route('students.store') }}' : '{{ route('students.update', ['id' => 'STUDENT_ID']) }}'.replace('STUDENT_ID', student.id)"
+                    method="POST"
+                    class="space-y-4"
+                    >   
                     @csrf
-                    <template x-if="formMode === 'edit'">
-                        <input type="hidden" name="id" :value="student.id">
-                    </template>
 
                     <!-- Student Name -->
                     <div class="mt-4">
@@ -86,10 +88,10 @@
                         <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
                         <select id="gender" name="gender" x-model="student.gender"
                             class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-                            <option value="">Select Gender</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
+                            <option value="" selected disabled>Select Gender</option>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                            <option value="OTHER">Other</option>
                         </select>
                     </div>
 
@@ -98,18 +100,18 @@
                         <label for="company" class="block text-sm font-medium text-gray-700">Company Name</label>
                         <select id="company" name="company" x-model="student.company"
                             class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-                            <option value="">Select Company</option>
-                            <option>A - COY</option>
-                            <option>B - COY</option>
-                            <option>C - COY</option>
-                            <option>E - COY</option>
+                            <option value="" selected disabled>Select Company</option>
+                            <option value="A">A - COY</option>
+                            <option value="B">B - COY</option>
+                            <option value="C">C - COY</option>
+                            <option value="D">D - COY</option>
                         </select>
                     </div>
 
                     <!-- Company Number -->
                     <div>
-                        <label for="company_number" class="block text-sm font-medium text-gray-700">Company Number</label>
-                        <input type="text" id="company_number" name="company_number" x-model="student.company_number"
+                        <label for="company_no" class="block text-sm font-medium text-gray-700">Company Number</label>
+                        <input type="text" id="company_no" name="company_no" x-model="student.s_id"
                             class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                     </div>
 
@@ -119,6 +121,68 @@
                         <input type="file" id="photo" name="photo"
                             class="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" >
                     </div>
+
+                    <!-- Attendance Status Checkboxes (only in edit mode) -->
+                    <!-- <template> -->
+                        
+                        <fieldset x-show="formMode === 'edit'"
+                            class="mt-4 border p-4 rounded"
+                            style="display: none;">
+                            <input type="hidden" name="id" :value="student.id">
+                            <legend class="font-semibold mb-2">Attendance Status</legend>
+
+                            <label class="inline-flex items-center">
+                            <input type="checkbox" name="others" x-model="student.others" class="form-checkbox" />
+                            <span class="ml-2">Absent</span>
+                            </label>
+
+                            <label class="inline-flex items-center mr-4">
+                            <input type="checkbox" name="ed" x-model="student.ed" class="form-checkbox" />
+                            <span class="ml-2">ED</span>
+                            </label>
+
+                            <label class="inline-flex items-center mr-4">
+                            <input type="checkbox" name="sick_in" x-model="student.sick_in" class="form-checkbox" />
+                            <span class="ml-2">Sick In</span>
+                            </label>
+
+                            <label class="inline-flex items-center mr-4">
+                            <input type="checkbox" name="sick_out" x-model="student.sick_out" class="form-checkbox" />
+                            <span class="ml-2">Sick Out</span>
+                            </label>
+
+                            <label class="inline-flex items-center mr-4">
+                            <input type="checkbox" name="ld" x-model="student.ld" class="form-checkbox" />
+                            <span class="ml-2">LD</span>
+                            </label>
+
+                            <label class="inline-flex items-center mr-4">
+                            <input type="checkbox" name="permission" x-model="student.permission" class="form-checkbox" />
+                            <span class="ml-2">Permission</span>
+                            </label>
+
+                            <label class="inline-flex items-center">
+                            <input type="checkbox" name="others" x-model="student.others" class="form-checkbox" />
+                            <span class="ml-2">Centry</span>
+                            </label>
+
+                            <label class="inline-flex items-center">
+                            <input type="checkbox" name="others" x-model="student.others" class="form-checkbox" />
+                            <span class="ml-2">Special Duty</span>
+                            </label>
+
+                            <label class="inline-flex items-center">
+                            <input type="checkbox" name="others" x-model="student.others" class="form-checkbox" />
+                            <span class="ml-2">Pass</span>
+                            </label>
+
+                            <label class="inline-flex items-center">
+                            <input type="checkbox" name="others" x-model="student.others" class="form-checkbox" />
+                            <span class="ml-2">Gard</span>
+                            </label>
+                        </fieldset>
+                    <!-- </template> -->
+
 
                     <!-- Form Buttons -->
                     <div class="flex justify-end gap-2 pt-4">
@@ -141,6 +205,7 @@
                     <thead class="bg-gray-100">
                         <tr class="uppercase text-xs">
                             <th class="px-4 py-5 text-left whitespace-nowrap w-max">SN</th>
+                            <th class="px-4 py-5 text-left whitespace-nowrap w-max">Student Photo</th>
                             <th class="px-4 py-5 text-left whitespace-nowrap w-max">Company Number</th>
                             <th class="px-4 py-5 text-left whitespace-nowrap w-max">Sudent Name</th>
                             <th class="px-4 py-5 text-left whitespace-nowrap w-max">Gender</th>
@@ -164,6 +229,7 @@
                         @foreach($students as $student)
                         <tr class="border-b hover:bg-gray-50">
                             <td class="px-4 py-2 text-center whitespace-nowrap">{{ $loop->iteration }}</td>
+                            <td class="px-4 py-2 text-center whitespace-nowrap">null</td>
                             <td class="px-4 py-2 text-center whitespace-nowrap">{{ $student->s_id }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ $student->name }}</td>
                             <td class="px-4 py-2 text-center whitespace-nowrap uppercase">{{ $student->gender }}</td>
@@ -215,47 +281,47 @@
 
 <script>
  function studentForm() {
-     return {
-         showForm: false,
-         formMode: 'add', // 'add' or 'edit'
-         student: {
-             id: null,
-             name: '',
-             gender: '',
-             age: '',
-         },
-         // Mocked students data (replace with actual server data or load via AJAX)
-         students: [
-             {id: 1, name: 'Alice John', gender: 'Female', age: 25, nida_no: '1234567890', company: 'TechCorp', company_no: '567890'},
-             {id: 2, name: 'John Doe', gender: 'Male', age: 30, nida_no: '9876543210', company: 'Innovate Ltd', company_no: '234567'},
-         ],
+    return {
+        showForm: false,
+        formMode: 'add', // 'add' or 'edit'
+        student: {
+            id: null,
+            name: '',
+            gender: '',
+            age: '',
+        },
+        // Mocked students data (replace with actual server data or load via AJAX)
+        students: [
+            {id: 1, name: 'Alice John', gender: 'Female', age: 25, nida_no: '1234567890', company: 'TechCorp', company_no: '567890'},
+            {id: 2, name: 'John Doe', gender: 'Male', age: 30, nida_no: '9876543210', company: 'Innovate Ltd', company_no: '234567'},
+        ],
 
-         openAddForm() {
-             this.formMode = 'add';
-             this.student = {id: null, name: '', gender: '', age: ''};
-             this.showForm = true;
-         },
+        openAddForm() {
+            this.formMode = 'add';
+            this.student = {id: null, name: '', gender: '', company: '', company_no: '', photo: '' };
+            this.showForm = true;
+        },
 
-         openEditForm(stud) {
-             this.formMode = 'edit';
-             // Copy selected student data into form model
-             this.student = {...stud};
-             this.showForm = true;
-         },
+        openEditForm(stud) {
+            this.formMode = 'edit';
+            // Copy selected student data into form model
+            this.student = {...stud};
+            this.showForm = true;
+        },
 
-         closeForm() {
-             this.showForm = false;
-         },
+        closeForm() {
+            this.showForm = false;
+        },
 
-         deleteStudent(id) {
-             if(confirm('Are you sure you want to delete this student?')) {
-                 this.students = this.students.filter(s => s.id !== id);
-             }
-         }
-     }
+        deleteStudent(id) {
+            if(confirm('Are you sure you want to delete this student?')) {
+                this.students = this.students.filter(s => s.id !== id);
+            }
+        }
+    }
  }
 </script>
-<script>
+<!-- <script>
 function studentActions() {
     return {
         studentForm: {},
@@ -285,7 +351,7 @@ function studentActions() {
         }
     }
 }
-</script>
+</script> -->
 
 </html>
 
