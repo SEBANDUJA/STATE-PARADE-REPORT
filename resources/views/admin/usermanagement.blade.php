@@ -4,7 +4,16 @@
 @section('title', 'Firemanship Report')
 
 @section('content')
-<div x-data="studentForm()" class="container mx-auto px-4 py-8 relative min-h-screen">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <title>Document</title>
+</head>
+<body class="">
+    <div x-data="studentForm()" class="container mx-auto px-4 py-8 relative min-h-screen">
 
     <h1 class="text-2xl font-bold mb-6">List Of Users</h1>
 
@@ -12,7 +21,7 @@
     <div class="flex justify-end items-center mb-4">
         <button
             
-            class="h-10 px-4 bg-orange-500 rounded-md text-white hover:bg-blue-600 transition uppercase text-xs flex items-center gap-2 hover:border-2 hover:border-orange-600 hover:bg-white hover:text-black transition-all duration-500 ease-in cursor-pointer"
+            class="h-10 px-4 bg-orange-500 rounded-md text-white uppercase text-xs flex items-center gap-2 hover:border-2 hover:border-orange-600 hover:bg-white hover:text-black transition-all duration-500 ease-in cursor-pointer"
         >
             <i class="fas fa-user-plus text-sm"></i>
             Add user
@@ -79,105 +88,101 @@
         </div>
     </div>
 
-    <!-- Student Table -->
-    <table class="min-w-full bg-white rounded shadow overflow-hidden mt-6">
-        <thead class="bg-gray-100">
-            <tr>
-                <th class="px-4 py-2 text-left">SN</th>
-                <th class="px-4 py-2 text-left">Photo</th>
-                <th class="px-4 py-2 text-left">Name</th>
-                <th class="px-4 py-2 text-left">Username</th>
-                <th class="px-4 py-2 text-left">Job Title</th>
-                <th class="px-4 py-2 text-left">Role</th>
-                <th class="px-4 py-2 text-left">Email</th>
-                <th class="px-4 py-2 text-left">Gender</th>
-                <th class="px-4 py-2 text-left">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- <template x-for="(stud, index) in students" :key="stud.id"> -->
+    <!-- Student Table Wrapper with x-scroll -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white rounded shadow overflow-hidden mt-6 whitespace-nowrap">
+            <thead class="bg-gray-100">
+                <tr class="uppercase">
+                    <th class="px-4 py-4 text-left">SN</th>
+                    <th class="px-4 py-4 text-left">Photo</th>
+                    <th class="px-4 py-4 text-left">Name</th>
+                    <th class="px-4 py-4 text-left">Username</th>
+                    <th class="px-4 py-4 text-left">Job Title</th>
+                    <th class="px-4 py-4 text-left">Role</th>
+                    <th class="px-4 py-4 text-left">Email</th>
+                    <th class="px-4 py-4 text-left">Gender</th>
+                    <th class="px-4 py-4 text-left">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
                 @foreach($user_in as $user)
                 <tr class="border-b hover:bg-gray-50">
-                    <td class="px-4 py-2" >{{ $loop->iteration }}</td>
-                    <td class="px-4 py-2" ></td>
-                    <td class="px-4 py-2" >{{ $user->name }}</td>
-                    <td class="px-4 py-2" >{{ $user->username }}</td>
-                    <td class="px-4 py-2" >{{ $user->job_title }}</td>
-                    <td class="px-4 py-2" >{{ $user->role }}</td>
-                    <td class="px-4 py-2" >{{ $user->email }}</td>
-                    <td class="px-4 py-2" >{{ $user->gender }}</td>
-                    <!-- <td class="px-4 py-2" ></td> -->
-                    <td class="px-4 py-2 flex gap-2">
-                        <button
-                            @click="openEditForm(stud)"
-                            class="w-fit px-3 h-8 bg-gray-500 text-white text-xs rounded hover:bg-blue-600 uppercase flex items-center gap-2.5 cursor-pointer"
-                        >
+                    <td class="px-4 py-4">{{ $loop->iteration }}</td>
+                    <td class="px-4 py-4"></td>
+                    <td class="px-4 py-4">{{ $user->name }}</td>
+                    <td class="px-4 py-4">{{ $user->username }}</td>
+                    <td class="px-4 py-4">{{ $user->job_title }}</td>
+                    <td class="px-4 py-4">{{ $user->role }}</td>
+                    <td class="px-4 py-4">{{ $user->email }}</td>
+                    <td class="px-4 py-4">{{ $user->gender }}</td>
+                    <td class="px-4 py-4 flex gap-2">
+                        <button @click="openEditForm(stud)"
+                            class="w-fit px-3 h-8 bg-gray-500 text-white text-xs rounded hover:bg-blue-600 uppercase flex items-center gap-2.5 cursor-pointer">
                             <i class="fas fa-edit text-white text-sm"></i>
                             Edit
                         </button>
-
-                        <button
-                            @click="deleteStudent(stud.id)"
-                            class="w-fit px-3 h-8 bg-red-500 text-white text-xs rounded hover:bg-red-600 uppercase flex items-center gap-2.5 cursor-pointer"
-                        >
+                        <button @click="deleteStudent(stud.id)"
+                            class="w-fit px-3 h-8 bg-red-500 text-white text-xs rounded hover:bg-red-600 uppercase flex items-center gap-2.5 cursor-pointer">
                             <i class="fas fa-trash text-white text-sm"></i>
                             Delete
                         </button>
                     </td>
                 </tr>
                 @endforeach
-            <!-- </template> -->
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
 
-{{-- Pagination Links --}}
-<div class="mt-4">
-    {{ $user_in->links() }}
-</div>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    {{-- Pagination Links --}}
+    <div class="mt-4">
+        {{ $user_in->links() }}
+    </div>
 
+
+</body>
 <script>
-function studentForm() {
-    return {
-        showForm: false,
-        formMode: 'add', // 'add' or 'edit'
-        student: {
-            id: null,
-            name: '',
-            gender: '',
-            age: '',
-        },
-        // Mocked students data (replace with actual server data or load via AJAX)
-        students: [
-            {id: 1, name: 'Alice John', gender: 'Female', age: 25, nida_no: '1234567890', company: 'TechCorp', company_no: '567890'},
-            {id: 2, name: 'John Doe', gender: 'Male', age: 30, nida_no: '9876543210', company: 'Innovate Ltd', company_no: '234567'},
-        ],
+    function studentForm() {
+        return {
+            showForm: false,
+            formMode: 'add', // 'add' or 'edit'
+            student: {
+                id: null,
+                name: '',
+                gender: '',
+                age: '',
+            },
+            // Mocked students data (replace with actual server data or load via AJAX)
+            students: [
+                {id: 1, name: 'Alice John', gender: 'Female', age: 25, nida_no: '1234567890', company: 'TechCorp', company_no: '567890'},
+                {id: 2, name: 'John Doe', gender: 'Male', age: 30, nida_no: '9876543210', company: 'Innovate Ltd', company_no: '234567'},
+            ],
 
-        openAddForm() {
-            this.formMode = 'add';
-            this.student = {id: null, name: '', gender: '', age: ''};
-            this.showForm = true;
-        },
+            openAddForm() {
+                this.formMode = 'add';
+                this.student = {id: null, name: '', gender: '', age: ''};
+                this.showForm = true;
+            },
 
-        openEditForm(stud) {
-            this.formMode = 'edit';
-            // Copy selected student data into form model
-            this.student = {...stud};
-            this.showForm = true;
-        },
+            openEditForm(stud) {
+                this.formMode = 'edit';
+                // Copy selected student data into form model
+                this.student = {...stud};
+                this.showForm = true;
+            },
 
-        closeForm() {
-            this.showForm = false;
-        },
+            closeForm() {
+                this.showForm = false;
+            },
 
-        deleteStudent(id) {
-            if(confirm('Are you sure you want to delete this student?')) {
-                this.students = this.students.filter(s => s.id !== id);
+            deleteStudent(id) {
+                if(confirm('Are you sure you want to delete this student?')) {
+                    this.students = this.students.filter(s => s.id !== id);
+                }
             }
         }
     }
-}
 </script>
+</html>
 @endsection
