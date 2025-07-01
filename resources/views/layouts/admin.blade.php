@@ -166,6 +166,28 @@
 
             <!-- Content Area -->
             <div class="p-6 text-black pt-20">
+                @if (session('success'))
+                    <div class="mb-4 p-4 rounded bg-green-100 text-green-800 border border-green-400 alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('fail'))
+                    <div class="mb-4 p-4 rounded bg-red-100 text-red-800 border border-red-400">
+                        {{ session('fail') }}
+                    </div>
+                @endif
+
+                @if ($errors->any())
+                    <div class="mb-4 p-4 rounded bg-red-100 text-red-800 border border-red-400">
+                        <ul class="list-disc pl-5">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 @yield('content')
             </div>
         </div>
