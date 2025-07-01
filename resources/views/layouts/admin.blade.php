@@ -62,20 +62,6 @@
                             </div>
                         </div>
                     </li>
-                <!-- Accordion 2 -->
-                <li>
-                    <div class="relative">
-                        <button id="accordion2" class="flex justify-between w-full py-3 px-4 text-xs uppercase text-black bg-white border rounded-4xl focus:outline-none">
-                            <i class="fas fa-users text-lg"></i>
-                            List of Students
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div id="accordion2-content" class="accordion-content hidden pl-4">
-                            <a href="{{ route('studentbasicfiremanship') }}" class="block py-3 text-xs text-black"><i class="fas fa-user-graduate text-xs mr-2"></i>Basic FireManShip</a>
-                            <a href="{{ route('studentinservice') }}" class="block py-3 text-xs text-black"><i class="fas fa-chalkboard-teacher text-xs mr-2"></i>In Service</a>
-                        </div>
-                    </div>
-                </li>
 
                     @if(Auth::user() && in_array(Auth::user()->role, ['admin', 'co', 'ci']))
                         <li>
@@ -149,6 +135,9 @@
                             @case('recommendation')
                                 Recommendation
                                 @break
+                            @case('profile')
+                                My Profile
+                                @break
                             @default
                                 Page
                         @endswitch
@@ -166,7 +155,9 @@
                     <div class="relative">
                         <button id="userMenuButton" class="text-black flex items-center space-x-2 focus:outline-none">
                             <div class="relative">
-                                <i class="fas fa-user-circle text-4xl"></i>
+                                <div class="w-10">
+                                    <img src="../images/wildfire.jpg" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
+                                </div>
                                 <span class="absolute bottom-0 right-0 block w-3 h-3 rounded-full bg-green-500 border-2 border-white"></span>
                             </div>
                             <span class="font-semibold text-black text-sm">
@@ -174,18 +165,42 @@
                             </span>
                         </button>
 
-                        <div id="userDropdown" class="hidden absolute right-0 top-full mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg py-2 z-50">
-                            <a href="{{ route('profile') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                <i class="fas fa-user text-gray-500"></i>
-                                Profile
-                            </a>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="w-full flex items-center gap-2 text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                    <i class="fas fa-sign-out-alt text-gray-500"></i>
-                                    Logout
-                                </button>
-                            </form>
+                        <div id="userDropdown" class="hidden absolute right-0 top-full mt-2 w-fit bg-white border border-gray-200 rounded-md shadow-lg py-4 z-50">
+                            <div class="flex flex-row justify-start items-center gap-x-6 w-full px-5">
+                                <div class="w-8">
+                                    <img src="../images/wildfire.jpg" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
+                                </div>
+                                <div class="flex flex-col justify-start items-start">
+                                    <span class="font-semibold text-black text-md">
+                                    {{ Auth::user()->username }}
+                                    </span>
+                                    <span class="text-black text-xs">Chief Officer (C.O)</span>
+                                </div>
+                            </div>
+
+                            <hr class="my-4 border-t-2 border-gray-400 w-full" />
+                             
+                            <div class="px-5">
+                                <a href="{{ route('profile') }}" class="flex items-center gap-2 py-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                    <i class="fas fa-user text-gray-500"></i>
+                                    Profile Details
+                                </a>
+                                <a href="{{ route('profile') }}" class="flex items-center gap-2 py-2 text-md text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-bell text-gray-500"></i>
+                                    Notification
+                                </a>
+                                <a href="{{ route('profile') }}" class="flex items-center gap-2 py-2 text-md text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-key text-gray-500"></i>
+                                    Change Password
+                                </a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="w-full flex items-center gap-2 text-left py-2 text-sm text-red-700 hover:bg-gray-100 cursor-pointer">
+                                        <i class="fas fa-sign-out-alt text-red-700"></i>
+                                        Logout
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
