@@ -16,22 +16,18 @@
 
     <div x-data="{ sidebarCollapsed: false }" class="flex h-screen relative">
 
-        <!-- Sidebar -->
-        <div 
-            :class="sidebarCollapsed ? 'w-0' : 'w-72'" 
-            class="fixed left-0 top-0 h-full bg-orange-500 text-white py-7 px-2 transform transition-all duration-300 ease-in-out overflow-hidden z-40">
-
-            <div class="w-20 h-20 mx-24">
-                <img src="{{ asset('images/Fire logo.png') }}" alt="Zimamoto Logo" class="w-full" />
-            </div>
-
-            <div class="w-full px-6 py-24">
-                <ul class="flex flex-col gap-y-5 w-full uppercase text-xs">
-                    <li>
-                        <a href="{{ route('dashboard') }}" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
-                            <i class="fas fa-bell text-lg"></i> Dashboard
-                        </a>
-                    </li>
+    <!-- Sidebar -->
+    <div id="sidebar" class="no-print fixed left-0 top-0 h-full bg-orange-500 text-white py-7 px-2 w-72 transform transition-transform duration-300 ease-in-out">
+        <div class="w-20 h-20 mx-24">
+            <img src="{{ asset('images/Fire logo.png') }}" alt="Zimamoto Logo" class="w-full" />
+        </div>
+        <div class="w-full px-6 py-24">
+            <ul class="flex flex-col gap-y-5 w-full uppercase text-xs">
+                <li>
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
+                        <i class="fas fa-bell text-lg"></i> Dashboard
+                    </a>
+                </li>
 
                     <!-- Accordion 1 -->
                     <li>
@@ -96,53 +92,15 @@
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div 
-            :class="sidebarCollapsed ? 'ml-0' : 'ml-72'" 
-            class="flex-1 transition-all duration-300 ease-in-out">
-
-            <!-- Header -->
-            <header 
-                :class="sidebarCollapsed ? 'left-0' : 'left-72'" 
-                class="fixed top-0 right-0 bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 shadow-md p-4 flex items-center justify-between z-50 transition-all duration-300">
-
-                <div class="flex items-center space-x-4">
-                    <button @click="sidebarCollapsed = !sidebarCollapsed" class="text-2xl text-black focus:outline-none">
-                        <i class="fas fa-bars cursor-pointer"></i>
-                    </button>
-
-                    <div class="text-2xl font-semibold text-black uppercase text-md">
-                        @php
-                            $routeName = Route::currentRouteName();
-                        @endphp
-
-                        @switch($routeName)
-                            @case('dashboard')
-                                Dashboard
-                                @break
-                            @case('reportbasicfiremanship')
-                                Report Basic Firemanship
-                                @break
-                            @case('studentbasicfiremanship')
-                                Student Basic Firemanship
-                                @break
-                            @case('reportinservice')
-                                Report In Service
-                                @break
-                            @case('usermanager')
-                                User Management
-                                @break
-                            @case('recommendation')
-                                Recommendation
-                                @break
-                            @case('profile')
-                                My Profile
-                                @break
-                            @default
-                                Page
-                        @endswitch
-                    </div>
-                </div>
+    <!-- Main Content -->
+    <div id="main-content" class="flex-1 ml-72 transition-all duration-500 ease-in-out">
+        <header class="no-print bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 shadow-md p-4 flex items-center justify-between relative z-10">
+            <div class="flex items-center space-x-4">
+                <button id="toggleSidebar" class="text-2xl text-black">
+                    <i class="fas fa-bars cursor-pointer"></i>
+                </button>
+                <div class="text-2xl font-semibold text-black uppercase font-thin text-md">Dashboard</div>
+            </div>
 
                 <div class="flex items-center space-x-12">
                     <div class="relative">

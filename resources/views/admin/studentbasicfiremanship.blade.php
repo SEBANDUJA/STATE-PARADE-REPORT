@@ -214,46 +214,46 @@
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
 <script>
-// function studentForm() {
-//     return {
-//         showForm: false,
-//         formMode: 'add', // 'add' or 'edit'
-//         student: {
-//             id: null,
-//             name: '',
-//             gender: '',
-//             age: '',
-//         },
-//         // Mocked students data (replace with actual server data or load via AJAX)
-//         students: [
-//             {id: 1, name: 'Alice John', gender: 'Female', age: 25, nida_no: '1234567890', company: 'TechCorp', company_no: '567890'},
-//             {id: 2, name: 'John Doe', gender: 'Male', age: 30, nida_no: '9876543210', company: 'Innovate Ltd', company_no: '234567'},
-//         ],
+ function studentForm() {
+     return {
+         showForm: false,
+         formMode: 'add', // 'add' or 'edit'
+         student: {
+             id: null,
+             name: '',
+             gender: '',
+             age: '',
+         },
+         // Mocked students data (replace with actual server data or load via AJAX)
+         students: [
+             {id: 1, name: 'Alice John', gender: 'Female', age: 25, nida_no: '1234567890', company: 'TechCorp', company_no: '567890'},
+             {id: 2, name: 'John Doe', gender: 'Male', age: 30, nida_no: '9876543210', company: 'Innovate Ltd', company_no: '234567'},
+         ],
 
-//         openAddForm() {
-//             this.formMode = 'add';
-//             this.student = {id: null, name: '', gender: '', age: ''};
-//             this.showForm = true;
-//         },
+         openAddForm() {
+             this.formMode = 'add';
+             this.student = {id: null, name: '', gender: '', age: ''};
+             this.showForm = true;
+         },
 
-//         openEditForm(stud) {
-//             this.formMode = 'edit';
-//             // Copy selected student data into form model
-//             this.student = {...stud};
-//             this.showForm = true;
-//         },
+         openEditForm(stud) {
+             this.formMode = 'edit';
+             // Copy selected student data into form model
+             this.student = {...stud};
+             this.showForm = true;
+         },
 
-//         closeForm() {
-//             this.showForm = false;
-//         },
+         closeForm() {
+             this.showForm = false;
+         },
 
-//         deleteStudent(id) {
-//             if(confirm('Are you sure you want to delete this student?')) {
-//                 this.students = this.students.filter(s => s.id !== id);
-//             }
-//         }
-//     }
-// }
+         deleteStudent(id) {
+             if(confirm('Are you sure you want to delete this student?')) {
+                 this.students = this.students.filter(s => s.id !== id);
+             }
+         }
+     }
+ }
 </script>
 <script>
 function studentActions() {
