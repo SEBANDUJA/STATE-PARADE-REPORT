@@ -110,41 +110,89 @@
                                 <i class="fas fa-paper-plane text-2xl"></i>
                             </button>
                         </div>
+                        <div class="relative" x-data="{ open: false }" @click.outside="open = false">
+                            <!-- Clickable Bell Button -->
+                            <button
+                                @click="open = !open"
+                                class="p-2 rounded-full hover:bg-gray-100 focus:outline-none"
+                                aria-label="Notifications"
+                            >
+                                <i class="fas fa-bell text-2xl text-black"></i>
+                            </button>
 
-                          <div class="relative" x-data="{ open: false }" @click.outside="open = false">
-    <!-- Clickable Bell Button -->
-    <button
-      @click="open = !open"
-      class="p-2 rounded-full hover:bg-gray-100 focus:outline-none"
-      aria-label="Notifications"
-    >
-      <i class="fas fa-bell text-2xl text-black"></i>
-    </button>
+                            <!-- Dropdown -->
+                            <div
+                                x-show="open"
+                                x-cloak
+                                @click.stop
+                                class="absolute right-0 mt-2 w-72 bg-white border border-gray-300 rounded-md shadow-lg z-50"
+                            >
+                                <div>
+                                    <!-- Header -->
+                                    <h3 class="font-semibold py-3 bg-black text-white px-4">Notifications</h3>
 
-    <!-- Dropdown (no second click needed) -->
-    <div
-      x-show="open"
-      x-cloak
-      @click.stop
-      class="absolute right-0 mt-2 w-64 bg-white border border-gray-300 rounded-md shadow-lg z-50"
-    >
-      <div class="">
-        <h3 class="font-semibold mb-2 py-3 bg-black text-white px-4">Notifications</h3>
-        <ul class="text-sm text-gray-600 space-y-2 p-4">
-          <li>🚨 New alert from HQ</li>
-          <li>📄 Daily incident report ready</li>
-          <li>📅 Fire drill at 3 PM</li>
-          <li>🚨 New alert from HQ</li>
-          <li>📄 Daily incident report ready</li>
-          <li>📅 Fire drill at 3 PM</li>
-        </ul>
-        <span class="bg-black w-full p-2 flex justify-center items-center">
-            <i class="fas fa-plus text-md text-white px-3"></i>
-            View All
-        </span>
-      </div>
-    </div>
-  </div>
+                                    <!-- Scrollable list with images, separators, and close icons -->
+                                    <ul class="text-sm text-gray-600 divide-y divide-gray-200 overflow-y-auto max-h-60">
+                                        <!-- Notification Item -->
+                                        <li class="flex items-center justify-between gap-2 px-4 py-3 w-full">
+                                            <div class="flex items-center gap-3">
+                                                <img src="../images/wildfire.jpg" alt="Zimamoto Logo" class="rounded-full ring-1 ring-gray-400 w-8 h-8" />
+                                                <span> New alert from HQ</span>
+                                            </div>
+                                            <button class="text-gray-400 hover:text-red-500">
+                                                <i class="fas fa-times text-sm"></i>
+                                            </button>
+                                        </li>
+
+                                        <li class="flex items-center justify-between gap-2 px-4 py-3">
+                                            <div class="flex items-center gap-3">
+                                                <img src="../images/artem.jpg" class="w-8 h-8 rounded-full" alt="icon" />
+                                                <span> Daily incident report ready</span>
+                                            </div>
+                                            <button class="text-gray-400 hover:text-red-500">
+                                                <i class="fas fa-times text-sm"></i>
+                                            </button>
+                                        </li>
+
+                                        <li class="flex items-center justify-between gap-2 px-4 py-3">
+                                            <div class="flex items-center gap-3">
+                                                <img src="../images/pixabay.jpg" class="w-8 h-8 rounded-full" alt="icon" />
+                                                <span> Fire drill at 3 PM</span>
+                                            </div>
+                                            <button class="text-gray-400 hover:text-red-500">
+                                                <i class="fas fa-times text-sm"></i>
+                                            </button>
+                                        </li>
+
+                                        <li class="flex items-center justify-between gap-2 px-4 py-3">
+                                            <div class="flex items-center gap-3">
+                                                <img src="../images/shvetsa.jpg" class="w-8 h-8 rounded-full" alt="icon" />
+                                                <span> Another HQ alert</span>
+                                            </div>
+                                            <button class="text-gray-400 hover:text-red-500">
+                                                <i class="fas fa-times text-sm"></i>
+                                            </button>
+                                        </li>
+                                        <li class="flex items-center justify-between gap-2 px-4 py-3">
+                                            <div class="flex items-center gap-3">
+                                                <img src="../images/artem.jpg" class="w-8 h-8 rounded-full" alt="icon" />
+                                                <span> My Recommendation</span>
+                                            </div>
+                                            <button class="text-gray-400 hover:text-red-500">
+                                                <i class="fas fa-times text-sm"></i>
+                                            </button>
+                                        </li>
+                                        <!-- Add more if needed -->
+                                    </ul>
+
+                                    <!-- Footer -->
+                                    <span class="bg-black w-full p-2 flex justify-center items-center cursor-pointer hover:bg-gray-800">
+                                        <i class="fas fa-plus text-md text-white px-3"></i>
+                                        <span class="text-white text-sm">View All</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="relative">
