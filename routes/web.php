@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/reportinservice', [ReportinServiceController::class, 'index'])->name('reportinservice');
     Route::get('/admin/studentbasicfiremanship', [StudentBasicFiremanshipController::class, 'index'])->name('studentbasicfiremanship');
     Route::put('/admin/studentbasicfiremanship/{id}', [StudentBasicFiremanshipController::class, 'update'])->name('students.update');
+    Route::post('/admin/studentbasicfiremanship', [StudentBasicFiremanshipController::class, 'store'])->name('students.store');
+
     Route::get('/admin/studentinservice', [StudentinServiceController::class, 'index'])->name('studentinservice');
     Route::get('admin/profile', [UserManagementController::class, 'profile'])->name('profile');
 });

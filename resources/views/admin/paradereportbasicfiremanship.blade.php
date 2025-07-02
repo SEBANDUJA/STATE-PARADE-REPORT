@@ -5,16 +5,6 @@
 
 @section('content')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Company Parade Report</title>
-    @vite('resources/css/app.css') {{-- Vite for Tailwind --}}
-    <script src="//unpkg.com/alpinejs" defer></script>
-</head>
-<body class="p-10">
-
 <div x-data="paradeApp()" class="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow flex gap-6">
 
     <!-- Left Column: Company Buttons -->
@@ -563,9 +553,6 @@ function paradeApp() {
     }
 }
 </script>
-
-</body>
-</html>
-
+<script src="//unpkg.com/alpinejs" defer></script>
 
 @endsection

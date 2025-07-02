@@ -5,8 +5,6 @@
 @custom-variant dark (&:is(.dark *));
 @source "../views";
 
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
 
 @theme inline {
@@ -172,3 +170,7 @@
 .transition-opacity {
     transition: opacity 0.3s ease-in-out;
 }
+[x-cloak] { display: none !important; }
+
+
+
