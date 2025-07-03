@@ -2,6 +2,7 @@
 @extends('layouts.app')
 
 @section('title', 'Basic Firemanship Report')
+@section('page_title', 'Basic Firemanship Report')
 
 @section('content')
     <div x-data="studentForm()" class="container mx-auto px-4 py-8 relative min-h-screen z-20">

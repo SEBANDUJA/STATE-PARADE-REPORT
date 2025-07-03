@@ -13,10 +13,15 @@
 </head>
 <body class="overflow-x-hidden bg-white">
 
-    <div x-data="{ sidebarCollapsed: false }" class="flex h-screen relative">
+    <div x-data="{ sidebarOpen: true }" class="flex h-screen relative">
 
     <!-- Sidebar -->
-    <div id="sidebar" class="no-print fixed left-0 top-0 h-full bg-orange-500 text-white py-7 px-2 w-72 transform transition-transform duration-300 ease-in-out z-20">
+    <div
+        id="sidebar"
+        :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+        class="no-print fixed left-0 top-0 h-full bg-orange-500 text-white py-7 px-2 w-72 transform transition-transform duration-300 ease-in-out z-20"
+    >
+
         <div class="w-20 h-20 mx-24">
             <img src="{{ asset('images/Fire logo.png') }}" alt="Zimamoto Logo" class="w-full" />
         </div>
@@ -92,14 +97,27 @@
         </div>
 
         <!-- Main Content -->
-        <div id="main-content" class="flex-1 ml-72 transition-all duration-500 ease-in-out">
-        <!-- <headerp-4 flex items-center justify-between relative z-10"> -->
-            <header class="no-print bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 shadow-md p-4 ml-72 flex items-center justify-between z-10 fixed right-0 left-0 top-0">
+        <div
+            id="main-content"
+            :class="sidebarOpen ? 'ml-72' : 'ml-0'"
+            class="flex-1 transition-all duration-300 ease-in-out"
+        >
+
+            <header
+                :class="sidebarOpen ? 'ml-72' : 'ml-0'"
+                class="transition-all duration-300 ease-in-out no-print bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 shadow-md p-4 flex items-center justify-between z-10 fixed right-0 left-0 top-0"
+            >
+
                 <div class="flex items-center space-x-4">
-                    <button id="toggleSidebar" class="text-2xl text-black">
+                    <button @click="sidebarOpen = !sidebarOpen" class="text-2xl text-black">
                         <i class="fas fa-bars cursor-pointer"></i>
                     </button>
-                    <div class="text-2xl font-semibold text-black uppercase text-md">Dashboard</div>
+
+                    <!-- <div class="text-2xl font-semibold text-black uppercase text-md">Dashboard</div> -->
+                    <div class="text-2xl font-semibold text-black uppercase text-md">
+                        @yield('page_title', 'Dashboard')
+                    </div>
+
                 </div>
 
                 <div class="flex items-center space-x-12">
@@ -280,9 +298,6 @@
 
     <!-- Sidebar & Dropdown Scripts -->
     <script>
-        const toggleButton = document.getElementById('toggleSidebar');
-        const sidebar = document.getElementById('sidebar');
-        const mainContent = document.getElementById('main-content');
 
         if (toggleButton) {
             toggleButton.addEventListener('click', () => {
