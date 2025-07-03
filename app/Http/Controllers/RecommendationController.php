@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Recommendation;
+use App\Models\User;
+use App\Notifications\RecommendationNotification;
+use Auth;
 
 class RecommendationController extends Controller
 {
@@ -39,14 +42,14 @@ class RecommendationController extends Controller
             $recommendation->send_to = $request->get('send_to');
             $recommendation->message = $request->get('message');
             $recommendation->audience = $request->audience ? json_encode($request->audience) : null;
+            $recommendation->sent_by = Auth::id();
             $recommendation->save();
 
-                $user = User::where('job_title', $request->send_to)->first(); // or User::find($request->send_to)
+            $user = User::where('job_title', $request->send_to)->first(); // or User::find($request->send_to)
 
-                if ($user) {
-                    $user->notify(new RecommendationNotification($recommendation));
-                }
-    //dd($request->send_to);
+            if ($user) {
+                $user->notify(new RecommendationNotification($recommendation));
+            }
             return redirect()->back()->with('success', 'Recommendation sent successfully!');
             } catch (\Exception $e) {
                 return redirect()->back()->with('fail', 'Something went wrong. Please try again.');

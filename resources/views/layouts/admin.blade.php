@@ -127,62 +127,35 @@
                                 @click.stop
                                 class="absolute right-0 mt-2 w-72 bg-white border border-gray-300 rounded-md shadow-lg z-50"
                             >
-                                <div>
+                                @php
+                                    $userNotifications = Auth::user()->notifications()->latest()->get()->map(function($n) {
+                                            return [
+                                                'receiver' => $n->data['send_to'],
+                                                'sent_by' => $n->data['sent_by'],
+                                                'message' => $n->data['message'],
+                                                'image' => '../images/artem.jpg' // Or pick dynamically if you store sender avatar
+                                            ];
+                                        });
+                                @endphp
+                                <div x-data="notificationList({{ $userNotifications->toJson() }})" class="border rounded shadow">
                                     <!-- Header -->
                                     <h3 class="font-semibold py-3 bg-black text-white px-4">Notifications</h3>
 
-                                    <!-- Scrollable list with images, separators, and close icons -->
+                                    <!-- Scrollable list -->
                                     <ul class="text-sm text-gray-600 divide-y divide-gray-200 overflow-y-auto max-h-60">
-                                        <!-- Notification Item -->
-                                        <li class="flex items-center justify-between gap-2 px-4 py-3 w-full">
-                                            <div class="flex items-center gap-3">
-                                                <img src="../images/wildfire.jpg" alt="Zimamoto Logo" class="rounded-full ring-1 ring-gray-400 w-8 h-8" />
-                                                <span> New alert from HQ</span>
-                                            </div>
-                                            <button class="text-gray-400 hover:text-red-500">
-                                                <i class="fas fa-times text-sm"></i>
-                                            </button>
-                                        </li>
-
-                                        <li class="flex items-center justify-between gap-2 px-4 py-3">
-                                            <div class="flex items-center gap-3">
-                                                <img src="../images/artem.jpg" class="w-8 h-8 rounded-full" alt="icon" />
-                                                <span> Daily incident report ready</span>
-                                            </div>
-                                            <button class="text-gray-400 hover:text-red-500">
-                                                <i class="fas fa-times text-sm"></i>
-                                            </button>
-                                        </li>
-
-                                        <li class="flex items-center justify-between gap-2 px-4 py-3">
-                                            <div class="flex items-center gap-3">
-                                                <img src="../images/pixabay.jpg" class="w-8 h-8 rounded-full" alt="icon" />
-                                                <span> Fire drill at 3 PM</span>
-                                            </div>
-                                            <button class="text-gray-400 hover:text-red-500">
-                                                <i class="fas fa-times text-sm"></i>
-                                            </button>
-                                        </li>
-
-                                        <li class="flex items-center justify-between gap-2 px-4 py-3">
-                                            <div class="flex items-center gap-3">
-                                                <img src="../images/shvetsa.jpg" class="w-8 h-8 rounded-full" alt="icon" />
-                                                <span> Another HQ alert</span>
-                                            </div>
-                                            <button class="text-gray-400 hover:text-red-500">
-                                                <i class="fas fa-times text-sm"></i>
-                                            </button>
-                                        </li>
-                                        <li class="flex items-center justify-between gap-2 px-4 py-3">
-                                            <div class="flex items-center gap-3">
-                                                <img src="../images/artem.jpg" class="w-8 h-8 rounded-full" alt="icon" />
-                                                <span> My Recommendation</span>
-                                            </div>
-                                            <button class="text-gray-400 hover:text-red-500">
-                                                <i class="fas fa-times text-sm"></i>
-                                            </button>
-                                        </li>
-                                        <!-- Add more if needed -->
+                                        <template x-for="(notification, index) in notifications" :key="index">
+                                            <li class="flex items-center justify-between gap-2 px-4 py-3 w-full">
+                                                <div class="flex items-center gap-3">
+                                                    <img :src="notification.image" alt="icon" class="w-8 h-8 rounded-full ring-1 ring-gray-400">
+                                                    <span x-text="notification.message"></span>
+                                                    <span x-text="notification.sent_by"></span>
+                                                    <span x-text="notification.receiver"></span>
+                                                </div>
+                                                <button @click="removeNotification(index)" class="text-gray-400 hover:text-red-500">
+                                                    <i class="fas fa-times text-sm"></i>
+                                                </button>
+                                            </li>
+                                        </template>
                                     </ul>
 
                                     <!-- Footer -->
@@ -191,6 +164,7 @@
                                         <span class="text-white text-sm">View All</span>
                                     </span>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -217,7 +191,7 @@
                                     <span class="font-semibold text-black text-md">
                                     {{ Auth::user()->username }}
                                     </span>
-                                    <span class="text-black text-xs">Chief Officer (C.O)</span>
+                                    <span class="text-black text-xs">{{ Auth::user()->job_title }}</span>
                                 </div>
                             </div>
 
@@ -338,6 +312,31 @@
             });
         });
     </script>
+    <script>
+        function notificationList(initialNotifications) {
+            return {
+                notifications: initialNotifications,
+
+                init() {
+                    document.addEventListener('add-recommendation', () => {
+                        this.addNotification();
+                    });
+                },
+
+                removeNotification(index) {
+                    console.log('Removing notification at index:', index);
+                    this.notifications.splice(index, 1);
+                },
+
+                addNotification() {
+                    const newNotif = { image: '../images/artem.jpg', message: 'New Recommendation Received!' };
+                    console.log('Adding notification:', newNotif);
+                    this.notifications.unshift(newNotif); 
+                }
+            }
+        }
+    </script>
+
 
 </body>
 </html>
