@@ -2,6 +2,7 @@
 @extends('layouts.app')
 
 @section('title', 'Firemanship Report')
+@section('page_title', 'Firemanship Report')
 
 @section('content')
 <div x-data="studentForm()" class="container mx-auto px-4 py-8 relative min-h-screen">
@@ -37,7 +38,7 @@
     <div class="flex justify-end items-center mb-4">
         <button
             @click="openAddForm()"
-            class="h-10 px-4 bg-orange-500 rounded-md text-white hover:bg-blue-600 transition uppercase text-xs flex items-center gap-2 hover:border-2 hover:border-orange-600 hover:bg-white hover:text-black transition-all duration-500 ease-in cursor-pointer"
+            class="h-10 px-4 bg-orange-500 rounded-md text-white uppercase text-xs flex items-center gap-2 hover:border-2 hover:border-orange-600 hover:bg-white hover:text-black transition-all duration-500 ease-in cursor-pointer"
         >
             <i class="fas fa-user-plus text-sm"></i>
             Add Student
