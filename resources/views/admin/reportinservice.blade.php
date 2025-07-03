@@ -3,6 +3,7 @@
 @extends('layouts.app')
 
 @section('title', 'Firemanship Report')
+@section('page_title', 'Firemanship Report')
 
 @section('content')
     @php

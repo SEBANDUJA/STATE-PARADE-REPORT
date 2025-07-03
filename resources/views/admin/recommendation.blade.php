@@ -3,6 +3,7 @@
 @extends('layouts.app')
 
 @section('title', 'Recommendation')
+@section('page_title', 'Recommendation')
 
 @section('content')
    <section class="pt-2">
