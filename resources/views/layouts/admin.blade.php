@@ -106,6 +106,7 @@
             class="flex-1 transition-all duration-300 ease-in-out"
         >
 
+            <!-- Header -->
             <header
                 :class="sidebarOpen ? 'ml-72' : 'ml-0'"
                 class="transition-all duration-300 ease-in-out no-print bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 shadow-md p-4 flex items-center justify-between z-10 fixed right-0 left-0 top-0"
@@ -116,108 +117,84 @@
                         <i class="fas fa-bars cursor-pointer"></i>
                     </button>
 
-                    <!-- <div class="text-2xl font-semibold text-black uppercase text-md">Dashboard</div> -->
                     <div class="text-2xl font-semibold text-black uppercase text-md">
                         @yield('page_title', 'Dashboard')
                     </div>
 
                 </div>
 
-                <div class="flex items-center space-x-12">
-                    <div class="flex flex-row gap-x-5 justify-center items-center">
+                <div class="flex items-center gap-x-4">
+                    <div class="flex flex-row gap-x-2.5 justify-center items-center">
 
+                        <!-- paper-plane icon -->
                         <div class="relative">
                             <button class="text-black">
-                                <i class="fas fa-paper-plane text-2xl"></i>
+                                <i class="fas fa-paper-plane text-2xl cursor-pointer"></i>
                             </button>
                         </div>
+
+                        <!-- Old Bell Icon Dropdown (Remove this) -->
                         <div class="relative" x-data="{ open: false }" @click.outside="open = false">
-                            <!-- Clickable Bell Button -->
-                            <button
-                                @click="open = !open"
-                                class="p-2 rounded-full hover:bg-gray-100 focus:outline-none"
-                                aria-label="Notifications"
-                            >
+                            <!-- Bell Button -->
+                            <button class="p-2 rounded-full focus:outline-none cursor-pointer" aria-label="Notifications">
                                 <i class="fas fa-bell text-2xl text-black"></i>
                             </button>
+                        </div>
 
-                            <!-- Dropdown -->
-                            <div
-                                x-show="open"
-                                x-cloak
-                                @click.stop
-                                class="absolute right-0 mt-2 w-72 bg-white border border-gray-300 rounded-md shadow-lg z-50"
-                            >
-                                <div>
-                                    <!-- Header -->
-                                    <h3 class="font-semibold py-3 bg-black text-white px-4">Notifications</h3>
+                        <!-- New Bell Icon Dropdown (Leave this) -->
+                        <div class="relative">
+                            <!-- User Menu Button -->
+                            <button id="userMenuButton" class="text-black flex items-center space-x-2 focus:outline-none cursor-pointer">
+                                <div class="relative">
+                                    <i class="fas fa-bell text-2xl text-black"></i>
+                                </div>
+                            </button>
 
-                                    <!-- Scrollable list with images, separators, and close icons -->
-                                    <ul class="text-sm text-gray-600 divide-y divide-gray-200 overflow-y-auto max-h-60">
-                                        <!-- Notification Item -->
-                                        <li class="flex items-center justify-between gap-2 px-4 py-3 w-full">
-                                            <div class="flex items-center gap-3">
-                                                <img src="../images/wildfire.jpg" alt="Zimamoto Logo" class="rounded-full ring-1 ring-gray-400 w-8 h-8" />
-                                                <span> New alert from HQ</span>
-                                            </div>
-                                            <button class="text-gray-400 hover:text-red-500">
-                                                <i class="fas fa-times text-sm"></i>
-                                            </button>
-                                        </li>
+                            <!-- Person Dropdown -->
+                            <div id="userDropdown" class="hidden absolute right-full mt-2 -ml-4 w-[20rem] bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                                <!-- Header -->
+                                <div class="w-full bg-black py-4 px-4 text-white font-medium">
+                                    <span>Notification</span>
+                                </div>
 
-                                        <li class="flex items-center justify-between gap-2 px-4 py-3">
-                                            <div class="flex items-center gap-3">
-                                                <img src="../images/artem.jpg" class="w-8 h-8 rounded-full" alt="icon" />
-                                                <span> Daily incident report ready</span>
-                                            </div>
-                                            <button class="text-gray-400 hover:text-red-500">
-                                                <i class="fas fa-times text-sm"></i>
-                                            </button>
-                                        </li>
+                                <!-- Body -->
+                                <div class="px-4 py-2 space-y-2">
+                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                        <i class="fas fa-user text-gray-500"></i>Hey i am on way
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                        <i class="fas fa-user text-gray-500"></i> Please help
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                        <i class="fas fa-user text-gray-500"></i> Why too much number of permission
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                        <i class="fas fa-user text-gray-500"></i> Profile Details
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                        <i class="fas fa-user text-gray-500"></i> Profile Details
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                        <i class="fas fa-user text-gray-500"></i> Profile Details
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                        <i class="fas fa-user text-gray-500"></i> Profile Details
+                                    </a>
+                                </div>
 
-                                        <li class="flex items-center justify-between gap-2 px-4 py-3">
-                                            <div class="flex items-center gap-3">
-                                                <img src="../images/pixabay.jpg" class="w-8 h-8 rounded-full" alt="icon" />
-                                                <span> Fire drill at 3 PM</span>
-                                            </div>
-                                            <button class="text-gray-400 hover:text-red-500">
-                                                <i class="fas fa-times text-sm"></i>
-                                            </button>
-                                        </li>
-
-                                        <li class="flex items-center justify-between gap-2 px-4 py-3">
-                                            <div class="flex items-center gap-3">
-                                                <img src="../images/shvetsa.jpg" class="w-8 h-8 rounded-full" alt="icon" />
-                                                <span> Another HQ alert</span>
-                                            </div>
-                                            <button class="text-gray-400 hover:text-red-500">
-                                                <i class="fas fa-times text-sm"></i>
-                                            </button>
-                                        </li>
-                                        <li class="flex items-center justify-between gap-2 px-4 py-3">
-                                            <div class="flex items-center gap-3">
-                                                <img src="../images/artem.jpg" class="w-8 h-8 rounded-full" alt="icon" />
-                                                <span> My Recommendation</span>
-                                            </div>
-                                            <button class="text-gray-400 hover:text-red-500">
-                                                <i class="fas fa-times text-sm"></i>
-                                            </button>
-                                        </li>
-                                        <!-- Add more if needed -->
-                                    </ul>
-
-                                    <!-- Footer -->
-                                    <span class="bg-black w-full p-2 flex justify-center items-center cursor-pointer hover:bg-gray-800">
-                                        <i class="fas fa-plus text-md text-white px-3"></i>
-                                        <span class="text-white text-sm">View All</span>
-                                    </span>
+                                <!-- Footer -->
+                                <div class="flex items-center gap-2 py-3 px-4 text-md bg-black text-white cursor-pointer">
+                                    <i class="fas fa-plus"></i>
+                                    <span>View All</span>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
-                    <!-- person dropdown -->
+                    <!-- Person images dropdown -->
                     <div class="relative">
+
                         <!-- User Menu Button -->
                         <button id="userMenuButton" class="text-black flex items-center space-x-2 focus:outline-none cursor-pointer">
                             <div class="relative">
@@ -231,7 +208,7 @@
                             </span>
                         </button>
 
-                        <!-- Dropdown -->
+                        <!-- Person Dropdown -->
                         <div id="userDropdown" class="hidden absolute right-0 top-full mt-2 w-fit bg-white border border-gray-200 rounded-md shadow-lg py-4 z-50">
                             <div class="flex flex-row justify-start items-center gap-x-6 w-full px-5">
                                 <div class="w-16">
@@ -251,11 +228,11 @@
                                 <a href="{{ route('profile') }}" class="flex items-center gap-2 py-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
                                     <i class="fas fa-user text-gray-500"></i> Profile Details
                                 </a>
-                                <a href="{{ route('profile') }}" class="flex items-center gap-2 py-2 text-md text-gray-700 hover:bg-gray-100">
-                                    <i class="fas fa-bell text-gray-500"></i> Notification
-                                </a>
                                 <a href="{{ route('profile') }}" class="flex items-center gap-2 py-2 text-md text-gray-700 hover:bg-gray-100 w-full">
                                     <i class="fas fa-key text-gray-500"></i> Change Password
+                                </a>
+                                <a href="{{ route('profile') }}" class="flex items-center gap-2 py-2 text-md text-gray-700 hover:bg-gray-100 w-full">
+                                    <i class="fas fa-cog text-gray-500"></i> Settings
                                 </a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -265,6 +242,7 @@
                                 </form>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
@@ -325,6 +303,7 @@
             }
         }
 
+        // person image dropdown
         document.addEventListener("DOMContentLoaded", function() {
             const accordionButtons = document.querySelectorAll(".relative > button");
 
@@ -344,20 +323,7 @@
         });
 
         // Notification icon
-        document.addEventListener("DOMContentLoaded", function () {
-            const bellButton = document.getElementById("bellButton");
-            const notificationDropdown = document.getElementById("notificationDropdown");
 
-            bellButton.addEventListener("click", function (e) {
-                e.stopPropagation(); // Prevent clicking from closing it immediately
-                notificationDropdown.classList.toggle("hidden");
-            });
-
-            // Hide dropdown when clicking outside
-            document.addEventListener("click", function () {
-                notificationDropdown.classList.add("hidden");
-            });
-        });
     </script>
 
 </body>
