@@ -82,13 +82,37 @@ class StudentBasicFiremanshipController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-            $student = Student::findOrFail($id);
-            $student->update($request->all());
+        $student = Student::findOrFail($id);
+        
+        $student->name = $request->name;
+        $student->gender = $request->gender;
+        $student->company = $request->company;
+        $student->s_id = $request->company_no;
 
-            return redirect()->back()->with('success', 'Student updated successfully');
+        // Boolean checkboxes
+        $student->absent = $request->has('absent');
+        $student->ed = $request->has('ed');
+        $student->sick_in = $request->has('sick_in');
+        $student->sick_out = $request->has('sick_out');
+        $student->ld = $request->has('ld');
+        $student->permission = $request->has('permission');
+        $student->centry = $request->has('centry');
+        $student->special_duty = $request->has('special_duty');
+        $student->pass = $request->has('pass');
+        $student->guard = $request->has('guard');
+
+        // if ($request->hasFile('photo')) {
+        //     $photoPath = $request->file('photo')->store('students', 'public');
+        //     $student->photo = $photoPath;
+        // }
+
+        $student->update();
+
+        return redirect()->back()->with('success', 'Student updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -40,6 +40,12 @@ class RecommendationController extends Controller
             $recommendation->message = $request->get('message');
             $recommendation->audience = $request->audience ? json_encode($request->audience) : null;
             $recommendation->save();
+
+                $user = User::where('job_title', $request->send_to)->first(); // or User::find($request->send_to)
+
+                if ($user) {
+                    $user->notify(new RecommendationNotification($recommendation));
+                }
     //dd($request->send_to);
             return redirect()->back()->with('success', 'Recommendation sent successfully!');
             } catch (\Exception $e) {
