@@ -21,9 +21,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/admin/reportbasicfiremanship', [ReportBasicFiremanship::class, 'index'])->name('reportbasicfiremanship');
     Route::get('/admin/reportinservice', [ReportinServiceController::class, 'index'])->name('reportinservice');
+    //students
     Route::get('/admin/studentbasicfiremanship', [StudentBasicFiremanshipController::class, 'index'])->name('studentbasicfiremanship');
     Route::put('/admin/studentbasicfiremanship/{id}', [StudentBasicFiremanshipController::class, 'update'])->name('students.update');
     Route::post('/admin/studentbasicfiremanship', [StudentBasicFiremanshipController::class, 'store'])->name('students.store');
+    Route::delete('/admin/studentbasicfiremanship/{id}', [StudentBasicFiremanshipController::class, 'destroy'])->name('students.delete');
 
     Route::get('/admin/studentinservice', [StudentinServiceController::class, 'index'])->name('studentinservice');
     Route::get('admin/profile', [UserManagementController::class, 'profile'])->name('profile');
@@ -37,7 +39,9 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/admin/studentbasicfiremanship/{id}', [StudentBasicFiremanshipController::class, 'destroy'])->name('students.destroy');
         Route::post('/admin/recommendation', [RecommendationController::class, 'store'])->name('recommendation.store');
         Route::get('/admin/recommendation', [RecommendationController::class, 'index'])->name('recommendation');
+        //User
         Route::get('/admin/usermanagement', [UserManagementController::class, 'index'])->name('usermanager');
+        Route::post('/admin/usermanagement', [UserManagementController::class, 'store'])->name('user.store');
     });
 });
 

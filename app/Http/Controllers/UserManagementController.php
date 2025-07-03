@@ -45,7 +45,33 @@ class UserManagementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string',
+            'email' => 'required|string|email',
+            'job_title' => 'required|string|max:50',
+            'role' => 'required|string|max:50',
+            'gender' => 'required|string|max:50',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $data = [
+            'name' => $request->input('name'),
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'job_title' => $request->input('job_title'),
+            'role' => $request->input('role'),
+            'gender' => $request->input('gender'),
+            
+        ];
+        
+        if ($request->hasFile('photo')) {
+            $data['photo'] = $request->file('photo')->store('students', 'public');
+        }
+        
+        User::create($data);
+        
+        return redirect()->back()->with('success', 'Student added successfully.');
     }
 
     /**
