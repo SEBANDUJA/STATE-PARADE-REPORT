@@ -26,7 +26,7 @@
 
          <!-- Message Form -->
          <div class="grid grid-cols-2 justify-items-between items-center gap-x-8 py-10 w-full">
-            <form class="w-full shadow-md py-8 px-4 p-4 mt-10" action="{{ route('recommendation.store') }}" method="POST">
+            <form class="w-full shadow-md p-4 mt-10" action="{{ route('recommendation.store') }}" method="POST">
                @csrf
                <div class="w-full">
                   <label for="message" class="text-sm font-semibold">Your Message:</label><br>
@@ -73,7 +73,6 @@
                               <span class="text-gray-500">{{ $recommendation->message }}</span>
                            </div>
                         </div>
-
                         <div class="flex flex-row gap-x-4 justify-items-end items-center">
                            <div>
                               <div>
@@ -101,18 +100,3 @@
 
    </section>
 @endsection
-<script>
-   function confirmDelete(id) {
-        swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this item!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true
-        }).then(function(willDelete){
-            if (willDelete) {
-             $('form#item-delete-'+id).submit();
-            }
-        });
-    }
-</script>

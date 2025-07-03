@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Student;
+use Illuminate\Support\Str;
 
 class ResetStudentFlags extends Command
 {
@@ -22,6 +23,10 @@ class ResetStudentFlags extends Command
             'special_duty' => 0,
             'pass' => 0,
             'guard' => 0,
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         $this->info('Student flags have been reset to 0.');

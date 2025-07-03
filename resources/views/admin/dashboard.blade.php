@@ -7,59 +7,34 @@
 
 @section('content')
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
 <!-- Summary cards -->
-<section class="grid grid-cols-4 justify-center place-items-center w-full mb-10">
-    <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-8 aspect-video">
-        <div><i class="bi bi-people-fill text-orange-500 text-5xl"></i></div>
-        <div class="flex flex-col gap-y-2">
-            <span class="text-md uppercase font-semibold">Total students</span>
-            <div class="flex justify-center items-center space-x-4">
-                <div>
-                    <span class="text-xs">Basic</span>
-                    <span class="text-xl font-semibold flex justify-center">{{ $students_count }}</span>
-                </div>
-                <div class="h-8 border-l-2 border-gray-400"></div>
-                <div>
-                    <span class="text-xs">In Service</span>
-                    <span class="text-xl font-semibold text-center flex justify-center">{{ $students_count }}</span>
-                </div>
-            </div>
+<section class="grid grid-cols-4 gap-4 w-full mb-10">
+    <div class="flex items-center gap-x-6 shadow-md p-6">
+        <i class="bi bi-people-fill text-orange-500 text-4xl"></i>
+        <div>
+            <div class="text-sm uppercase font-semibold">Total Students</div>
+            <div class="text-xl font-bold">{{ $students_count }}</div>
         </div>
     </div>
-
-    <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10 aspect-video">
-        <div><i class="bi bi-journal-bookmark-fill text-orange-500 text-5xl"></i></div>
-        <div class="flex flex-col gap-y-2">
-            <span class="text-md uppercase font-semibold">Permission</span>
-            <div class="flex justify-center items-center space-x-4">
-                <div>
-                    <span class="text-xs">Basic</span>
-                    <span class="text-xl font-semibold flex justify-center">13</span>
-                </div>
-                <div class="h-8 border-l-2 border-gray-400"></div>
-                <div>
-                    <span class="text-xs">In Service</span>
-                    <span class="text-xl font-semibold text-center flex justify-center">03</span>
-                </div>
-            </div>
+    <div class="flex items-center gap-x-6 shadow-md p-6">
+        <i class="bi bi-journal-bookmark-fill text-orange-500 text-4xl"></i>
+        <div>
+            <div class="text-sm uppercase font-semibold">Permission</div>
+            <div class="text-xl font-bold">13</div>
         </div>
     </div>
-
-    <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10 aspect-video">
-        <div><i class="bi bi-person-fill text-orange-500 text-5xl"></i></div>
-        <div class="flex flex-col gap-y-2 font-semibold">
-            <span class="text-md uppercase font-semibold">Total users</span>
-            <span class="text-xl flex justify-center">{{ $users_count }}</span>
+    <div class="flex items-center gap-x-6 shadow-md p-6">
+        <i class="bi bi-person-fill text-orange-500 text-4xl"></i>
+        <div>
+            <div class="text-sm uppercase font-semibold">Total Users</div>
+            <div class="text-xl font-bold">{{ $users_count }}</div>
         </div>
     </div>
-
-    <div class="flex flex-row justify-start items-center gap-x-6 shadow-md w-full p-10 aspect-video">
-        <div><i class="bi bi-book text-orange-500 text-5xl"></i></div>
-        <div class="flex flex-col gap-y-2 font-semibold">
-            <span class="text-md uppercase font-semibold">Total Course</span>
-            <span class="text-xl flex justify-center">2</span>
+    <div class="flex items-center gap-x-6 shadow-md p-6">
+        <i class="bi bi-book text-orange-500 text-4xl"></i>
+        <div>
+            <div class="text-sm uppercase font-semibold">Total Course</div>
+            <div class="text-xl font-bold">2</div>
         </div>
     </div>
 </section>
@@ -76,27 +51,33 @@
     </div>
 </section>
 
-<!-- Graphs side-by-side -->
-<section class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
+<!-- Graphs side by side -->
+<section class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4 mb-10">
     <!-- Line Chart -->
-    <div class="bg-white shadow rounded p-4">
-        <h3 class="text-center font-semibold mb-4">ED / Absent / Sick Out</h3>
+    <div class="bg-white shadow rounded p-6">
+        <h3 class="text-center font-semibold mb-4">Line Chart: ED / Absent / Sick Out</h3>
         <canvas id="trendChart" class="w-full h-64"></canvas>
     </div>
 
-    <!-- Bar Chart -->
-    <div class="bg-white shadow rounded p-4">
-        <h3 class="text-center font-semibold mb-4">ED Totals by Day</h3>
-        <canvas id="barChart" class="w-full h-64"></canvas>
+    <!-- Grouped Bar Chart -->
+    <div class="bg-white shadow rounded p-6">
+        <h3 class="text-center font-semibold mb-4">Grouped Bar Chart</h3>
+        <canvas id="groupedBarChart" class="w-full h-64"></canvas>
     </div>
 </section>
 
-<!-- Chart.js CDN -->
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- Chart rendering -->
 <script>
-    // Helper: format day suffix (1st, 2nd, 3rd, 4th...)
+    const rawDates = {!! json_encode($dates) !!};
+    const edData = {!! json_encode(array_values($edCounts->toArray())) !!};
+    const absentData = {!! json_encode(array_values($absentCounts->toArray())) !!};
+    const sickOutData = {!! json_encode(array_values($sickOutCounts->toArray())) !!};
+    const sickInData = {!! json_encode(array_values($sickInCounts->toArray())) !!};
+    const permissionData = {!! json_encode(array_values($permissionCounts->toArray())) !!};
+
+    // Helper: format like 21st, 22nd etc.
     function formatDayLabel(dateString) {
         const day = new Date(dateString).getDate();
         const suffix = (d) => {
@@ -111,24 +92,18 @@
         return `${day}${suffix(day)}`;
     }
 
-    const rawDates = {!! json_encode($dates) !!};
     const labels = rawDates.map(date => formatDayLabel(date));
 
-    const edData = {!! json_encode($edCounts) !!};
-    const absentData = {!! json_encode($absentCounts) !!};
-    const sickOutData = {!! json_encode($sickOutCounts) !!};
-
     // Line Chart
-    const trendCtx = document.getElementById('trendChart').getContext('2d');
-    new Chart(trendCtx, {
+    new Chart(document.getElementById('trendChart'), {
         type: 'line',
         data: {
-            labels: labels,
+            labels,
             datasets: [
                 {
                     label: 'ED',
                     data: edData,
-                    borderColor: '#1D4ED8',
+                    borderColor: '#FB923C',
                     backgroundColor: 'transparent',
                     tension: 0.4
                 },
@@ -142,7 +117,7 @@
                 {
                     label: 'Sick Out',
                     data: sickOutData,
-                    borderColor: '#EAB308',
+                    borderColor: '#3B82F6',
                     backgroundColor: 'transparent',
                     tension: 0.4
                 }
@@ -150,9 +125,12 @@
         },
         options: {
             responsive: true,
+            animation: {
+                duration: 1200,
+                easing: 'easeOutCubic'
+            },
             plugins: {
-                title: { display: false },
-                legend: { display: true, position: 'bottom' }
+                legend: { position: 'bottom' }
             },
             scales: {
                 x: {
@@ -174,23 +152,46 @@
         }
     });
 
-    // Bar Chart
-    const barCtx = document.getElementById('barChart').getContext('2d');
-    new Chart(barCtx, {
+    // Bar Chart with Animation
+    new Chart(document.getElementById('groupedBarChart'), {
         type: 'bar',
         data: {
-            labels: labels,
-            datasets: [{
-                label: 'ED Count',
-                data: edData,
-                backgroundColor: '#EA580C'
-            }]
+            labels,
+            datasets: [
+                {
+                    label: 'ED',
+                    data: edData,
+                    backgroundColor: '#FB923C',
+                    maxBarThickness: 18
+                },
+                {
+                    label: 'Sick In',
+                    data: sickInData,
+                    backgroundColor: '#22C55E',
+                    maxBarThickness: 18
+                },
+                {
+                    label: 'Sick Out',
+                    data: sickOutData,
+                    backgroundColor: '#FACC15',
+                    maxBarThickness: 18
+                },
+                {
+                    label: 'Permission',
+                    data: permissionData,
+                    backgroundColor: '#6366F1',
+                    maxBarThickness: 18
+                }
+            ]
         },
         options: {
             responsive: true,
+            animation: {
+                duration: 1200,
+                easing: 'easeOutBounce'
+            },
             plugins: {
-                title: { display: false },
-                legend: { display: false }
+                legend: { position: 'bottom' }
             },
             scales: {
                 x: {
@@ -198,7 +199,9 @@
                         display: true,
                         text: 'Date',
                         font: { weight: 'bold' }
-                    }
+                    },
+                    barPercentage: 0.6,
+                    categoryPercentage: 0.5
                 },
                 y: {
                     beginAtZero: true,
@@ -214,4 +217,14 @@
 </script>
 
 @endsection
+
+
+
+
+
+
+
+
+
+
 

@@ -5,52 +5,53 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\DailyTotal;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
-    /**
-     * Display a listing of the resource.
+     * Display the dashboard with charts using daily_totals table.
      */
     public function index(Request $request)
     {
-    $students_count = Student::count();
-    $users_count = User::count();
+        $students_count = Student::count();
+        $users_count = User::count();
 
-    $month = $request->get('month', now()->format('Y-m'));
-    [$year, $monthNum] = explode('-', $month);
+        // Get selected month or use current
+        $month = $request->get('month', now()->format('Y-m'));
+        [$year, $monthNum] = explode('-', $month);
 
-    $trendData = Student::selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d') as date,
-            SUM(ed) as ed_count,
-            SUM(absent) as absent_count,
-            SUM(sick_out) as sick_out_count")
-        ->whereYear('created_at', $year)
-        ->whereMonth('created_at', $monthNum)
-        ->groupBy('date')
-        ->orderBy('date', 'asc')
-        ->get();
+        // Get data from daily_totals for visualization
+        $trendData = DailyTotal::selectRaw('
+                report_date as date,
+                ed,
+                absent,
+                sick_out,
+                sick_in,
+                permission
+            ')
+            ->whereYear('report_date', $year)
+            ->whereMonth('report_date', $monthNum)
+            ->orderBy('report_date')
+            ->get();
 
-    return view('admin.dashboard', [
-        'students_count' => $students_count,
-        'users_count' => $users_count,
-        'dates' => $trendData->pluck('date'),
-        'edCounts' => $trendData->pluck('ed_count'),
-        'absentCounts' => $trendData->pluck('absent_count'),
-        'sickOutCounts' => $trendData->pluck('sick_out_count'),
-        'selectedMonth' => $month,
-    ]);
+        return view('admin.dashboard', [
+            'students_count' => $students_count,
+            'users_count' => $users_count,
+            'dates' => $trendData->pluck('date'),
+            'edCounts' => $trendData->pluck('ed'),
+            'absentCounts' => $trendData->pluck('absent'),
+            'sickOutCounts' => $trendData->pluck('sick_out'),
+            'sickInCounts' => $trendData->pluck('sick_in'),
+            'permissionCounts' => $trendData->pluck('permission'),
+            'selectedMonth' => $month,
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the welcome page.
      */
-
     public function showWelcomePage()
     {
         return view('welcome');
