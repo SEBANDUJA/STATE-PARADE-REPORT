@@ -132,61 +132,63 @@
                                 <i class="fas fa-paper-plane text-2xl cursor-pointer"></i>
                             </button>
                         </div>
-
-                        <!-- Old Bell Icon Dropdown (Remove this) -->
-                        <div class="relative" x-data="{ open: false }" @click.outside="open = false">
-                            <!-- Bell Button -->
-                            <button class="p-2 rounded-full focus:outline-none cursor-pointer" aria-label="Notifications">
-                                <i class="fas fa-bell text-2xl text-black"></i>
-                            </button>
-                        </div>
-
+                                @php
+                                    $userNotifications = Auth::user()->notifications()->latest()->get()->map(function($n) {
+                                            return [
+                                                'receiver' => $n->data['send_to'],
+                                                'sent_by' => $n->data['sent_by'],
+                                                'message' => $n->data['message'],
+                                                'image' => '../images/artem.jpg' // Or pick dynamically if you store sender avatar
+                                            ];
+                                        });
+                                @endphp
                         <!-- New Bell Icon Dropdown (Leave this) -->
-                        <div class="relative">
-                            <!-- User Menu Button -->
-                            <button id="userMenuButton" class="text-black flex items-center space-x-2 focus:outline-none cursor-pointer">
-                                <div class="relative">
-                                    <i class="fas fa-bell text-2xl text-black"></i>
-                                </div>
-                            </button>
-
+                        <div x-data="notificationList({{ $userNotifications->toJson() }})" class="relative">                            
+                                <!-- User Menu Button -->
+                                <button id="userMenuButton" class="text-black flex items-center space-x-2 focus:outline-none cursor-pointer">
+                                    <div class="relative">
+                                        <i class="fas fa-bell text-2xl text-black"></i>
+                                        <!-- Badge -->
+                                        <span 
+                                            x-show="notifications.length > 0" 
+                                            x-text="notifications.length" 
+                                            class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                                        ></span>
+                                    </div>
+                                </button>
+                            
                             <!-- Person Dropdown -->
                             <div id="userDropdown" class="hidden absolute right-full mt-2 -ml-4 w-[20rem] bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                                <!-- Header -->
-                                <div class="w-full bg-black py-4 px-4 text-white font-medium">
-                                    <span>Notification</span>
+
+                                <div class="border rounded shadow">
+                                    <!-- Header -->
+                                    <h3 class="font-semibold py-3 bg-black text-white px-4">Notifications</h3>
+
+                                    <!-- Scrollable list -->
+                                    <ul class="text-sm text-gray-600 divide-y divide-gray-200 overflow-y-auto max-h-60">
+                                        
+                                        <template x-for="(notification, index) in notifications" :key="index">   
+                                            <li class="flex items-center justify-between gap-2 px-4 py-3 w-full">
+                                                <div class="flex items-center gap-3">
+                                                    <img :src="notification.image" alt="icon" class="w-8 h-8 rounded-full ring-1 ring-gray-400">
+                                                    <span x-text="notification.message"></span>
+                                                    <!-- <span x-text="notification.sent_by"></span>
+                                                    <span x-text="notification.receiver"></span> -->
+                                                </div>
+                                                <button @click="removeNotification(index)" class="text-gray-400 hover:text-red-500">
+                                                    <i class="fas fa-times text-sm"></i>
+                                                </button>
+                                            </li>
+                                        </template>
+                                    </ul>
+
+                                    <!-- Footer -->
+                                    <span class="bg-black w-full p-2 flex justify-center items-center cursor-pointer hover:bg-gray-800">
+                                        <i class="fas fa-plus text-md text-white px-3"></i>
+                                        <span class="text-white text-sm">View All</span>
+                                    </span>
                                 </div>
 
-                                <!-- Body -->
-                                <div class="px-4 py-2 space-y-2">
-                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
-                                        <i class="fas fa-user text-gray-500"></i>Hey i am on way
-                                    </a>
-                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
-                                        <i class="fas fa-user text-gray-500"></i> Please help
-                                    </a>
-                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
-                                        <i class="fas fa-user text-gray-500"></i> Why too much number of permission
-                                    </a>
-                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
-                                        <i class="fas fa-user text-gray-500"></i> Profile Details
-                                    </a>
-                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
-                                        <i class="fas fa-user text-gray-500"></i> Profile Details
-                                    </a>
-                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
-                                        <i class="fas fa-user text-gray-500"></i> Profile Details
-                                    </a>
-                                    <a href="#" class="flex items-center gap-2 text-md text-gray-700 hover:bg-gray-100 cursor-pointer">
-                                        <i class="fas fa-user text-gray-500"></i> Profile Details
-                                    </a>
-                                </div>
-
-                                <!-- Footer -->
-                                <div class="flex items-center gap-2 py-3 px-4 text-md bg-black text-white cursor-pointer">
-                                    <i class="fas fa-plus"></i>
-                                    <span>View All</span>
-                                </div>
                             </div>
                         </div>
 
@@ -218,7 +220,7 @@
                                     <span class="font-semibold text-black text-md">
                                         {{ Auth::user()->username }}
                                     </span>
-                                    <span class="text-black text-xs">Chief Officer (C.O)</span>
+                                    <span class="text-black text-xs">{{ Auth::user()->job_title }}</span>
                                 </div>
                             </div>
 
@@ -325,6 +327,32 @@
         // Notification icon
 
     </script>
+
+    <script>
+        function notificationList(initialNotifications) {
+            return {
+                notifications: initialNotifications,
+
+                init() {
+                    document.addEventListener('add-recommendation', () => {
+                        this.addNotification();
+                    });
+                },
+
+                removeNotification(index) {
+                    console.log('Removing notification at index:', index);
+                    this.notifications.splice(index, 1);
+                },
+
+                addNotification() {
+                    const newNotif = { image: '../images/artem.jpg', message: 'New Recommendation Received!' };
+                    console.log('Adding notification:', newNotif);
+                    this.notifications.unshift(newNotif); 
+                }
+            }
+        }
+    </script>
+
 
 </body>
 </html>
