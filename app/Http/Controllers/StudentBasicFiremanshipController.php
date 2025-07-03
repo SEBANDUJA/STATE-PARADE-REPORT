@@ -30,39 +30,32 @@ class StudentBasicFiremanshipController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
+        $request->validate([
+            's_name' => 'required|string|max:255',
             'gender' => 'required|string',
-            'company' => 'nullable|string|max:255',
-            'company_no' => 'required|string'
+            'company' => 'required|string',
+            's_id' => 'required|string|unique:students|max:50',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput()->with('fail', 'Failed to send recommendation.');
+        $data = [
+            's_id' => $request->input('s_id'),
+            'name' => $request->input('s_name'),
+            'gender' => $request->input('gender'),
+            'company' => $request->input('company'),
+            
+        ];
+        
+        if ($request->hasFile('photo')) {
+            $data['photo'] = $request->file('photo')->store('students', 'public');
         }
-        try {
-            $student = new Student();
-            $student->name = $request->get('name');
-            $student->gender = $request->get('gender');
-            $student->company = $request->get('company');
-            $student->s_id = $request->get('company_no');
-
-            // Handle the file upload
-            // if ($request->hasFile('photo')) {
-            //     $file = $request->file('photo');
-            //     // $file = Image::make($file)->resize(300, 300);
-            //     $fileName = time() . '_' . $file->getClientOriginalName();
-            //     $file->move(public_path('uploads/products'), $fileName); // Move the file to a public directory
-            //     $product->p_fphoto = json_encode($fileName);
-            //  }
-
-            $student->save();
-
-            return redirect()->back()->with('success', __('Student Informations has been created successful '));
-        }catch (\Exception $e) {
-                return redirect()->back()->with('fail', 'Something went wrong. Please try again.');
-            }
+        
+        Student::create($data);
+        
+        return redirect()->back()->with('success', 'Student added successfully.');
     }
+
+
     /**
      * Display the specified resource.
      */
@@ -119,9 +112,10 @@ class StudentBasicFiremanshipController extends Controller
      */
     public function destroy(string $id)
     {
-            $student = Student::findOrFail($id);
-            $student->delete();
-
-            return response()->json(['message' => 'Student deleted successfully']);
+        $student = Student::findOrFail($id);
+        $student->delete();
+        
+        return response()->json(['message' => 'Student deleted successfully']);
     }
+
 }
