@@ -180,7 +180,7 @@ function studentForm() {
 
         deleteStudent(id) {
             if (confirm('Are you sure you want to delete this student?')) {
-                fetch(`/students/${id}`, {
+                fetch(`/admin/studentbasicfiremanship/${id}`, {
                     method: 'DELETE',
                     headers: {
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
