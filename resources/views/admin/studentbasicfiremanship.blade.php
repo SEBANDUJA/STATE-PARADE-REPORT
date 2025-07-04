@@ -34,10 +34,11 @@
             <h2 class="text-lg font-semibold mb-4" x-text="formMode === 'add' ? 'Add Student' : 'Edit Student'"></h2>
 
             <form
-                :action="formMode === 'add' ? '{{ route('students.store') }}' : '{{ route('students.update', ['id' => 'STUDENT_ID']) }}'.replace('STUDENT_ID', student.id)"
+                x-ref="form"
                 method="POST"
                 enctype="multipart/form-data"
                 class="space-y-4"
+                @submit.prevent="submitForm"
             >
                 @csrf
                 <template x-if="formMode === 'edit'">
@@ -47,7 +48,7 @@
                 <!-- Student Name -->
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700">Student Name</label>
-                    <input type="text" id="name" name="name" x-model="student.name"
+                    <input type="text" id="s_name" name="s_name" x-model="student.name"
                         class="w-full border rounded px-3 py-2" required>
                 </div>
 
@@ -91,12 +92,8 @@
 
                 <!-- Buttons -->
                 <div class="flex justify-end gap-2 pt-4">
-                    <button type="button" @click="closeForm()" class="px-4 py-2 bg-gray-300 rounded">
-                        Cancel
-                    </button>
-                    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">
-                        Save
-                    </button>
+                    <button type="button" @click="closeForm()" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">Save</button>
                 </div>
             </form>
         </div>
@@ -176,6 +173,15 @@ function studentForm() {
 
         closeForm() {
             this.showForm = false;
+        },
+
+        submitForm() {
+            const form = this.$refs.form;
+            const action = this.formMode === 'add'
+                ? '{{ route('students.store') }}'
+                : `{{ url('/admin/studentbasicfiremanship') }}/${this.student.id}`;
+            form.setAttribute('action', action);
+            form.submit();
         },
 
         deleteStudent(id) {

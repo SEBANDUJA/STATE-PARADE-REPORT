@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+
 
 class StudentBasicFiremanshipController extends Controller
 {
@@ -79,10 +82,10 @@ class StudentBasicFiremanshipController extends Controller
     {
         $student = Student::findOrFail($id);
         
-        $student->name = $request->name;
+        $student->name = $request->s_name;
         $student->gender = $request->gender;
         $student->company = $request->company;
-        $student->s_id = $request->company_no;
+        $student->s_id = $request->s_id;
 
         // Boolean checkboxes
         $student->absent = $request->has('absent');

@@ -49,6 +49,7 @@ class UserManagementController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|string',
             'email' => 'required|string|email',
+            'password' => 'required|string|max:50',
             'job_title' => 'required|string|max:50',
             'role' => 'required|string|max:50',
             'gender' => 'required|string|max:50',
@@ -59,6 +60,7 @@ class UserManagementController extends Controller
             'name' => $request->input('name'),
             'username' => $request->input('username'),
             'email' => $request->input('email'),
+            'password' => $request->input('password'),
             'job_title' => $request->input('job_title'),
             'role' => $request->input('role'),
             'gender' => $request->input('gender'),
@@ -71,7 +73,7 @@ class UserManagementController extends Controller
         
         User::create($data);
         
-        return redirect()->back()->with('success', 'Student added successfully.');
+        return redirect()->back()->with('success', 'User added successfully.');
     }
 
     /**
@@ -95,14 +97,51 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string',
+            'email' => 'required|string|email',
+            'job_title' => 'required|string|max:50',
+            'role' => 'required|string|max:50',
+            'gender' => 'required|string|max:50',
+            'password' => 'nullable|string|max:50',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+        
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->job_title = $request->job_title;
+        $user->role = $request->role;
+        $user->gender = $request->gender;
+        
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
+        
+        if ($request->hasFile('photo')) {
+            $user->photo = $request->file('photo')->store('users', 'public');
+        }
+        
+        $user->save();
+        
+        return redirect()->back()->with('success', 'User updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return response()->json(['success' => true, 'message' => 'User deleted successfully.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete user.'], 500);
+        }
     }
+
 }
