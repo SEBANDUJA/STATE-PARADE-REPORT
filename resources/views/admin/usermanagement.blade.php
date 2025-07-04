@@ -2,7 +2,6 @@
 @extends('layouts.app')
 
 @section('title', 'Firemanship Report')
-@section('page_title', 'user management')
 
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
