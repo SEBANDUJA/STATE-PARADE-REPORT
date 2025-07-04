@@ -58,42 +58,38 @@
 
             <!-- Recent Messages -->
             <div class="w-full shadow-md py-8 px-4">
-
                <h2 class="font-semibold">Recent Messages</h2>
-               <div class="flex flex-col gap-y-4 mt-5">
-
+               <div class="mt-5 max-h-60 overflow-y-auto flex flex-col gap-y-4">
                   @foreach($recom as $recommendation)
                      <div class="grid grid-cols-2 justify-items-between items-center gap-x-6 p-3 bg-gray-100 w-full">
-                        <div class="flex flex-row gap-x-4 justify-items-start items-center">
-                           <div class="w-10">
-                              <img src="../images/nutcracker.png" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
-                           </div>
-                           <div class="flex flex-col justify-start items-start">
-                              <span class="font-semibold text-sm">{{ $recommendation->send_to }}</span>
-                              <span class="text-gray-500">{{ $recommendation->message }}</span>
-                           </div>
-                        </div>
-                        <div class="flex flex-row gap-x-4 justify-items-end items-center">
-                           <div>
-                              <div>
-
+                           <div class="flex flex-row gap-x-4 justify-items-start items-center">
+                              <div class="w-10">
+                                 <img src="../images/nutcracker.png" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
                               </div>
-                              <div>
-                                 <span class="text-xs">{{ $recommendation->created_at }}</span>
+                              <div class="flex flex-col justify-start items-start">
+                                 <span class="font-semibold text-sm">{{ $recommendation->send_to }}</span>
+                                 <span class="text-gray-500">{{ $recommendation->message }}</span>
                               </div>
                            </div>
-                           <div>
-                              <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer hover:border-2 hover:border-red-500 hover:bg-white hover:text-black transition-all ease-out duration-500">
-                                 <i class="fas fa-trash-alt"></i>
-                                 Delete
-                              </button>
+                           <div class="flex flex-row gap-x-4 justify-items-end items-center">
+                              <div>
+                                 <div>
+                                       <!-- optional actions -->
+                                 </div>
+                                 <div>
+                                       <span class="text-xs">{{ $recommendation->created_at }}</span>
+                                 </div>
+                              </div>
+                              <div>
+                                 <button class="w-fit h-8 px-3 rounded-md uppercase text-xs text-white bg-red-500 flex items-center gap-2 cursor-pointer hover:border-2 hover:border-red-500 hover:bg-white hover:text-black transition-all ease-out duration-500">
+                                       <i class="fas fa-trash-alt"></i>
+                                       Delete
+                                 </button>
+                              </div>
                            </div>
-                        </div>
                      </div>
                   @endforeach  
-                  
                </div>
-
             </div>
          </div>
       </div>
