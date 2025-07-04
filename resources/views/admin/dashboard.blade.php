@@ -3,11 +3,12 @@
 @extends('layouts.admin')
 
 @section('title', 'Dashboard')
+@section('page_title', 'Dashboard')
 
 @section('content')
 
 <!-- Summary cards -->
-<section class="grid grid-cols-4 gap-4 w-full mb-10">
+<section class="grid grid-cols-4 gap-4 w-full mb-10 pt-20">
     <div class="flex items-center gap-x-6 shadow-md p-6">
         <i class="bi bi-people-fill text-orange-500 text-4xl"></i>
         <div>

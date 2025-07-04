@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Basic Firemanship Report')
+@section('page_title', 'Basic Firemanship Report')
 
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">

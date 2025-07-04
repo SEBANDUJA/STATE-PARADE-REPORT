@@ -2,6 +2,7 @@
 @extends('layouts.app')
 
 @section('title', 'Parade Report Basicfiremanship')
+@section('page_title', 'Parade Report Basicfiremanship')
 
 @section('content')
 

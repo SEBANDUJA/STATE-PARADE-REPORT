@@ -37,8 +37,9 @@ class RecommendationNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'send_to' => $this->recommendation->send_to,
             'message' => $this->recommendation->message,
+            'sent_by' => $this->recommendation->sent_by,
+            'send_to' => $this->recommendation->send_to,
         ];
     }
 }
