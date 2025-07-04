@@ -27,11 +27,11 @@
         </div>
         <div class="w-full px-6 py-24">
             <ul class="flex flex-col gap-y-5 w-full uppercase text-xs">
-                <li>
-                    <a href="{{ route('dashboard') }}" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
-                        <i class="fas fa-bell text-lg"></i> Dashboard
-                    </a>
-                </li>
+                    <li>
+                        <a href="{{ route('dashboard') }}" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
+                            <i class="fas fa-bell text-lg"></i> Dashboard
+                        </a>
+                    </li>
 
                     <!-- Accordion 1 -->
                     <li>
@@ -52,7 +52,7 @@
                     <li>
                         <div class="relative">
                             <button class="flex justify-between gap-x-1 w-full py-3 px-4 text-xs uppercase text-black bg-white border rounded-4xl focus:outline-none">
-                                <i class="fas fa-users text-lg"></i>
+                                <i class="fas fa-address-book text-lg"></i>
                                 List of Students
                                 <i class="fas fa-chevron-down"></i>
                             </button>
@@ -83,7 +83,7 @@
                         <li>
                             <div class="relative">
                                 <button class="flex justify-between gap-x-1 w-full py-3 px-4 text-xs uppercase text-black bg-white border rounded-4xl focus:outline-none">
-                                    <i class="fas fa-users text-lg"></i>
+                                    <i class="fas fa-file-upload text-lg"></i>
                                     Upload Parade Report
                                     <i class="fas fa-chevron-down"></i>
                                 </button>
@@ -95,6 +95,11 @@
                         </li>
 
                     @endif
+                        <li>
+                            <a href="{{ route('dashboard') }}" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
+                                <i class="fas fa-chart-bar text-lg"></i> Statistics
+                            </a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -125,13 +130,6 @@
 
                 <div class="flex items-center gap-x-4">
                     <div class="flex flex-row gap-x-2.5 justify-center items-center">
-
-                        <!-- paper-plane icon -->
-                        <div class="relative">
-                            <button class="text-black">
-                                <i class="fas fa-paper-plane text-2xl cursor-pointer"></i>
-                            </button>
-                        </div>
                                 @php
                                     $userNotifications = Auth::user()->notifications()->latest()->get()->map(function($n) {
                                             return [
@@ -142,10 +140,58 @@
                                             ];
                                         });
                                 @endphp
+                        <!-- paper-plane icon -->
+                        <div x-data="notificationList({{ $userNotifications->toJson() }})" class="relative">
+                            <button id="userMenuButton" class="text-black flex items-center space-x-2 focus:outline-none cursor-pointer">
+                                <!-- <i class="fas fa-paper-plane text-2xl cursor-pointer"></i> -->
+                                    <div class="relative">
+                                        <i class="fas fa-paper-plane text-2xl text-black cursor-pointer"></i>
+                                        <!-- Badge -->
+                                        <span 
+                                            x-show="notifications.length > 0" 
+                                            x-text="notifications.length" 
+                                            class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                                        ></span>
+                                    </div>
+                            </button>
+                                                        <!-- Person Dropdown -->
+                            <div id="userDropdown" class="hidden absolute right-full mt-2 -ml-4 w-[20rem] bg-white border border-gray-200 rounded-md shadow-lg z-50">
+
+                                <div class="border rounded shadow">
+                                    <!-- Header -->
+                                    <h3 class="font-semibold py-3 bg-black text-white px-4">Notifications</h3>
+
+                                    <!-- Scrollable list -->
+                                    <ul class="text-sm text-gray-600 divide-y divide-gray-200 overflow-y-auto max-h-60">
+                                        
+                                        <template x-for="(notification, index) in notifications" :key="index">   
+                                            <li class="flex items-center justify-between gap-2 px-4 py-3 w-full">
+                                                <div class="flex items-center gap-3">
+                                                    <img :src="notification.image" alt="icon" class="w-8 h-8 rounded-full ring-1 ring-gray-400">
+                                                    <span x-text="notification.message"></span>
+                                                    <!-- <span x-text="notification.sent_by"></span>
+                                                    <span x-text="notification.receiver"></span> -->
+                                                </div>
+                                                <button @click="removeNotification(index)" class="text-gray-400 hover:text-red-500">
+                                                    <i class="fas fa-times text-sm"></i>
+                                                </button>
+                                            </li>
+                                        </template>
+                                    </ul>
+
+                                    <!-- Footer -->
+                                    <span class="bg-black w-full p-2 flex justify-center items-center cursor-pointer hover:bg-gray-800">
+                                        <i class="fas fa-plus text-md text-white px-3"></i>
+                                        <span class="text-white text-sm">View All</span>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
                         <!-- New Bell Icon Dropdown (Leave this) -->
-                        <div x-data="notificationList({{ $userNotifications->toJson() }})" class="relative">                            
+                        <div  class="relative">                            
                                 <!-- User Menu Button -->
-                                <button id="userMenuButton" class="text-black flex items-center space-x-2 focus:outline-none cursor-pointer">
+                                <button class="text-black flex items-center space-x-2 focus:outline-none cursor-pointer">
                                     <div class="relative">
                                         <i class="fas fa-bell text-2xl text-black"></i>
                                         <!-- Badge -->
