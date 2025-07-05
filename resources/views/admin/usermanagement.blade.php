@@ -27,7 +27,7 @@
         @click.away="closeForm()"
         class="fixed inset-0 flex items-center justify-center z-50 pointer-events-auto"
         style="background: transparent;"
-    >
+        >
         <div class="bg-white border border-gray-300 shadow-lg p-6 rounded-md w-full max-w-md" @click.stop>
             <h2 class="text-lg font-semibold mb-4" x-text="formMode === 'add' ? 'Add User' : 'Edit User'"></h2>
 
@@ -100,7 +100,6 @@
             </form>
         </div>
     </div>
-
     <!-- User Table -->
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white rounded shadow overflow-hidden mt-6 whitespace-nowrap">
