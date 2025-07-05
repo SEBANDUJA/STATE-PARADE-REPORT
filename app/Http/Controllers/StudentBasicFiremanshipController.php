@@ -16,8 +16,12 @@ class StudentBasicFiremanshipController extends Controller
      */
     public function index()
     {
-        $students = Student::paginate(10);
-        return view ('admin.studentbasicfiremanship',compact('students'));
+        $studentsPaginated = Student::paginate(25);      
+        $allStudents = Student::all();                       
+        return view('admin.studentbasicfiremanship', [
+            'students' => $studentsPaginated,
+            'allStudents' => $allStudents
+        ]);
     }
 
     /**
