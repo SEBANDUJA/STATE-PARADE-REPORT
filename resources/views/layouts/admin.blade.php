@@ -316,7 +316,13 @@
                         <button id="userMenuButton" class="text-black flex items-center space-x-2 focus:outline-none cursor-pointer">
                             <div class="relative">
                                 <div class="w-10">
-                                    <img src="{{ asset('images/wildfire.jpg') }}" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
+                                    @if(Auth::user()->photo)
+                                    <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="User Photo" class="rounded-full h-10 w-10 object-cover">
+                                    @else
+                                    <!-- Default avatar - you can use any placeholder image -->
+                                     <img src="{{ asset('images/wildfire.jpg') }}" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
+                                     @endif
+                                    
                                 </div>
                                 <span class="absolute bottom-0 right-0 block w-3 h-3 rounded-full bg-green-500 border-2 border-white"></span>
                             </div>
