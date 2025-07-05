@@ -335,7 +335,12 @@
                         <div id="userDropdown" class="hidden absolute right-0 top-full mt-2 w-fit bg-white border border-gray-200 rounded-md shadow-lg py-4 z-50">
                             <div class="flex flex-row justify-start items-center gap-x-6 w-full px-5">
                                 <div class="w-16">
-                                    <img src="{{ asset('images/wildfire.jpg') }}" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
+                                    @if(Auth::user()->photo)
+                                    <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="User Photo" class="rounded-full h-10 w-10 object-cover">
+                                    @else
+                                    <!-- Default avatar - you can use any placeholder image -->
+                                     <img src="{{ asset('images/wildfire.jpg') }}" alt="Zimamoto Logo" class="w-full rounded-full ring-1 ring-gray-400" />
+                                     @endif
                                 </div>
                                 <div class="flex flex-col justify-start items-start w-full">
                                     <span class="font-semibold text-black text-md">
