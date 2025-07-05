@@ -104,30 +104,48 @@
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white rounded shadow overflow-hidden mt-6 whitespace-nowrap">
             <thead class="bg-gray-100">
-                <tr class="uppercase text-xs">
-                    <th class="px-4 py-3 text-left">SN</th>
-                    <th class="px-4 py-3 text-left">Name</th>
-                    <th class="px-4 py-3 text-left">Username</th>
-                    <th class="px-4 py-3 text-left">Job Title</th>
-                    <th class="px-4 py-3 text-left">Role</th>
-                    <th class="px-4 py-3 text-left">Email</th>
-                    <th class="px-4 py-3 text-left">Gender</th>
-                    <th class="px-4 py-3 text-left">Actions</th>
+                <tr class="uppercase">
+                    <th class="px-4 py-4 text-left">SN</th>
+                    <th class="px-4 py-4 text-left">Photo</th>
+                    <th class="px-4 py-4 text-left">Name</th>
+                    <th class="px-4 py-4 text-left">Username</th>
+                    <th class="px-4 py-4 text-left">Job Title</th>
+                    <th class="px-4 py-4 text-left">Role</th>
+                    <th class="px-4 py-4 text-left">Email</th>
+                    <th class="px-4 py-4 text-left">Gender</th>
+                    <th class="px-4 py-4 text-left">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($user_in as $userItem)
+                @foreach($user_in as $user)
                 <tr class="border-b hover:bg-gray-50">
-                    <td class="px-4 py-3">{{ $loop->iteration }}</td>
-                    <td class="px-4 py-3">{{ $userItem->name }}</td>
-                    <td class="px-4 py-3">{{ $userItem->username }}</td>
-                    <td class="px-4 py-3">{{ $userItem->job_title }}</td>
-                    <td class="px-4 py-3">{{ $userItem->role }}</td>
-                    <td class="px-4 py-3">{{ $userItem->email }}</td>
-                    <td class="px-4 py-3">{{ $userItem->gender }}</td>
-                    <td class="px-4 py-3 flex gap-2">
-                        <button @click='openEditForm(@json($userItem))' class="px-3 py-1 bg-blue-500 text-white rounded text-xs">Edit</button>
-                        <button @click="deleteUser({{ $userItem->id }})" class="px-3 py-1 bg-red-500 text-white rounded text-xs">Delete</button>
+                    <td class="px-4 py-4">{{ $loop->iteration }}</td>
+                    <td class="px-4 py-4">
+                @if($user->photo)
+                    <img src="{{ asset('storage/' . $user->photo) }}" alt="User Photo" class="rounded-full h-12 w-12 object-cover">
+                @else
+                    <!-- Default avatar - you can use any placeholder image -->
+                    <img src="{{ asset('images/soldier.png') }}" alt="Default Photo" class="rounded-full h-12 w-12 object-cover">
+                @endif
+</td>
+                    <td class="px-4 py-4">{{ $user->name }}</td>
+                    <td class="px-4 py-4">{{ $user->username }}</td>
+                    <td class="px-4 py-4">{{ $user->job_title }}</td>
+                    <td class="px-4 py-4">{{ $user->role }}</td>
+                    <td class="px-4 py-4">{{ $user->email }}</td>
+                    <td class="px-4 py-4">{{ $user->gender }}</td>
+                    <td class="px-4 py-4 flex gap-2">
+                        
+                        <button @click='openEditForm(@json($user))'
+                            class="w-fit px-3 h-8 bg-gray-500 text-white text-xs rounded hover:bg-blue-600 uppercase flex items-center gap-2.5 cursor-pointer">
+                            <i class="fas fa-edit text-white text-sm"></i>
+                            Edit
+                        </button>
+                        <button @click="deleteStudent({{ $user->id }})"
+                            class="w-fit px-3 h-8 bg-red-500 text-white text-xs rounded hover:bg-red-600 uppercase flex items-center gap-2.5 cursor-pointer">
+                            <i class="fas fa-trash text-white text-sm"></i>
+                            Delete
+                        </button>
                     </td>
                 </tr>
                 @endforeach

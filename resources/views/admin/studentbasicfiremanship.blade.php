@@ -105,6 +105,7 @@
             <thead class="bg-gray-100">
                 <tr class="uppercase text-xs">
                     <th class="px-4 py-3">SN</th>
+                    <th class="px-4 py-3 text-left">Photo</th>
                     <th class="px-4 py-3">Company No</th>
                     <th class="px-4 py-3">Name</th>
                     <th class="px-4 py-3">Gender</th>
