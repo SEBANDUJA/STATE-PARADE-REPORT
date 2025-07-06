@@ -12,28 +12,48 @@
     <div class="flex items-center gap-x-6 shadow-md p-6">
         <i class="bi bi-people-fill text-orange-500 text-4xl"></i>
         <div>
-            <div class="text-sm uppercase font-semibold">Total Students</div>
-            <div class="text-xl font-bold">{{ $students_count }}</div>
+            <div class="text-sm uppercase font-bold">Total Students</div>
+            <div class="flex flex-row justify-center items-center gap-x-4 mt-2">
+                <div class="flex flex-col">
+                    <span class="text-sm">Basic</span>
+                    <div class="text-xl font-bold text-center">{{ $students_count }}</div>
+                </div>
+                <div class="h-10 border-1 border-black"></div>
+                <div class="flex flex-col">
+                    <span class="text-sm">In service</span>
+                    <div class="text-xl font-bold text-center">{{ $students_count }}</div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="flex items-center gap-x-6 shadow-md p-6">
         <i class="bi bi-journal-bookmark-fill text-orange-500 text-4xl"></i>
         <div>
-            <div class="text-sm uppercase font-semibold">Permission</div>
-            <div class="text-xl font-bold">13</div>
+            <div class="text-sm uppercase font-bold">Permission</div>
+            <div class="flex flex-row justify-center items-center gap-x-4 mt-2">
+                <div class="flex flex-col">
+                    <span class="text-sm">Basic</span>
+                    <div class="text-xl font-bold text-center">0</div>
+                </div>
+                <div class="h-10 border-1 border-black"></div>
+                <div class="flex flex-col">
+                    <span class="text-sm">In service</span>
+                    <div class="text-xl font-bold text-center">0</div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="flex items-center gap-x-6 shadow-md p-6">
         <i class="bi bi-person-fill text-orange-500 text-4xl"></i>
         <div>
-            <div class="text-sm uppercase font-semibold">Total Users</div>
+            <div class="text-sm uppercase font-bold">Total Users</div>
             <div class="text-xl font-bold">{{ $users_count }}</div>
         </div>
     </div>
     <div class="flex items-center gap-x-6 shadow-md p-6">
         <i class="bi bi-book text-orange-500 text-4xl"></i>
         <div>
-            <div class="text-sm uppercase font-semibold">Total Course</div>
+            <div class="text-sm uppercase font-bold">Total Course</div>
             <div class="text-xl font-bold">2</div>
         </div>
     </div>
