@@ -10,6 +10,7 @@ use App\Http\Controllers\StudentBasicFiremanshipController;
 use App\Http\Controllers\ReportBasicFiremanship;
 use App\Http\Controllers\ReportinServiceController;
 use App\Http\Controllers\StudentinServiceController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\MultiStepFormController;
 use App\Http\Middleware\RoleMiddleware;
 
@@ -45,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/admin/usermanagement', [UserManagementController::class, 'store'])->name('user.store');
         Route::put('/admin/usermanagement/{id}', [UserManagementController::class, 'update'])->name('user.update');
         Route::delete('/admin/usermanagement/{id}', [UserManagementController::class, 'destroy'])->name('user.delete');
+        //Statistics
+        Route::get('/admin/statistics', [StatisticsController::class, 'index'])->name('statistics');
     });
 });
 

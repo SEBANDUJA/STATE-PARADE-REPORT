@@ -2,6 +2,7 @@
 @extends('layouts.app')
 
 @section('title', 'Firemanship Report')
+@section('page_title', 'User Management')
 
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -45,7 +46,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Photo</label>
-                    <input type="file" name="photo" class="w-full border rounded px-3 py-2">
+                    <input type="file" name="photo" class="w-full border rounded px-3 py-2 required">
                 </div>
 
                 <div>
