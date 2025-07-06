@@ -1,0 +1,30 @@
+<div class="flex flex-wrap gap-4 mt-4">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="sick_in" name="sick_in" class="form-checkbox text-blue-600" />
+                        <label for="sick_in" class="ml-2 text-gray-700">Sick In</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="sick_out" name="sick_out" class="form-checkbox text-blue-600" />
+                        <label for="sick_out" class="ml-2 text-gray-700">Sick Out</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="ed" name="ed" class="form-checkbox text-blue-600" />
+                        <label for="ed" class="ml-2 text-gray-700">ED</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="ld" name="ld" class="form-checkbox text-blue-600" />
+                        <label for="ld" class="ml-2 text-gray-700">LD</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="permission" name="permission" class="form-checkbox text-blue-600" />
+                        <label for="permission" class="ml-2 text-gray-700 font">Permission</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="absent" name="absent" class="form-checkbox text-blue-600" />
+                        <label for="absent" class="ml-2 text-gray-700 font-bold">Absent</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="guard" name="guard" class="form-checkbox text-blue-600" />
+                        <label for="guard" class="ml-2 text-gray-700 font-bold">Guard</label>
+                    </div>
+                </div>

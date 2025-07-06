@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('s_id')->unique();
             $table->string('name');
+            $table->string('photo')->nullable();
             $table->string('gender');
             $table->string('company');
 

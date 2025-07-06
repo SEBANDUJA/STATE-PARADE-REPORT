@@ -4,16 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-
 
 class StudentBasicFiremanshipController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $studentsPaginated = Student::paginate(25);      
@@ -24,17 +17,6 @@ class StudentBasicFiremanshipController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -45,84 +27,59 @@ class StudentBasicFiremanshipController extends Controller
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $data = [
-            's_id' => $request->input('s_id'),
-            'name' => $request->input('s_name'),
-            'gender' => $request->input('gender'),
-            'company' => $request->input('company'),
-            
-        ];
-        
+        $data = $request->only([
+            'gender', 'company', 's_id',
+            'sick_in','sick_out','ed','ld','absent','permission','centry','special_duty','pass','guard'
+        ]);
+        $data['name'] = $request->input('s_name');
+
+        foreach (['sick_in','sick_out','ed','ld','absent','permission','centry','special_duty','pass','guard'] as $field) {
+            $data[$field] = $request->input($field, 0);
+        }
+
         if ($request->hasFile('photo')) {
             $data['photo'] = $request->file('photo')->store('students', 'public');
         }
-        
+
         Student::create($data);
-        
+
         return redirect()->back()->with('success', 'Student added successfully.');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
         $student = Student::findOrFail($id);
-        
+
+        $request->validate([
+            's_name' => 'required|string|max:255',
+            'gender' => 'required|string',
+            'company' => 'required|string',
+            's_id' => 'required|string|max:50|unique:students,s_id,' . $id,
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
         $student->name = $request->s_name;
         $student->gender = $request->gender;
         $student->company = $request->company;
         $student->s_id = $request->s_id;
 
-        // Boolean checkboxes
-        $student->absent = $request->has('absent');
-        $student->ed = $request->has('ed');
-        $student->sick_in = $request->has('sick_in');
-        $student->sick_out = $request->has('sick_out');
-        $student->ld = $request->has('ld');
-        $student->permission = $request->has('permission');
-        $student->centry = $request->has('centry');
-        $student->special_duty = $request->has('special_duty');
-        $student->pass = $request->has('pass');
-        $student->guard = $request->has('guard');
+        foreach (['sick_in','sick_out','ed','ld','absent','permission','centry','special_duty','pass','guard'] as $field) {
+            $student->$field = $request->input($field, 0);
+        }
 
-        // if ($request->hasFile('photo')) {
-        //     $photoPath = $request->file('photo')->store('students', 'public');
-        //     $student->photo = $photoPath;
-        // }
+        if ($request->hasFile('photo')) {
+            $student->photo = $request->file('photo')->store('students', 'public');
+        }
 
-        $student->update();
+        $student->save();
 
         return redirect()->back()->with('success', 'Student updated successfully.');
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $student = Student::findOrFail($id);
         $student->delete();
-        
         return response()->json(['message' => 'Student deleted successfully']);
     }
-
 }
