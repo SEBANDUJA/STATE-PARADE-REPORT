@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('recommendations', function (Blueprint $table) {
             $table->id();
             $table->string('send_to');
+            $table->string('sent_by');
             $table->text('message');
             $table->json('audience')->nullable();
             $table->timestamps();

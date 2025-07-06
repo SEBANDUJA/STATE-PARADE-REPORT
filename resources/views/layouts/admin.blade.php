@@ -163,20 +163,30 @@
                                     selectedNotification: null
                                     }" class="border rounded shadow">
 
-                                    <!-- Header -->
-                                    <h3 class="font-semibold py-3 bg-black text-white px-4">Recommendation Notifications</h3>
+                                    <h3 class="font-semibold py-3 bg-red-300 text-white px-4">Recommendation Notifications</h3>
 
-                                    <!-- Scrollable list -->
                                     <ul class="text-sm text-gray-600 divide-y divide-gray-200 overflow-y-auto max-h-60">
                                         <template x-for="(notification, index) in notifications" :key="index">   
                                             <li class="flex items-center justify-between gap-2 px-4 py-3 w-full">
+                                               <!-- ##<div  -->
+                                                    <!-- class="flex items-center gap-3 cursor-pointer" -->
+                                                    <!-- @click="selectedNotification = notification; showModal = true" -->
+                                                <!-- > -->
+                                                    <!-- <img :src="notification.image" alt="icon" class="w-8 h-8 rounded-full ring-1 ring-gray-400"> -->
+                                                    <!-- <span x-text="notification.message"></span> -->
+                                                <!-- </div>## -->
                                                 <div 
                                                     class="flex items-center gap-3 cursor-pointer"
-                                                    @click="selectedNotification = notification; showModal = true"
-                                                >
+                                                    @click="
+                                                        selectedNotification = notification; 
+                                                        showModal = true; 
+                                                        document.getElementById('userDropdown').classList.add('hidden')
+                                                    "
+                                                    >
                                                     <img :src="notification.image" alt="icon" class="w-8 h-8 rounded-full ring-1 ring-gray-400">
                                                     <span x-text="notification.message"></span>
                                                 </div>
+
                                                 <button @click="removeNotification(index)" class="text-gray-400 hover:text-red-500">
                                                     <i class="fas fa-times text-sm"></i>
                                                 </button>
@@ -184,79 +194,192 @@
                                         </template>
                                     </ul>
 
-                                    <!-- Footer -->
-                                    <span class="bg-black w-full p-2 flex justify-center items-center cursor-pointer hover:bg-gray-800">
+                                    <span class="bg-red-300 w-full p-2 flex justify-center items-center cursor-pointer hover:bg-gray-800">
                                         <i class="fas fa-plus text-md text-white px-3"></i>
                                         <span class="text-white text-sm">View All</span>
                                     </span>
+                                    
+                                    <div 
+                                        x-show="showModal" 
+                                        x-transition 
+                                        class="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+                                        >
+                                        <div class="bg-white rounded-lg w-96 p-6 relative shadow border">
+                                            <button 
+                                                @click="showModal = false" 
+                                                class="absolute top-2 right-2 text-gray-500 hover:text-black"
+                                            >
+                                                <i class="fas fa-times"></i>
+                                            </button>
 
-                                    <!-- Modal -->
-                                <div 
-                                    x-show="showModal" 
-                                    x-transition 
-                                    class="bg-white rounded-lg w-96 p-6 relative shadow border"
+                                            <h3 class="font-semibold text-lg mb-4">Recommendation Message</h3>
+                                            <p class="mb-4 text-gray-700" x-text="selectedNotification?.message"></p>
+
+                                            <div x-data="{ showReply: false, replyText: '' }">
+                                                <template x-if="showReply">
+                                                    <div>
+                                                        <textarea 
+                                                            x-model="replyText" 
+                                                            placeholder="Type your reply..." 
+                                                            class="w-full border border-gray-300 rounded p-2 mb-3"
+                                                            rows="3"
+                                                        ></textarea>
+                                                        <div class="flex justify-end gap-2">
+                                                            <button 
+                                                                @click="showReply = false"
+                                                                class="px-3 py-1 text-gray-600 rounded hover:text-black text-sm"
+                                                            >
+                                                                Cancel
+                                                            </button>
+                                                            <button 
+                                                                @click="
+                                                                    if (replyText.trim() !== '') {
+                                                                        alert('Reply sent: ' + replyText);
+                                                                        replyText = '';
+                                                                        showReply = false;
+                                                                        showModal = false;
+                                                                    }
+                                                                "
+                                                                class="px-4 py-1 bg-orange-500 text-white rounded hover:bg-orange-600 text-sm"
+                                                            >
+                                                                Send
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </template>
+
+                                                <template x-if="!showReply">
+                                                    <div class="flex justify-end">
+                                                        <button 
+                                                            @click="showReply = true"
+                                                            class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 text-sm"
+                                                        >
+                                                            Reply
+                                                        </button>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- <div 
+                                    x-data="{ 
+                                        notifications: {{ $userNotifications->toJson() }},
+                                        showModal: false,
+                                        selectedNotification: null,
+                                        showDropdown: false 
+                                    }" 
+                                    class="relative"
                                     >
-                                    <button 
-                                        @click="showModal = false" 
-                                        class="absolute top-2 right-2 text-gray-500 hover:text-black"
-                                    >
-                                        <i class="fas fa-times"></i>
+                                    
+                                    <button @click="showDropdown = !showDropdown">
+                                        <i class="fas fa-bell"></i>
                                     </button>
 
-                                    <h3 class="font-semibold text-lg mb-4">Recommendation Message</h3>
-                                    <p class="mb-4 text-gray-700" x-text="selectedNotification?.message"></p>
+                                    <div 
+                                        x-show="showDropdown"
+                                        @click.away="showDropdown = false"
+                                        class="absolute right-0 mt-2 w-[20rem] bg-white border border-gray-200 rounded-md shadow-lg z-50"
+                                    >
+                                        
+                                        <h3 class="font-semibold py-3 bg-red-300 text-white px-4">Recommendation Notifications</h3>
 
-                                    <!-- Add state to toggle reply -->
-                                    <div x-data="{ showReply: false, replyText: '' }">
-                                        <template x-if="showReply">
-                                            <div>
-                                                <textarea 
-                                                    x-model="replyText" 
-                                                    placeholder="Type your reply..." 
-                                                    class="w-full border border-gray-300 rounded p-2 mb-3"
-                                                    rows="3"
-                                                ></textarea>
-                                                <div class="flex justify-end gap-2">
-                                                    <button 
-                                                        @click="showReply = false"
-                                                        class="px-3 py-1 text-gray-600 rounded hover:text-black text-sm"
-                                                    >
-                                                        Cancel
-                                                    </button>
-                                                    <button 
+                                        <ul class="text-sm text-gray-600 divide-y divide-gray-200 overflow-y-auto max-h-60">
+                                            <template x-for="(notification, index) in notifications" :key="index">   
+                                                <li class="flex items-center justify-between gap-2 px-4 py-3 w-full">
+                                                    <div 
+                                                        class="flex items-center gap-3 cursor-pointer"
                                                         @click="
-                                                            if (replyText.trim() !== '') {
-                                                                alert('Reply sent: ' + replyText);
-                                                                replyText = '';
-                                                                showReply = false;
-                                                                showModal = false;
-                                                            }
+                                                            selectedNotification = notification;
+                                                            showModal = true;
+                                                            showDropdown = false;
                                                         "
-                                                        class="px-4 py-1 bg-orange-500 text-white rounded hover:bg-orange-600 text-sm"
                                                     >
-                                                        Send
+                                                        <img :src="notification.image" alt="icon" class="w-8 h-8 rounded-full ring-1 ring-gray-400">
+                                                        <span x-text="notification.message"></span>
+                                                    </div>
+                                                    <button @click="notifications.splice(index, 1)" class="text-gray-400 hover:text-red-500">
+                                                        <i class="fas fa-times text-sm"></i>
                                                     </button>
-                                                </div>
-                                            </div>
-                                        </template>
+                                                </li>
+                                            </template>
+                                        </ul>
 
-                                        <template x-if="!showReply">
-                                            <div class="flex justify-end">
-                                                <button 
-                                                    @click="showReply = true"
-                                                    class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 text-sm"
-                                                >
-                                                    Reply
-                                                </button>
-                                            </div>
-                                        </template>
+                                        <span class="bg-red-300 w-full p-2 flex justify-center items-center cursor-pointer hover:bg-gray-800">
+                                            <i class="fas fa-plus text-md text-white px-3"></i>
+                                            <span class="text-white text-sm">View All</span>
+                                        </span>
                                     </div>
-                                </div>
 
-                                </div>
+                                    <div 
+                                        x-show="showModal" 
+                                        x-transition 
+                                        class="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+                                    >
+                                        <div class="bg-white rounded-lg w-96 p-6 relative shadow border">
+                                            <button 
+                                                @click="showModal = false" 
+                                                class="absolute top-2 right-2 text-gray-500 hover:text-black"
+                                            >
+                                                <i class="fas fa-times"></i>
+                                            </button>
 
+                                            <h3 class="font-semibold text-lg mb-4">Recommendation Message</h3>
+                                            <p class="mb-4 text-gray-700" x-text="selectedNotification?.message"></p>
+
+                                            <div x-data="{ showReply: false, replyText: '' }">
+                                                <template x-if="showReply">
+                                                    <div>
+                                                        <textarea 
+                                                            x-model="replyText" 
+                                                            placeholder="Type your reply..." 
+                                                            class="w-full border border-gray-300 rounded p-2 mb-3"
+                                                            rows="3"
+                                                        ></textarea>
+                                                        <div class="flex justify-end gap-2">
+                                                            <button 
+                                                                @click="showReply = false"
+                                                                class="px-3 py-1 text-gray-600 rounded hover:text-black text-sm"
+                                                            >
+                                                                Cancel
+                                                            </button>
+                                                            <button 
+                                                                @click="
+                                                                    if (replyText.trim() !== '') {
+                                                                        alert('Reply sent: ' + replyText);
+                                                                        replyText = '';
+                                                                        showReply = false;
+                                                                        showModal = false;
+                                                                    }
+                                                                "
+                                                                class="px-4 py-1 bg-orange-500 text-white rounded hover:bg-orange-600 text-sm"
+                                                            >
+                                                                Send
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </template>
+
+                                                <template x-if="!showReply">
+                                                    <div class="flex justify-end">
+                                                        <button 
+                                                            @click="showReply = true"
+                                                            class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 text-sm"
+                                                        >
+                                                            Reply
+                                                        </button>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
                             </div>
                         </div>
+
+
                         <!-- New Bell Icon Dropdown (Leave this) -->
                         <div  class="relative">                            
                                 <!-- User Menu Button -->
