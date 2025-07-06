@@ -2,6 +2,7 @@
 @extends('layouts.app')
 
 @section('title', 'Firemanship Report')
+@section('page_title', 'User Management')
 
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -45,7 +46,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Photo</label>
-                    <input type="file" name="photo" class="w-full border rounded px-3 py-2">
+                    <input type="file" name="photo" class="w-full border rounded px-3 py-2 required">
                 </div>
 
                 <div>
@@ -141,7 +142,7 @@
                             <i class="fas fa-edit text-white text-sm"></i>
                             Edit
                         </button>
-                        <button @click="deleteStudent({{ $user->id }})"
+                        <button @click="deleteUser({{ $user->id }})"
                             class="w-fit px-3 h-8 bg-red-500 text-white text-xs rounded hover:bg-red-600 uppercase flex items-center gap-2.5 cursor-pointer">
                             <i class="fas fa-trash text-white text-sm"></i>
                             Delete

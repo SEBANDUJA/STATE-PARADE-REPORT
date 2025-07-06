@@ -96,7 +96,7 @@
 
                     @endif
                         <li>
-                            <a href="{{ route('dashboard') }}" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
+                            <a href="{{ route('statistics') }}" class="flex items-center gap-x-4 py-3 px-4 text-black bg-white rounded-4xl text-start">
                                 <i class="fas fa-chart-bar text-lg"></i> Statistics
                             </a>
                         </li>
