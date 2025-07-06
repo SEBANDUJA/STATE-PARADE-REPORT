@@ -63,6 +63,12 @@ class HomeController extends Controller
     }
 
 
+    //   public function showWelcomePage()
+    // {
+    //     return view('loginems');
+    // }
+
+
     // public function login()
     // {
     //     return view('login');
