@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPRMS State Parade Report</title>
+    <title>SPRMS | Home </title>
     <style>
         * {
             margin: 0;
@@ -124,7 +124,7 @@
         }
         
         h1 {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             text-transform: uppercase;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
