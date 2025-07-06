@@ -141,7 +141,7 @@
                             <i class="fas fa-edit text-white text-sm"></i>
                             Edit
                         </button>
-                        <button @click="deleteStudent({{ $user->id }})"
+                        <button @click="deleteUser({{ $user->id }})"
                             class="w-fit px-3 h-8 bg-red-500 text-white text-xs rounded hover:bg-red-600 uppercase flex items-center gap-2.5 cursor-pointer">
                             <i class="fas fa-trash text-white text-sm"></i>
                             Delete

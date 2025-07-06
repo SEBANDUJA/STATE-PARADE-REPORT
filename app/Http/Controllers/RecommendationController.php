@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Recommendation;
 use App\Models\User;
 use App\Notifications\RecommendationNotification;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class RecommendationController extends Controller
 {
@@ -34,9 +34,6 @@ class RecommendationController extends Controller
             return redirect()->back()->withErrors($validator)->withInput()->with('fail', 'Failed to send recommendation.');;
         }
 
-        // Example: Store data in a Recommendation model (you can create it via artisan)
-        // Assuming a `recommendations` table with fields: send_to, message, audience
-
         try {
             $recommendation = new Recommendation();
             $recommendation->send_to = $request->get('send_to');
@@ -46,12 +43,13 @@ class RecommendationController extends Controller
             $recommendation->save();
 
             $user = User::where('job_title', $request->send_to)->first(); // or User::find($request->send_to)
-
+            
             if ($user) {
                 $user->notify(new RecommendationNotification($recommendation));
             }
             return redirect()->back()->with('success', 'Recommendation sent successfully!');
             } catch (\Exception $e) {
+                //dd($e->getMessage());  
                 return redirect()->back()->with('fail', 'Something went wrong. Please try again.');
             }
     }
