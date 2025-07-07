@@ -52,10 +52,27 @@ class HomeController extends Controller
     /**
      * Show the welcome page.
      */
-    public function showWelcomePage()
+    // public function showWelcomePage()
+    // {
+    //     return view('welcome');
+    // }
+
+      public function showWelcomePage()
     {
-        return view('welcome');
+        return view('login');
     }
+
+
+    //   public function showWelcomePage()
+    // {
+    //     return view('loginems');
+    // }
+
+
+    // public function login()
+    // {
+    //     return view('login');
+    // }
 
     /**
      * Show the form for creating a new resource.
