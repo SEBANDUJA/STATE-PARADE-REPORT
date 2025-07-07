@@ -79,10 +79,23 @@
         <canvas id="trendChart" class="w-full h-64"></canvas>
     </div>
 
-    <!-- Grouped Bar Chart -->
+    <!-- Calendar -->
     <div class="bg-white shadow rounded p-6">
-        <h3 class="text-center font-semibold mb-4">Grouped Bar Chart</h3>
-        <canvas id="groupedBarChart" class="w-full h-64"></canvas>
+        <div class="text-center font-semibold mb-4">
+            <h3 id="calendar-month-year" class="text-lg"></h3>
+        </div>
+        <div id="calendar" class="w-full">
+            <div class="grid grid-cols-7 gap-1 text-center">
+                <div class="font-medium text-sm py-2">Sun</div>
+                <div class="font-medium text-sm py-2">Mon</div>
+                <div class="font-medium text-sm py-2">Tue</div>
+                <div class="font-medium text-sm py-2">Wed</div>
+                <div class="font-medium text-sm py-2">Thu</div>
+                <div class="font-medium text-sm py-2">Fri</div>
+                <div class="font-medium text-sm py-2">Sat</div>
+            </div>
+            <div id="calendar-days" class="grid grid-cols-7 gap-1 text-center"></div>
+        </div>
     </div>
 </section>
 
@@ -234,6 +247,48 @@
             }
         }
     });
+
+
+// Calendar functionality
+    function generateCalendar() {
+        const now = new Date();
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
+        const currentDate = now.getDate();
+        
+        // Set month and year header
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+                          "July", "August", "September", "October", "November", "December"];
+        document.getElementById('calendar-month-year').textContent = 
+            `${monthNames[currentMonth]} ${currentYear}`;
+        
+        // Get first day of month and total days in month
+        const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+        
+        // Clear previous days
+        const calendarDays = document.getElementById('calendar-days');
+        calendarDays.innerHTML = '';
+        
+        // Add empty cells for days before the first day of the month
+        for (let i = 0; i < firstDay; i++) {
+            const emptyCell = document.createElement('div');
+            emptyCell.className = 'py-2';
+            calendarDays.appendChild(emptyCell);
+        }
+        
+        // Add cells for each day of the month
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayCell = document.createElement('div');
+            dayCell.className = `py-2 border rounded ${day === currentDate ? 'bg-blue-100 font-bold' : ''}`;
+            dayCell.textContent = day;
+            calendarDays.appendChild(dayCell);
+        }
+    }
+    
+    // Initialize calendar when page loads
+    document.addEventListener('DOMContentLoaded', generateCalendar);
+
 </script>
 
 @endsection

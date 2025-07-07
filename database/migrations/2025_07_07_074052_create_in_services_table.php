@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('InService', function (Blueprint $table) {
             $table->id();
-            $table->string('s_id')->unique();
-            $table->string('photo')->nullable();
+            $table->string('inservice_id')->unique();
             $table->string('name');
             $table->string('photo')->nullable();
             $table->string('gender');
@@ -30,6 +29,7 @@ return new class extends Migration
             $table->boolean('centry')->default(0);
             $table->boolean('special_duty')->default(0);
             $table->boolean('pass')->default(0);
+            $table->boolean('bed_rest')->default(0);
             $table->boolean('guard')->default(0);
             //
             $table->timestamp('email_verified_at')->nullable();
@@ -43,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('InService');
     }
 };
