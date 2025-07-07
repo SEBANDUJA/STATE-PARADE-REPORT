@@ -16,7 +16,6 @@ use App\Http\Middleware\RoleMiddleware;
 
 
  Route::get('/', [HomeController::class, 'showWelcomePage'])->name('welcome');
-//   Route::get('/login', [HomeController::class, 'login'])->name('auth.login');
 
 
 Route::middleware('auth')->group(function () {
